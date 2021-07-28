@@ -100,7 +100,7 @@
    },
    sectionTitle: {
      fontSize: 24,
-     fontFamily: "Roboto-Light"
+     fontFamily: "Cera Pro Medium"
    },
    sectionDescription: {
      marginTop: 8,

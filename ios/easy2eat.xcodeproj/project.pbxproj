@@ -12,10 +12,10 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		292327CA8E54A71BAABC9328 /* libPods-easy2eat-easy2eatTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF08775A947FA0BF08E91263 /* libPods-easy2eat-easy2eatTests.a */; };
-		41DD23EDC31F4CDFB05A825D /* Cera-Pro-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 571F6AC2BEB840D7B68ED0E4 /* Cera-Pro-Medium.ttf */; };
+		492CF7F9E8ED452E8764F4B5 /* Cera Pro Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95A7C7CF1608442D9E2C495C /* Cera Pro Medium.otf */; };
+		78E971D369194574BDA20F69 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC6F37F1C4A14243BECC0A30 /* Roboto-Light.ttf */; };
 		7D68F6FB04579D839E3D237B /* libPods-easy2eat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CA2FAB642C66C999863BB1 /* libPods-easy2eat.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
-		78E971D369194574BDA20F69 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC6F37F1C4A14243BECC0A30 /* Roboto-Light.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,16 +38,16 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = easy2eat/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = easy2eat/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = easy2eat/main.m; sourceTree = "<group>"; };
-		571F6AC2BEB840D7B68ED0E4 /* Cera-Pro-Medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cera-Pro-Medium.ttf"; path = "../src/assets/fonts/Cera-Pro-Medium.ttf"; sourceTree = "<group>"; };
 		5FCCF231B314DAD24BA0F013 /* Pods-easy2eat-easy2eatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-easy2eat-easy2eatTests.debug.xcconfig"; path = "Target Support Files/Pods-easy2eat-easy2eatTests/Pods-easy2eat-easy2eatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		66CA2FAB642C66C999863BB1 /* libPods-easy2eat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-easy2eat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = easy2eat/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		95A7C7CF1608442D9E2C495C /* Cera Pro Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cera Pro Medium.otf"; path = "../src/assets/fonts/Cera Pro Medium.otf"; sourceTree = "<group>"; };
 		BF08775A947FA0BF08E91263 /* libPods-easy2eat-easy2eatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-easy2eat-easy2eatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EB46E5FA1AA4075CEA5D14 /* Pods-easy2eat-easy2eatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-easy2eat-easy2eatTests.release.xcconfig"; path = "Target Support Files/Pods-easy2eat-easy2eatTests/Pods-easy2eat-easy2eatTests.release.xcconfig"; sourceTree = "<group>"; };
+		DC6F37F1C4A14243BECC0A30 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		DF781A2624BB759E89EB6219 /* Pods-easy2eat.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-easy2eat.release.xcconfig"; path = "Target Support Files/Pods-easy2eat/Pods-easy2eat.release.xcconfig"; sourceTree = "<group>"; };
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		F67D22A4C22005B796C6376C /* Pods-easy2eat.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-easy2eat.debug.xcconfig"; path = "Target Support Files/Pods-easy2eat/Pods-easy2eat.debug.xcconfig"; sourceTree = "<group>"; };
-		DC6F37F1C4A14243BECC0A30 /* Roboto-Light.ttf */ = {isa = PBXFileReference; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,8 +113,8 @@
 		32AB43FDFD5A4FA8AC5E722C /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				571F6AC2BEB840D7B68ED0E4 /* Cera-Pro-Medium.ttf */,
 				DC6F37F1C4A14243BECC0A30 /* Roboto-Light.ttf */,
+				95A7C7CF1608442D9E2C495C /* Cera Pro Medium.otf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -258,8 +258,8 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				41DD23EDC31F4CDFB05A825D /* Cera-Pro-Medium.ttf in Resources */,
 				78E971D369194574BDA20F69 /* Roboto-Light.ttf in Resources */,
+				492CF7F9E8ED452E8764F4B5 /* Cera Pro Medium.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
