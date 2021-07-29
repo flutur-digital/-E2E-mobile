@@ -8,7 +8,11 @@ import Login from '../screens/Login';
 
 const Router = () => {
     return (
-      <Stack.Navigator>
+      <Stack.Navigator
+        screenOptions={{
+          headerShown: false
+        }}
+      >
         <Stack.Screen name="GetStarted" component={GetStarted} />
         <Stack.Screen name="Login" component={Login} />
       </Stack.Navigator>
