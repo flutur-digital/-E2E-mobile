@@ -1,7 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React from 'react';
 import { View, Text, Pressable, SafeAreaView } from 'react-native';
-import LottieView from 'lottie-react-native';
 import { Typography, MainColor } from '../../theme';
 import styles from "./styles";
 
