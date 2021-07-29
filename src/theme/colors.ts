@@ -1,1 +1,2 @@
-export const MainColor = 'red';
+export const MainColor = '#fac200';
+
