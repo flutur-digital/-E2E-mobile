@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
     contentWrapper: {
         width: '100%',
         height: '100%',
-        justifyContent: 'flex-end'
+        justifyContent: 'center'
     },
 
     startBtn: {
