@@ -12,6 +12,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		292327CA8E54A71BAABC9328 /* libPods-easy2eat-easy2eatTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BF08775A947FA0BF08E91263 /* libPods-easy2eat-easy2eatTests.a */; };
+		2BFB56A426B340B1009E2432 /* File.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BFB56A326B340B1009E2432 /* File.swift */; };
 		492CF7F9E8ED452E8764F4B5 /* Cera Pro Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 95A7C7CF1608442D9E2C495C /* Cera Pro Medium.otf */; };
 		78E971D369194574BDA20F69 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC6F37F1C4A14243BECC0A30 /* Roboto-Light.ttf */; };
 		7D68F6FB04579D839E3D237B /* libPods-easy2eat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CA2FAB642C66C999863BB1 /* libPods-easy2eat.a */; };
@@ -38,6 +39,8 @@
 		13B07FB51A68108700A75B9A /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = easy2eat/Images.xcassets; sourceTree = "<group>"; };
 		13B07FB61A68108700A75B9A /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = easy2eat/Info.plist; sourceTree = "<group>"; };
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = easy2eat/main.m; sourceTree = "<group>"; };
+		2BFB56A226B340B1009E2432 /* easy2eat-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "easy2eat-Bridging-Header.h"; sourceTree = "<group>"; };
+		2BFB56A326B340B1009E2432 /* File.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = File.swift; sourceTree = "<group>"; };
 		5FCCF231B314DAD24BA0F013 /* Pods-easy2eat-easy2eatTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-easy2eat-easy2eatTests.debug.xcconfig"; path = "Target Support Files/Pods-easy2eat-easy2eatTests/Pods-easy2eat-easy2eatTests.debug.xcconfig"; sourceTree = "<group>"; };
 		66CA2FAB642C66C999863BB1 /* libPods-easy2eat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-easy2eat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = easy2eat/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -129,6 +132,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				2BFB56A326B340B1009E2432 /* File.swift */,
 				13B07FAE1A68108700A75B9A /* easy2eat */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* easy2eatTests */,
@@ -136,6 +140,7 @@
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				995442E790BCF478D0B874B9 /* Pods */,
 				32AB43FDFD5A4FA8AC5E722C /* Resources */,
+				2BFB56A226B340B1009E2432 /* easy2eat-Bridging-Header.h */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -221,7 +226,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						LastSwiftMigration = 1120;
+						LastSwiftMigration = 1250;
 					};
 				};
 			};
@@ -427,6 +432,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				13B07FBC1A68108700A75B9A /* AppDelegate.m in Sources */,
+				2BFB56A426B340B1009E2432 /* File.swift in Sources */,
 				13B07FC11A68108700A75B9A /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -446,6 +452,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 5FCCF231B314DAD24BA0F013 /* Pods-easy2eat-easy2eatTests.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -473,6 +480,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = C1EB46E5FA1AA4075CEA5D14 /* Pods-easy2eat-easy2eatTests.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = easy2eatTests/Info.plist;
@@ -500,6 +508,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5G662B4WTW;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = easy2eat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -513,6 +522,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = easy2eat;
+				SWIFT_OBJC_BRIDGING_HEADER = "easy2eat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
@@ -526,6 +536,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 5G662B4WTW;
 				INFOPLIST_FILE = easy2eat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -538,6 +549,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = easy2eat;
+				SWIFT_OBJC_BRIDGING_HEADER = "easy2eat-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
