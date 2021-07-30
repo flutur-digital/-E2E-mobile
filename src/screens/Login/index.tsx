@@ -1,11 +1,13 @@
 import React from 'react';
-import {View, Text, SafeAreaView, PixelRatio, Pressable} from 'react-native';
+import {View, Text, SafeAreaView, PixelRatio, Pressable, Image} from 'react-native';
 import {SecondColor, Layouts, Typography, MainColor} from "../../theme";
 import styles from "./styles";
 import ArrowLeft from '../../assets/images/arrow-left.svg';
-import LogoSvg from '../../assets/images/user.svg';
 import Recipe from "../../components/Recipe";
 import AppleSvg from './assets/images/apple.svg';
+import LogoSvg from './assets/images/logo.svg';
+import FacebookSvg from './assets/images/facebook.svg';
+import GoogleSvg from './assets/images/google.svg';
 
 import PrimarySmallBtn from "../../components/PrimarySmallBtn";
 
@@ -25,12 +27,31 @@ const Login : React.FC = () => {
                     e<Text style={{color : MainColor}}>2</Text>e community!
                 </Text>
                 {/*<Recipe title={'Eggs with roast beef & avocado'} image={'https://shorturl.at/kJOV9'} time={'15 min'} likes={10}/>*/}
+                <Image source={require('./assets/images/logo.png')} style={styles.logoBox}/>
                 <Pressable style={styles.iosBtn}>
-                    <AppleSvg/>
+                    <AppleSvg width={20} height={25}/>
                     <Text style={styles.whiteBtnTitle}>
                         Sign in with Apple
                     </Text>
                 </Pressable>
+                <Pressable style={styles.facebookBtn}>
+                    <FacebookSvg width={13} height={25}/>
+                    <Text style={styles.whiteBtnTitle}>
+                        Sign in with Facebook
+                    </Text>
+                </Pressable>
+                <Pressable style={styles.googleBtn}>
+                    <GoogleSvg width={26} height={26}/>
+                    <Text style={styles.blackBtnTitle}>
+                        Sign in with Google
+                    </Text>
+                </Pressable>
+
+            </View>
+            <View style={styles.legalBox}>
+                <Text style={styles.copyTxt}>
+                    Easy2Eat Mobile App © 2021 All rights reserved
+                </Text>
             </View>
 
         </SafeAreaView>

@@ -28,6 +28,8 @@ const GetStarted : React.FC = () => {
           <View style={styles.contentWrapper}>
             <Text style={{ fontSize: 50 }}>adfda</Text>
             <Pressable onPress={() => navigation.navigate('Login')}><Text>Login</Text></Pressable>
+              <Pressable onPress={() => navigation.navigate('SearchResults')}><Text>Search Results</Text></Pressable>
+              <Pressable onPress={() => navigation.navigate('UserRecipes')}><Text>UserRecipes</Text></Pressable>
           </View>
         </View>
     )
