@@ -9,6 +9,19 @@ export const Typography = StyleSheet.create({
         lineHeight: 36.8,
         letterSpacing: -0.95,
         color: "#000000",
-        textAlign : 'center'
+        textAlign : 'center',
+        marginTop : 10,
+        marginBottom : 29
     },
+    copyTxt : {
+        fontFamily: 'Cera Pro Medium',
+        fontSize: 11,
+        fontWeight: '500',
+        fontStyle: 'normal',
+        textAlign: 'center',
+        color: '#2c2c2c',
+        opacity: 0.5,
+        position : 'absolute',
+        bottom : 0
+    }
 });

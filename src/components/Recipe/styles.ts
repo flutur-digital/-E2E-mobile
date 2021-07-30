@@ -13,10 +13,8 @@ const styles = StyleSheet.create({
         },
         shadowRadius: 9.2,
         shadowOpacity: 1,
-        borderRadius : 9.2,
-        paddingLeft : 17.3,
-        paddingBottom : 14.7,
-        marginTop : 30
+        borderRadius : 20,
+        marginBottom : 10
 
     },
 
@@ -38,8 +36,8 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         height : 150,
         width : 150,
-        marginTop : -10,
-        borderRadius : 9.2,
+        borderBottomLeftRadius : 20,
+        borderTopLeftRadius : 20,
     },
     recipeTitle : {
         fontFamily: 'Cera Pro Medium',

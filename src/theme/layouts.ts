@@ -5,10 +5,10 @@ export const Layouts = StyleSheet.create({
         width : '100%',
         display : 'flex',
         flexDirection : 'row',
-        alignItems : 'center',
+        alignItems : 'flex-start',
         justifyContent : 'space-between',
         paddingLeft : 22,
-        paddingRight : 21
+        paddingRight : 15
     },
     PrimarySmallBtn : {
         width: 38.7,
