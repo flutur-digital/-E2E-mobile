@@ -1,3 +1,2 @@
-import * as Auth from './users/auth.service';
-
-export { Auth };
+export * from './users/auth.service';
+export * from './recipes/ingredients.service';
