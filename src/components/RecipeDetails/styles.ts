@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
         display : 'flex',
         alignItems : 'center',
         justifyContent : 'center',
-        // marginRight : 5
+        marginRight : 5
     },
     step : {
         fontFamily: 'Cera Pro Medium',
@@ -94,12 +94,86 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontStyle: 'normal',
         lineHeight: 22.4,
+        flex : 1,
 
     },
     recipeMedia : {
         width : '100%',
         resizeMode : 'contain',
         height : 250
+    },
+    recipeFooter : {
+        width : '100%',
+        paddingLeft : 20,
+        paddingRight : 23,
+        marginTop: 40,
+        paddingBottom: 23,
+        display : 'flex',
+        flexDirection : 'row'
+    },
+    smallRecipeImage : {
+        width : 118,
+        height : 118,
+        borderRadius : 25
+    },
+    userInfo : {
+        width : '100%',
+        flex : 1,
+        flexDirection : 'column',
+        marginLeft : 18
+    },
+    role : {
+        fontFamily: 'Cera Pro Medium',
+        color: '#8b8b8b',
+        fontSize: 12,
+        lineHeight: 19.1,
+        fontStyle: 'normal',
+    },
+    name : {
+        fontFamily: 'Cera Pro Medium',
+        fontSize: 16,
+        fontWeight: '500',
+        fontStyle: 'normal',
+        color: '#000000',
+    },
+    followBlock : {
+        display : 'flex',
+        flexDirection : 'row',
+        justifyContent : 'space-between',
+        alignItems : 'center',
+        paddingTop : 8,
+        borderTopWidth : 0.5,
+        borderTopColor : 'rgba(139,139,139,0.51)',
+
+        marginTop : 10
+    },
+    followBtn : {
+        paddingLeft : 7,
+        paddingTop : 9,
+        paddingBottom : 7,
+        paddingRight: 19,
+        borderWidth: 1,
+        borderColor: '#ffca00',
+        borderRadius : 25,
+        display : 'flex',
+        flexDirection : 'row',
+        alignItems : 'center'
+    },
+    userAvatar : {
+        width : 34,
+        height : 34,
+        borderRadius : 99,
+        marginRight: 10
+    },
+    followTxt : {
+        fontFamily: 'Cera Pro Medium',
+        fontSize: 14,
+        fontWeight: '500',
+        fontStyle: 'normal',
+    },
+    likesCount : {
+        flexDirection : 'column',
+        justifyContent : 'center'
     }
 });
 

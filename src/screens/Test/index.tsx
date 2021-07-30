@@ -18,6 +18,11 @@ const Test : React.FC = () => {
                     Recipe Screen
                 </Text>
             </Pressable>
+            <Pressable onPress={() => navigation.navigate('UserRecipes')} style={{marginTop : 10}}>
+                <Text>
+                   User
+                </Text>
+            </Pressable>
 
         </View>
     )
