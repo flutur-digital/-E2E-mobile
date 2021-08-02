@@ -40,18 +40,19 @@ const Search : React.FC = () => {
             <View style={styles.searchContainer}>
                   <Text style={Typography.title}>Please choose ingredients you have</Text>
                   <SearchInput onSearch={ingredientSearch}/>
-                  <FlatList
-                    style={{ marginTop: 27 }}
-                    data={searchIngredients}
-                    renderItem={({ item, index }) => (
-                      <IngredientItem
-                        ingredient={item}
-                      />
-                    )}
-                    keyExtractor={item => String(item.id)}
-                  />
+
             </View>
-            <RecipeResultsCounter recipesFound={3}/>
+            <FlatList
+                style={{ marginTop: 27, paddingLeft: 22, paddingRight: 22 }}
+                data={searchIngredients}
+                renderItem={({ item, index }) => (
+                    <IngredientItem
+                        ingredient={item}
+                    />
+                )}
+                keyExtractor={item => String(item.id)}
+            />
+            <RecipeResultsCounter onClick={()=> navigation.navigate('SearchResults')} recipesFound={3}/>
         </SafeAreaView>
     )
 }

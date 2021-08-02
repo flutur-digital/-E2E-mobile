@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
     alertWrapper : {
         width : '100%',
         position : 'absolute',
-        bottom : 10,
+        bottom : 30,
         paddingLeft: 14,
         paddingRight: 14
     },

@@ -101,7 +101,6 @@ const AddRecipeStep1 : React.FC = () => {
                             horizontal={false}
                             numColumns={3}
                             renderItem={({ item, index }) => (
-
                                 <Ingredient
                                     ingredient={item}
                                 />

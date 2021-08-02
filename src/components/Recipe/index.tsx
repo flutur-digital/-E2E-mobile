@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import {View, Text, Pressable, Image} from 'react-native';
+import React, { useState, useEffect, useRef } from 'react';
+import {View, Text, Pressable, Image, Animated} from 'react-native';
 import styles from './styles';
 import DurationSvg from './assets/images/time.svg';
 import HeartSvg from './assets/images/heart3.svg';
@@ -14,9 +14,27 @@ interface RecipeInfo {
 
 const Recipe : React.FC<RecipeInfo> = ({title, image, time, likes}) => {
 
+    const moveRecipe = useRef(new Animated.Value(500)).current;
     const navigation = useNavigation();
+    useEffect(() => {
+        Animated.sequence([
+            Animated.spring(moveRecipe, {
+                toValue: 0,
+                velocity: 10,
+                delay : 300,
+                tension : 5,
+                friction : 3,
+                useNativeDriver: true,
+                isInteraction: false
+
+            }),
+        ]).start();
+
+    },[moveRecipe]);
+
 
     return (
+        <Animated.View style={{transform: [{translateX: moveRecipe}]}}>
         <Pressable style={styles.recipeBox}>
                 <Image style={styles.recipeImage} source={{uri: image}}/>
             <View style={styles.wrapper}>
@@ -41,7 +59,8 @@ const Recipe : React.FC<RecipeInfo> = ({title, image, time, likes}) => {
             </View>
 
         </Pressable>
+        </Animated.View>
     )
-}
+};
 
 export default Recipe;
