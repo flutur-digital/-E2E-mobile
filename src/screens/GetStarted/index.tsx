@@ -24,7 +24,7 @@ const GetStarted : React.FC = () => {
             ignoreSilentSwitch={"obey"}
           />
           <View style={styles.contentWrapper}>
-            <Pressable style={styles.startBtn} onPress={() => navigation.navigate('Login')}>
+            <Pressable style={styles.startBtn} onPress={() => navigation.navigate('Search')}>
               <Text style={styles.startBtnText}>Start</Text>
               <ArrowRight/>
             </Pressable>

@@ -124,7 +124,7 @@ const BottomNavigationStack = () => {
 }
 
 const Router = () => {
-  const isAuthenticated = false;
+  const isAuthenticated = true;
   return isAuthenticated ? <BottomNavigationStack/> : <Stack1/>
 }
 

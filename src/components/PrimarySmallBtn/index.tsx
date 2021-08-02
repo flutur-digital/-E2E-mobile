@@ -7,14 +7,15 @@ import ArrowLeft from '../../assets/images/arrow-left.svg';
 interface PrimarySmallBtnProps {
     icon : any;
     bgColor : string;
+    onClick?: () => void;
 }
 
-const PrimarySmallBtn : React.FC<PrimarySmallBtnProps> = ({icon, bgColor}) => {
+const PrimarySmallBtn : React.FC<PrimarySmallBtnProps> = ({icon, bgColor,onClick}) => {
 
     const navigation = useNavigation();
 
     return (
-        <Pressable style={[styles.PrimarySmallBtn,{backgroundColor: bgColor}]}>
+        <Pressable onPress={onClick} style={[styles.PrimarySmallBtn,{backgroundColor: bgColor}]}>
             {icon}
         </Pressable>
     )

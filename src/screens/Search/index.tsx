@@ -6,7 +6,7 @@ import IngredientItem from "./components/IngredientItem";
 import {Typography} from "../../theme";
 import styles from "./styles";
 import {IngredientType} from "../../types";
-
+import RecipeResultsCounter from "./components/RecipeResultsCounter";
 import {getAllIngredients} from "../../services";
 
 const Search : React.FC = () => {
@@ -38,19 +38,20 @@ const Search : React.FC = () => {
     return (
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.searchContainer}>
-              <Text style={Typography.title}>Please choose ingredients you have</Text>
-              <SearchInput onSearch={ingredientSearch}/>
-              <FlatList
-                style={{ marginTop: 27 }}
-                data={searchIngredients}
-                renderItem={({ item }) => (
-                  <IngredientItem
-                    ingredient={item}
+                  <Text style={Typography.title}>Please choose ingredients you have</Text>
+                  <SearchInput onSearch={ingredientSearch}/>
+                  <FlatList
+                    style={{ marginTop: 27 }}
+                    data={searchIngredients}
+                    renderItem={({ item, index }) => (
+                      <IngredientItem
+                        ingredient={item}
+                      />
+                    )}
+                    keyExtractor={item => String(item.id)}
                   />
-                )}
-                keyExtractor={item => String(item.id)}
-              />
             </View>
+            <RecipeResultsCounter recipesFound={3}/>
         </SafeAreaView>
     )
 }

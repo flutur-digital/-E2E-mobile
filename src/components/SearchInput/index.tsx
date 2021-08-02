@@ -16,7 +16,7 @@ const SearchInput : React.FC<Props> = ({onSearch, defaultValue}) => {
     const onChangeText = (text: string) => {
       setSearchValue(text);
       onSearch(text);
-    }
+    };
 
     return (
         <View style={styles.searchInputContainer}>
@@ -24,6 +24,7 @@ const SearchInput : React.FC<Props> = ({onSearch, defaultValue}) => {
             style={styles.inputBox}
             onChangeText={onChangeText}
             value={searchValue}
+            placeholder={'Search'}
           />
           <SearchIcon style={styles.searchIcon}/>
         </View>
