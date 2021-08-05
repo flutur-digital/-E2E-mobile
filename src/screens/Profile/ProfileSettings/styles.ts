@@ -4,11 +4,13 @@ import {MainColor} from "../../../theme";
 const styles = StyleSheet.create({
     container : {
         display : 'flex',
-        flexDirection : 'column',
         width: '100%',
         paddingLeft : 14,
         paddingRight : 15,
-        position : 'relative'
+        paddingTop: 30,
+        position : 'relative',
+        alignItems : 'center',
+        flex : 1,
     },
     scrollContainer : {
         justifyContent : 'center',
@@ -34,8 +36,7 @@ const styles = StyleSheet.create({
     userAvatar : {
         width : 94,
         height : 94,
-        borderRadius: 99,
-        display : 'flex'
+        borderRadius: 99
     },
     userName: {
         fontFamily: 'Cera Pro Medium',
@@ -58,11 +59,37 @@ const styles = StyleSheet.create({
         marginBottom : 38,
         marginTop: 12
     },
-    test : {
+    changePhotoTxt : {
+        fontFamily: 'Cera Pro Medium',
+        color : '#2b8ac1',
+        fontWeight : 'bold',
+        marginTop : 15,
+        marginBottom:  45
+    },
+    settingItem : {
         width : '100%',
-        display : 'flex',
-        alignItems : 'center',
-        justifyContent : 'center'
+        flexDirection : 'row',
+        marginBottom : 15
+    },
+    settingName : {
+        width : '25%'
+    },
+    inputWrapper : {
+        width : '75%',
+        borderBottomWidth: 0.5,
+        borderBottomColor : '#979797',
+        paddingBottom : 15
+    },
+    name : {
+        fontFamily: 'Cera Pro Medium',
+        fontSize: 18,
+        fontWeight: '300',
+        color : '#555555'
+    },
+    settingInput : {
+        fontFamily: 'Cera Pro Medium',
+        fontSize: 18,
+        fontWeight: '400',
     }
 
 });

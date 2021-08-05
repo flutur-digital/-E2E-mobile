@@ -18,7 +18,7 @@ const MyProfile : React.FC = () => {
                 <View style={{width: 38.7, height: 38.7,}}>
 
                 </View>
-                <Pressable style={styles.settingsBtn}>
+                <Pressable style={styles.settingsBtn} onPress={()=>navigation.navigate('Settings')}>
                     <SettingsSvg width={22} height={22}/>
                 </Pressable>
 

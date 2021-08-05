@@ -29,6 +29,8 @@ import AddRecipeSuccess from "../screens/AddRecipeScreens/AddRecipeSuccess";
 
 //user profile screens
 import MyProfile from "../screens/Profile/MyProfile";
+import ProfileSettings from "../screens/Profile/ProfileSettings";
+import Settings from "../screens/Profile/Settings";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -73,6 +75,8 @@ const Stack3 = () => {
       }}
     >
       <Stack.Screen name="MyProfile" component={MyProfile} />
+        <Stack.Screen name="Settings" component={Settings} />
+        <Stack.Screen name="ProfileSettings" component={ProfileSettings} />
     </Stack.Navigator>
   )
 }
