@@ -17,6 +17,7 @@
 		78E971D369194574BDA20F69 /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DC6F37F1C4A14243BECC0A30 /* Roboto-Light.ttf */; };
 		7D68F6FB04579D839E3D237B /* libPods-easy2eat.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 66CA2FAB642C66C999863BB1 /* libPods-easy2eat.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
+		9908C41D26BEA4E800D86C1F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9908C41C26BEA4E800D86C1F /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -45,6 +46,7 @@
 		66CA2FAB642C66C999863BB1 /* libPods-easy2eat.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-easy2eat.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; name = LaunchScreen.storyboard; path = easy2eat/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		95A7C7CF1608442D9E2C495C /* Cera Pro Medium.otf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Cera Pro Medium.otf"; path = "../src/assets/fonts/Cera Pro Medium.otf"; sourceTree = "<group>"; };
+		9908C41C26BEA4E800D86C1F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BF08775A947FA0BF08E91263 /* libPods-easy2eat-easy2eatTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-easy2eat-easy2eatTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C1EB46E5FA1AA4075CEA5D14 /* Pods-easy2eat-easy2eatTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-easy2eat-easy2eatTests.release.xcconfig"; path = "Target Support Files/Pods-easy2eat-easy2eatTests/Pods-easy2eat-easy2eatTests.release.xcconfig"; sourceTree = "<group>"; };
 		DC6F37F1C4A14243BECC0A30 /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../src/assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
@@ -93,6 +95,7 @@
 		13B07FAE1A68108700A75B9A /* easy2eat */ = {
 			isa = PBXGroup;
 			children = (
+				9908C41C26BEA4E800D86C1F /* GoogleService-Info.plist */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
@@ -263,6 +266,7 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				9908C41D26BEA4E800D86C1F /* GoogleService-Info.plist in Resources */,
 				78E971D369194574BDA20F69 /* Roboto-Light.ttf in Resources */,
 				492CF7F9E8ED452E8764F4B5 /* Cera Pro Medium.otf in Resources */,
 			);
