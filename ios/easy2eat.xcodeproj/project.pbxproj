@@ -508,7 +508,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5G662B4WTW;
+				DEVELOPMENT_TEAM = C8QH2RLT3H;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = easy2eat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -520,7 +520,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = app.easy2eat.co;
 				PRODUCT_NAME = easy2eat;
 				SWIFT_OBJC_BRIDGING_HEADER = "easy2eat-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -536,7 +536,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 5G662B4WTW;
+				DEVELOPMENT_TEAM = C8QH2RLT3H;
 				INFOPLIST_FILE = easy2eat/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -547,7 +547,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = app.easy2eat.co;
 				PRODUCT_NAME = easy2eat;
 				SWIFT_OBJC_BRIDGING_HEADER = "easy2eat-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;

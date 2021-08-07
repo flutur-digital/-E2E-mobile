@@ -1,19 +1,35 @@
 import React from 'react';
-import {View, Text, SafeAreaView, PixelRatio, Pressable, Image} from 'react-native';
-import {SecondColor, Layouts, Typography, MainColor} from "../../theme";
+import {View, Text, SafeAreaView, Pressable, Image} from 'react-native';
+import {Layouts, Typography, MainColor} from "../../theme";
 import styles from "./styles";
 import ArrowLeft from '../../assets/images/arrow-left.svg';
-import Recipe from "../../components/Recipe";
 import AppleSvg from './assets/images/apple.svg';
-import LogoSvg from './assets/images/logo.svg';
 import FacebookSvg from './assets/images/facebook.svg';
 import GoogleSvg from './assets/images/google.svg';
-
 import PrimarySmallBtn from "../../components/PrimarySmallBtn";
 
-
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next'
 
 const Login : React.FC = () => {
+
+    const loginFacebook = () => {
+        LoginManager.logInWithPermissions(["public_profile","email"]).then((result) => {
+              if (result.isCancelled) {
+                  console.log("Login cancelled");
+              } else {
+                  AccessToken.getCurrentAccessToken().then(data => {
+                      // @ts-ignore
+                      console.log(data.accessToken.toString())
+                  })
+                  // // @ts-ignore
+                  // console.log("Login success with permissions: " + result.grantedPermissions.toString());
+              }
+          },
+          function(error) {
+              console.log("Login fail with error: " + error);
+          }
+        );
+    }
 
     return (
         <SafeAreaView style={styles.wrapper}>
@@ -34,7 +50,7 @@ const Login : React.FC = () => {
                         Sign in with Apple
                     </Text>
                 </Pressable>
-                <Pressable style={styles.facebookBtn}>
+                <Pressable onPress={() => loginFacebook()} style={styles.facebookBtn}>
                     <FacebookSvg width={13} height={25}/>
                     <Text style={styles.whiteBtnTitle}>
                         Sign in with Facebook
