@@ -42,12 +42,12 @@ const Stack1 = () => {
         headerShown: false
       }}
     >
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="GetStarted" component={GetStarted} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="SearchResults" component={SearchResults} />
       <Stack.Screen name="UserRecipes" component={UserRecipes} />
       <Stack.Screen name="RecipeScreen" component={RecipeScreen} />
-      <Stack.Screen name="Login" component={Login} />
     </Stack.Navigator>
   )
 }
@@ -128,7 +128,7 @@ const BottomNavigationStack = () => {
 }
 
 const Router = () => {
-  const isAuthenticated = true;
+  const isAuthenticated = false;
   return isAuthenticated ? <BottomNavigationStack/> : <Stack1/>
 }
 

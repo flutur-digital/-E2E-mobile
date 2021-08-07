@@ -1,19 +1,57 @@
 import React from 'react';
-import {View, Text, SafeAreaView, PixelRatio, Pressable, Image} from 'react-native';
-import {SecondColor, Layouts, Typography, MainColor} from "../../theme";
+import {View, Text, SafeAreaView, Pressable, Image} from 'react-native';
+import {Layouts, Typography, MainColor} from "../../theme";
 import styles from "./styles";
 import ArrowLeft from '../../assets/images/arrow-left.svg';
-import Recipe from "../../components/Recipe";
 import AppleSvg from './assets/images/apple.svg';
-import LogoSvg from './assets/images/logo.svg';
 import FacebookSvg from './assets/images/facebook.svg';
 import GoogleSvg from './assets/images/google.svg';
-
 import PrimarySmallBtn from "../../components/PrimarySmallBtn";
 
-
+import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
+import { GoogleSignin, statusCodes } from '@react-native-google-signin/google-signin';
 
 const Login : React.FC = () => {
+
+    const loginFacebook = () => {
+        LoginManager.logInWithPermissions(["public_profile","email"]).then((result) => {
+              if (result.isCancelled) {
+                  console.log("Login cancelled");
+              } else {
+                  AccessToken.getCurrentAccessToken().then(data => {
+                      // @ts-ignore
+                      console.log(data.accessToken.toString())
+                  })
+                  // // @ts-ignore
+                  // console.log("Login success with permissions: " + result.grantedPermissions.toString());
+              }
+          },
+          function(error) {
+              console.log("Login fail with error: " + error);
+          }
+        );
+    }
+
+    const loginGoogle = async () => {
+      GoogleSignin.configure({
+        iosClientId: '750241320668-r1ihbh0rlp39ca2ib04a6kjvbgp653rg.apps.googleusercontent.com',
+      });
+        try {
+          await GoogleSignin.hasPlayServices();
+          const accesToken = await GoogleSignin.getTokens();
+          console.log(accesToken)
+        } catch (error) {
+          if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+            // user cancelled the login flow
+          } else if (error.code === statusCodes.IN_PROGRESS) {
+            // operation (e.g. sign in) is in progress already
+          } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+            // play services not available or outdated
+          } else {
+            // some other error happened
+          }
+        }
+    }
 
     return (
         <SafeAreaView style={styles.wrapper}>
@@ -34,13 +72,13 @@ const Login : React.FC = () => {
                         Sign in with Apple
                     </Text>
                 </Pressable>
-                <Pressable style={styles.facebookBtn}>
+                <Pressable onPress={() => loginFacebook()} style={styles.facebookBtn}>
                     <FacebookSvg width={13} height={25}/>
                     <Text style={styles.whiteBtnTitle}>
                         Sign in with Facebook
                     </Text>
                 </Pressable>
-                <Pressable style={styles.googleBtn}>
+                <Pressable onPress={() => loginGoogle()} style={styles.googleBtn}>
                     <GoogleSvg width={26} height={26}/>
                     <Text style={styles.blackBtnTitle}>
                         Sign in with Google
