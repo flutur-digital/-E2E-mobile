@@ -21,9 +21,9 @@ const ProfileSettings : React.FC = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={{ width: '100%', height:'100%' }}>
-            <View style={[Layouts.spaceBetween, {paddingLeft: 22, paddingRight: 16}]}>
-                <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor}/>
-                <PrimarySmallBtn onClick={()=> navigation.navigate('AddRecipeSuccess')} icon={<CheckSvg width={20} height={14}/>} bgColor={'#00e96b'}/>
+            <View style={[Layouts.spaceBetween, {paddingLeft: 22, paddingRight: 16, paddingTop : 15}]}>
+                <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={()=>navigation.goBack()}/>
+                <PrimarySmallBtn onClick={()=>navigation.navigate('Settings')} icon={<CheckSvg width={20} height={14}/>} bgColor={'#00e96b'}/>
             </View>
             <View style={styles.container}>
                 <Image style={styles.userAvatar}

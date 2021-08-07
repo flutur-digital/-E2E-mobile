@@ -19,8 +19,8 @@ const SearchResults : React.FC = () => {
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
-            <View style={Layouts.spaceBetween}>
-                <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor}/>
+            <View style={[Layouts.spaceBetween, {paddingTop : 15}]}>
+                <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={()=>navigation.goBack()}/>
                 <Image source={require('../../assets/images/logoBtn.png')} style={{width : 60, height : 60}}/>
             </View>
             <ScrollView style={styles.container} contentContainerStyle={styles.scrollContainer}>
@@ -32,11 +32,13 @@ const SearchResults : React.FC = () => {
                     title={'Eggs with roast beef & avocado'}
                     image={'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}
                     time={'15 min'}
+
                 />
                 <Recipe
                     title={'Eggs with roast beef & avocado'}
                     image={'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}
                     time={'15 min'}
+
                 />
 
 

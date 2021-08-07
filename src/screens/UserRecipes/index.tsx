@@ -18,7 +18,7 @@ const UserRecipes : React.FC = () => {
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
-            <View style={Layouts.spaceBetween}>
+            <View style={[Layouts.spaceBetween, {paddingTop : 15}]}>
                 <View style={{width: 38.7, height: 38.7,}}>
 
                 </View>

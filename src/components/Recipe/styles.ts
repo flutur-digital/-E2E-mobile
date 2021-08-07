@@ -14,7 +14,8 @@ const styles = StyleSheet.create({
         shadowRadius: 9.2,
         shadowOpacity: 1,
         borderRadius : 20,
-        marginBottom : 10
+        marginBottom : 10,
+        height : 150,
 
     },
 
@@ -24,8 +25,10 @@ const styles = StyleSheet.create({
         paddingTop : 20,
         paddingLeft: 20,
         paddingRight : 32,
+        paddingBottom : 25,
         display : 'flex',
-        flexDirection : 'column'
+        flexDirection : 'column',
+        justifyContent: 'space-between'
     },
     recipeImage : {
         shadowColor: "rgba(0, 0, 0, 0.29)",

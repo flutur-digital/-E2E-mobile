@@ -11,7 +11,8 @@ const styles = StyleSheet.create({
 
     searchContainer: {
         paddingLeft: 22,
-        paddingRight: 22
+        paddingRight: 22,
+        paddingTop : 15
     }
 });
 

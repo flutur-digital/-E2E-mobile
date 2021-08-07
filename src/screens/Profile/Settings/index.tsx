@@ -25,8 +25,8 @@ const Settings : React.FC = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={{ width: '100%', height:'100%' }}>
-            <View style={[Layouts.spaceBetween, {paddingLeft: 22, paddingRight: 16}]}>
-                <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor}/>
+            <View style={[Layouts.spaceBetween, {paddingLeft: 22, paddingRight: 16, paddingTop : 15}]}>
+                <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={()=>navigation.goBack()}/>
                 <Text style={styles.title}>
                     Settings
                 </Text>

@@ -51,7 +51,7 @@ const AddRecipeStep1 : React.FC = () => {
     const navigation = useNavigation();
     return (
         <SafeAreaView style={{ width: '100%', height:'100%', flex : 1 }}>
-            <View style={[Layouts.spaceBetween, {paddingLeft: 20, paddingRight: 20}]}>
+            <View style={[Layouts.spaceBetween, {paddingLeft: 20, paddingRight: 20, paddingTop : 15}]}>
                 <View style={{width : 38.7, height : 38.7}}>
                 </View>
                 <Text style={styles.title}>

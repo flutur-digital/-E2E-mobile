@@ -10,6 +10,7 @@ interface RecipeInfo {
     image : string;
     time : string;
     likes? : number;
+
 }
 
 const Recipe : React.FC<RecipeInfo> = ({title, image, time, likes}) => {
@@ -35,7 +36,7 @@ const Recipe : React.FC<RecipeInfo> = ({title, image, time, likes}) => {
 
     return (
         <Animated.View style={{transform: [{translateX: moveRecipe}]}}>
-        <Pressable style={styles.recipeBox}>
+        <Pressable style={styles.recipeBox} onPress={()=> navigation.navigate('RecipeScreen')}>
                 <Image style={styles.recipeImage} source={{uri: image}}/>
             <View style={styles.wrapper}>
                <Text numberOfLines={3} style={styles.recipeTitle}>{title}</Text>
