@@ -6,11 +6,18 @@ import styles from "./styles";
 import Recipe from "../../../components/Recipe";
 
 import SettingsSvg from '../../../assets/images/settings.svg';
+import { useSelector } from "react-redux";
 
 
 const MyProfile : React.FC = () => {
 
     const navigation = useNavigation();
+
+    const {isAuthenticated, user} = useSelector(
+      (state: any) => state.authReducer
+    );
+
+    console.log(user)
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
@@ -27,9 +34,7 @@ const MyProfile : React.FC = () => {
                 <Image style={styles.userAvatar}
                        source={{uri : 'https://lh3.googleusercontent.com/proxy/zjtYbjTqfTUOImpno68A6EISaOjkWXYRu4tthjB2ijfXgSLQJgGhCz11Kby67tufSbreX9596DWdRLVkybhb04kY'}}
                 />
-                <Text style={styles.userName}>
-                    Dorin
-                </Text>
+                <Text style={styles.userName}>{user.name}</Text>
                 <Text style={styles.userBio}>
                     Hello, please enjoy my recipes
                 </Text>

@@ -1,23 +1,35 @@
 import React from 'react';
-import { View} from 'react-native';
+import { View, Image } from 'react-native';
 
 interface Props{
   focused: boolean,
+  width: number,
+  height: number,
   inactiveIcon: any,
   activeIcon: any
 }
 
-const BottomNavigationTab : React.FC<Props> = ({focused, inactiveIcon, activeIcon}) => {
+const BottomNavigationTab : React.FC<Props> = ({focused, width, height, inactiveIcon, activeIcon}) => {
 
   if(!focused){
     return (
-      <View>{inactiveIcon}</View>
+      <View style={{ paddingTop: 13 }}>
+        <Image
+          style={{width: width, height: height, resizeMode: 'contain'}}
+          source={inactiveIcon}
+        />
+      </View>
     )
   } else {
     return (
-      <View>{activeIcon}</View>
+      <View style={{ paddingTop: 13 }}>
+        <Image
+          style={{width: width, height: height, resizeMode: 'contain'}}
+          source={activeIcon}
+        />
+      </View>
     )
   }
-}
+};
 
 export default BottomNavigationTab;

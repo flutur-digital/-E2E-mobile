@@ -1,16 +1,8 @@
 import React from 'react';
+import {connect} from "react-redux";
 import { createNativeStackNavigator } from 'react-native-screens/native-stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import BottomNavigationTab from "../components/BottomNavigationTab";
-
-import Tab1InactiveIcon from '../assets/images/bottomnavigationicons/tab1inactive.svg';
-import Tab1ActiveIcon from '../assets/images/bottomnavigationicons/tab1active.svg';
-
-import Tab2InactiveIcon from '../assets/images/bottomnavigationicons/tab2inactive.svg';
-import Tab2ActiveIcon from '../assets/images/bottomnavigationicons/tab2active.svg';
-
-import Tab3InactiveIcon from '../assets/images/bottomnavigationicons/tab3inactive.svg';
-import Tab3ActiveIcon from '../assets/images/bottomnavigationicons/tab3active.svg';
 
 //import screens
 import GetStarted from '../screens/GetStarted';
@@ -42,8 +34,8 @@ const Stack1 = () => {
         headerShown: false
       }}
     >
-      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="GetStarted" component={GetStarted} />
+      <Stack.Screen name="Login" component={Login} />
       <Stack.Screen name="Search" component={Search} />
       <Stack.Screen name="SearchResults" component={SearchResults} />
       <Stack.Screen name="UserRecipes" component={UserRecipes} />
@@ -101,7 +93,7 @@ const BottomNavigationStack = () => {
         component={Stack1}
         options={{
           tabBarIcon: ({focused}) => (
-            <BottomNavigationTab focused={focused} inactiveIcon={<Tab1InactiveIcon/>} activeIcon={<Tab1ActiveIcon/>}/>
+            <BottomNavigationTab focused={focused} width={73} height={46} inactiveIcon={require("../assets/images/bottomnavigationicons/tab1inactive.png")} activeIcon={require("../assets/images/bottomnavigationicons/tab1active.png")}/>
           ),
         }}
       />
@@ -110,7 +102,7 @@ const BottomNavigationStack = () => {
         component={Stack2}
         options={{
           tabBarIcon: ({focused}) => (
-            <BottomNavigationTab focused={focused} inactiveIcon={<Tab2InactiveIcon/>} activeIcon={<Tab2ActiveIcon/>}/>
+            <BottomNavigationTab focused={focused} width={48} height={48} inactiveIcon={require("../assets/images/bottomnavigationicons/tab2inactive.png")} activeIcon={require("../assets/images/bottomnavigationicons/tab2active.png")}/>
           ),
         }}
       />
@@ -119,7 +111,7 @@ const BottomNavigationStack = () => {
         component={Stack3}
         options={{
           tabBarIcon: ({focused}) => (
-            <BottomNavigationTab focused={focused} inactiveIcon={<Tab3InactiveIcon/>} activeIcon={<Tab3ActiveIcon/>}/>
+            <BottomNavigationTab focused={focused} width={47} height={31} inactiveIcon={require("../assets/images/bottomnavigationicons/tab3inactive.png")} activeIcon={require("../assets/images/bottomnavigationicons/tab3active.png")}/>
           ),
         }}
       />
@@ -127,10 +119,34 @@ const BottomNavigationStack = () => {
   );
 }
 
-const Router = () => {
-  const isAuthenticated = false;
-  return isAuthenticated ? <BottomNavigationStack/> : <Stack1/>
+interface StateProps{
+  isAuthenticated: boolean,
+  token: string
 }
 
-export default Router;
+const AuthStack = () => {
+  return (
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false
+      }}
+    >
+      <Stack.Screen name="GetStarted" component={GetStarted} />
+      <Stack.Screen name="BottomNavigation" component={BottomNavigationStack} />
+    </Stack.Navigator>
+  )
+}
+
+const Router = (state:StateProps) => {
+
+  console.log(state);
+  return state.isAuthenticated ? <AuthStack/> : <Stack1/>
+}
+
+const mapStateToProps = (state : any) => ({
+  isAuthenticated: state.authReducer.isAuthenticated,
+  token: state.authReducer.token
+});
+
+export default connect<StateProps>(mapStateToProps)(Router)
 

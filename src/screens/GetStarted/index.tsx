@@ -8,10 +8,16 @@ import ArrowRight from '../../assets/images/arrow-right.svg';
 import FacebookIcon from '../../assets/images/socialsicons/facebook.svg';
 import InstagramIcon from '../../assets/images/socialsicons/instagram.svg';
 import TwitterIcon from '../../assets/images/socialsicons/twitter.svg';
+import { useSelector } from "react-redux";
 
 const GetStarted : React.FC = () => {
 
     const navigation = useNavigation();
+
+  const {isAuthenticated} = useSelector(
+    (state: any) => state.authReducer
+  );
+
     return (
         <View style={{ width: '100%', height:'100%' }}>
           <Video
@@ -24,7 +30,7 @@ const GetStarted : React.FC = () => {
             ignoreSilentSwitch={"obey"}
           />
           <View style={styles.contentWrapper}>
-            <Pressable style={styles.startBtn} onPress={() => navigation.navigate('Search')}>
+            <Pressable style={styles.startBtn} onPress={() => isAuthenticated ? navigation.navigate('BottomNavigation', {screen: 'Stack1',params: {screen: 'Search'}}) : navigation.navigate('Search')}>
               <Text style={styles.startBtnText}>Start</Text>
               <ArrowRight/>
             </Pressable>
