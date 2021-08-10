@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "750241320668",
+    "project_id": "easy2eat-5d586",
+    "storage_bucket": "easy2eat-5d586.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750241320668:android:5656e0bf6a960735506e19",
+        "android_client_info": {
+          "package_name": "app.easy2eat.co"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750241320668-43pnr3ragddtr5kial45jlfgku7b94s6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCdE1g5StIcfr1jQppYFctlF0fA8Z0SmXI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750241320668-43pnr3ragddtr5kial45jlfgku7b94s6.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "750241320668-r1ihbh0rlp39ca2ib04a6kjvbgp653rg.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "app.easy2eat.co"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
