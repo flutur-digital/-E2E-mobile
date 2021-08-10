@@ -7,13 +7,15 @@ import {Typography} from "../../theme";
 import styles from "./styles";
 import {IngredientType} from "../../types";
 import RecipeResultsCounter from "./components/RecipeResultsCounter";
-import {getAllIngredients} from "../../services";
+import {getAllIngredients, searchRecipes} from "../../services";
 
 const Search : React.FC = () => {
 
     const navigation = useNavigation();
     const [ingredients, setIngredients] = useState<Array<IngredientType>>([]);
     const [searchIngredients, setSearchIngredients] = useState<Array<IngredientType>>([]);
+
+    const [selectedIngredients, setSelectedIngredients] = useState<Array<number>>([])
 
     const getIngredients = () => {
       getAllIngredients().then((res) => {
@@ -35,6 +37,27 @@ const Search : React.FC = () => {
       setSearchIngredients(data);
     }
 
+
+    const selectIngredient = (ingredientId: number) => {
+      setSelectedIngredients(selectedIngredients.concat([ingredientId]));
+    }
+
+    const unselectIngredient = (ingredientId: number) => {
+      setSelectedIngredients(selectedIngredients.filter((el) => { return el != ingredientId }));
+    }
+
+    const checkIfIngredientIsSelected = (ingredientId: number) => {
+      return selectedIngredients.includes(ingredientId);
+    }
+
+    useEffect(() => {
+      if(selectedIngredients.length > 0) {
+        searchRecipes(selectedIngredients).then((res) => {
+          console.log(res.data)
+        })
+      }
+    },[selectedIngredients])
+
     return (
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.searchContainer}>
@@ -47,7 +70,10 @@ const Search : React.FC = () => {
                 data={searchIngredients}
                 renderItem={({ item, index }) => (
                     <IngredientItem
+                        onSelect={selectIngredient}
+                        unSelect={unselectIngredient}
                         ingredient={item}
+                        selected={checkIfIngredientIsSelected(item.id)}
                     />
                 )}
                 keyExtractor={item => String(item.id)}

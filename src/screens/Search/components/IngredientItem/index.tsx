@@ -5,12 +5,17 @@ import styles from './styles';
 import {IngredientType} from "../../../../types";
 import PrimarySmallBtn from "../../../../components/PrimarySmallBtn";
 import AddIcon from './assets/addicon.svg';
+import SelectedIngredientIcon from './assets/selectedIngredientIcon.svg';
+import UnselectedIngredientIcon from './assets/unselectedIngredientIcon.svg';
 
 interface Props {
-  ingredient: IngredientType
+  ingredient: IngredientType,
+  onSelect: (id: number) => void;
+  unSelect: (id: number) => void;
+  selected: boolean;
 }
 
-const IngredientItem : React.FC<Props> = ({ingredient}) => {
+const IngredientItem : React.FC<Props> = ({ingredient, onSelect,unSelect, selected}) => {
 
     const moveIngredient = useRef(new Animated.Value(-200)).current;
 
@@ -30,8 +35,6 @@ const IngredientItem : React.FC<Props> = ({ingredient}) => {
 
     },[moveIngredient]);
 
-    const navigation = useNavigation();
-
     return (
         <View style={styles.ingredientContainer}>
             <Animated.View style={[styles.ingredientInfo, {transform: [{translateX: moveIngredient}]}]}>
@@ -41,7 +44,10 @@ const IngredientItem : React.FC<Props> = ({ingredient}) => {
                 <Text style={styles.ingredientName}>{ingredient.name}</Text>
             </Animated.View>
             <View style={styles.ingredientActions}>
-                <PrimarySmallBtn icon={<AddIcon/>} bgColor={'#fff'}/>
+              {
+                selected ? <Pressable onPress={() => unSelect(ingredient.id)}><SelectedIngredientIcon width={60} height={60}/></Pressable> :
+                  <Pressable onPress={() => onSelect(ingredient.id)}><UnselectedIngredientIcon width={60} height={60}/></Pressable>
+              }
             </View>
         </View>
     )
