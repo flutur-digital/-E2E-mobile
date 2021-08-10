@@ -13,7 +13,7 @@ import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-si
 
 import { userLogin } from "../../services";
 
-import {setAuthSuccess} from "../../store/modules/auth.reducer";
+import { setAuthSuccess } from "../../store/modules/auth.reducer";
 import { useNavigation } from "@react-navigation/native";
 
 const Login: React.FC = () => {
@@ -23,22 +23,22 @@ const Login: React.FC = () => {
 
   const loginFacebook = () => {
     LoginManager.logInWithPermissions(["public_profile", "email"]).then((result) => {
-        if (result.isCancelled) {
-          console.log("Login cancelled");
-        } else {
-          AccessToken.getCurrentAccessToken().then(data => {
-            if (data && data.accessToken) {
-              userLogin(data.accessToken.toString(), "facebook").then((res) => {
-                if (res && res.data && res.data.token && res.data.user) {
-                  dispatch(setAuthSuccess({token: res.data.token, user: res.data.user}));
-                  return navigation.navigate('Stack3', { screen: 'MyProfile' });
-                }
-              });
-            }
-          });
-        }
-      },
-      function(error) {
+      if (result.isCancelled) {
+        console.log("Login cancelled");
+      } else {
+        AccessToken.getCurrentAccessToken().then(data => {
+          if (data && data.accessToken) {
+            userLogin(data.accessToken.toString(), "facebook").then((res) => {
+              if (res && res.data && res.data.token && res.data.user) {
+                dispatch(setAuthSuccess({ token: res.data.token, user: res.data.user }));
+                return navigation.navigate('Stack3', { screen: 'MyProfile' });
+              }
+            });
+          }
+        });
+      }
+    },
+      function (error) {
         console.log("Login fail with error: " + error);
       }
     );
@@ -46,16 +46,19 @@ const Login: React.FC = () => {
 
   const loginGoogle = async () => {
     GoogleSignin.configure({
-      iosClientId: "750241320668-r1ihbh0rlp39ca2ib04a6kjvbgp653rg.apps.googleusercontent.com"
+      iosClientId: "750241320668-r1ihbh0rlp39ca2ib04a6kjvbgp653rg.apps.googleusercontent.com",
+      webClientId: "750241320668-43pnr3ragddtr5kial45jlfgku7b94s6.apps.googleusercontent.com"
     });
     try {
       await GoogleSignin.hasPlayServices();
       await GoogleSignin.signIn();
       const response = await GoogleSignin.getTokens();
+      //@ts-ignore
+      console.log(response)
       if (response) {
         userLogin(response.accessToken, "google").then((res) => {
           if (res && res.data && res.data.token && res.data.user) {
-            dispatch(setAuthSuccess({token: res.data.token, user: res.data.user}));
+            dispatch(setAuthSuccess({ token: res.data.token, user: res.data.user }));
             return navigation.navigate('Stack3', { screen: 'MyProfile' });
           }
         });
