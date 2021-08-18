@@ -39,6 +39,7 @@ const styles = StyleSheet.create({
         shadowOpacity: 1,
         height : 150,
         width : 150,
+        resizeMode: 'cover',
         borderBottomLeftRadius : 20,
         borderTopLeftRadius : 20,
     },

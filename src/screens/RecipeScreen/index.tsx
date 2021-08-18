@@ -1,20 +1,21 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import {View, Dimensions, Text, Pressable, SafeAreaView, StyleSheet, ScrollView, Image} from "react-native";
-import Video from "react-native-video";
-import {Typography, MainColor, SecondColor, Layouts} from '../../theme';
+import React, { useEffect } from "react";
+import {View, SafeAreaView, ScrollView,} from "react-native";
+import { MainColor, SecondColor, Layouts} from '../../theme';
 import styles from "./styles";
-import Recipe from "../../components/Recipe";
 import HeartSvg from '../../assets/images/heart.svg';
 import PrimarySmallBtn from "../../components/PrimarySmallBtn";
 import ArrowLeft from "../../assets/images/arrow-left.svg";
 
-const screen = Dimensions.get("screen");
 import RecipeDetails from "../../components/RecipeDetails";
 
-const RecipeScreen : React.FC = () => {
+// @ts-ignore
+const RecipeScreen : React.FC = ({ route, navigation }) => {
 
-    const navigation = useNavigation();
+    const { id } = route.params;
+
+    useEffect(() => {
+      console.log(id)
+    },)
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>

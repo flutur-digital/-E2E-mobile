@@ -1,21 +1,17 @@
-import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import {View, Dimensions, Text, Pressable, SafeAreaView, StyleSheet, ScrollView, Image} from "react-native";
-import Video from "react-native-video";
+import React, { useEffect } from "react";
+import {View,Text, Pressable, SafeAreaView, StyleSheet, ScrollView, Image} from "react-native";
 import {Typography, MainColor, SecondColor, Layouts} from '../../theme';
 import styles from "./styles";
 import Recipe from "../../components/Recipe";
 
-import InstagramSvg from '../../assets/images/insta.svg';
 import PrimarySmallBtn from "../../components/PrimarySmallBtn";
 import ArrowLeft from "../../assets/images/arrow-left.svg";
 
-const screen = Dimensions.get("screen");
 
+// @ts-ignore
+const SearchResults : React.FC = ({ route, navigation }) => {
 
-const SearchResults : React.FC = () => {
-
-    const navigation = useNavigation();
+    const { searchResults } = route.params;
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
@@ -25,23 +21,21 @@ const SearchResults : React.FC = () => {
             </View>
             <ScrollView style={styles.container} contentContainerStyle={styles.scrollContainer}>
                 <Text allowFontScaling={false} adjustsFontSizeToFit numberOfLines={2} style={Typography.title}>
-                    Look! We have{"\n"}
-                    4 dishes for you 😊
+                    Look! We have{"\n"} {searchResults.length} dishes for you 😊
                 </Text>
-                <Recipe
-                    title={'Eggs with roast beef & avocado'}
-                    image={'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}
-                    time={'15 min'}
-
-                />
-                <Recipe
-                    title={'Eggs with roast beef & avocado'}
-                    image={'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}
-                    time={'15 min'}
-
-                />
-
-
+                {
+                  searchResults.map((recipe: any, index: number) => {
+                    return (
+                      <Recipe
+                        key={index}
+                        id={recipe.id}
+                        title={recipe.name}
+                        image={recipe.image}
+                        time={`${recipe.prepare_time} min`}
+                      />
+                    )
+                  })
+                }
             </ScrollView>
         </SafeAreaView>
     )

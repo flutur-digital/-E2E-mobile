@@ -14,8 +14,9 @@ const Search : React.FC = () => {
     const navigation = useNavigation();
     const [ingredients, setIngredients] = useState<Array<IngredientType>>([]);
     const [searchIngredients, setSearchIngredients] = useState<Array<IngredientType>>([]);
+    const [selectedIngredients, setSelectedIngredients] = useState<Array<number>>([]);
 
-    const [selectedIngredients, setSelectedIngredients] = useState<Array<number>>([])
+    const [searchResults, setSearchResults] = useState<null | Array<any>>(null);
 
     const getIngredients = () => {
       getAllIngredients().then((res) => {
@@ -53,17 +54,20 @@ const Search : React.FC = () => {
     useEffect(() => {
       if(selectedIngredients.length > 0) {
         searchRecipes(selectedIngredients).then((res) => {
-          console.log(res.data)
+          if(res.data){
+            setSearchResults(res.data.data);
+          }
         })
+      } else {
+        setSearchResults(null);
       }
-    },[selectedIngredients])
+    },[selectedIngredients]);
 
     return (
         <SafeAreaView style={styles.mainContainer}>
             <View style={styles.searchContainer}>
                   <Text style={Typography.title}>Please choose ingredients you have</Text>
                   <SearchInput onSearch={ingredientSearch}/>
-
             </View>
             <FlatList
                 style={{ marginTop: 27, paddingLeft: 22, paddingRight: 22 }}
@@ -78,7 +82,8 @@ const Search : React.FC = () => {
                 )}
                 keyExtractor={item => String(item.id)}
             />
-            <RecipeResultsCounter onClick={()=> navigation.navigate('SearchResults')} recipesFound={3}/>
+
+            {searchResults && searchResults.length > 0 && <RecipeResultsCounter onClick={()=> navigation.navigate('SearchResults', {searchResults: searchResults})} recipesFound={searchResults.length}/> }
         </SafeAreaView>
     )
 }

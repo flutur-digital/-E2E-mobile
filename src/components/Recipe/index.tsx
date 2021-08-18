@@ -6,6 +6,7 @@ import DurationSvg from './assets/images/time.svg';
 import HeartSvg from './assets/images/heart3.svg';
 
 interface RecipeInfo {
+    id: number,
     title : string;
     image : string;
     time : string;
@@ -13,7 +14,7 @@ interface RecipeInfo {
 
 }
 
-const Recipe : React.FC<RecipeInfo> = ({title, image, time, likes}) => {
+const Recipe : React.FC<RecipeInfo> = ({id,title, image, time, likes}) => {
 
     const moveRecipe = useRef(new Animated.Value(500)).current;
     const navigation = useNavigation();
@@ -36,7 +37,7 @@ const Recipe : React.FC<RecipeInfo> = ({title, image, time, likes}) => {
 
     return (
         <Animated.View style={{transform: [{translateX: moveRecipe}]}}>
-        <Pressable style={styles.recipeBox} onPress={()=> navigation.navigate('RecipeScreen')}>
+        <Pressable style={styles.recipeBox} onPress={()=> navigation.navigate('RecipeScreen', {id: id})}>
                 <Image style={styles.recipeImage} source={{uri: image}}/>
             <View style={styles.wrapper}>
                <Text numberOfLines={3} style={styles.recipeTitle}>{title}</Text>
