@@ -2,6 +2,7 @@ import React from 'react';
 import 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
 import { enableScreens } from 'react-native-screens';
+import { Settings } from 'react-native-fbsdk-next';
 import Router from './navigation/router';
 import {configureAxiosErrorHandler} from "./config";
 
@@ -11,6 +12,7 @@ import store, {persistor} from "./store/store";
 
 enableScreens();
 configureAxiosErrorHandler();
+Settings.initializeSDK();
 
 const AppNavigation = () => {
   return (
