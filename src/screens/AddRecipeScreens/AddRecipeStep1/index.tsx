@@ -65,6 +65,21 @@ const AddRecipeStep1: React.FC = () => {
     setSearchIngredients(data);
   };
 
+  //daga for step1
+  const [selectedIngredients, setSelectedIngredients] = useState<Array<number>>([]);
+
+  const selectIngredient = (ingredientId: number) => {
+    setSelectedIngredients(selectedIngredients.concat([ingredientId]));
+  }
+
+  const unselectIngredient = (ingredientId: number) => {
+    setSelectedIngredients(selectedIngredients.filter((el) => { return el != ingredientId }));
+  }
+
+  const checkIfIngredientIsSelected = (ingredientId: number) => {
+    return selectedIngredients.includes(ingredientId);
+  }
+
   const navigation = useNavigation();
 
     const [response, setResponse] = React.useState<any>(null);
@@ -72,7 +87,7 @@ const AddRecipeStep1: React.FC = () => {
     const onButtonPress = () => {
         // @ts-ignore
         launchImageLibrary(imagePickerOptions, (response) =>  {
-            // console.log(response)
+            console.log(response)
         })
     };
 
@@ -123,12 +138,19 @@ const AddRecipeStep1: React.FC = () => {
               <View key={index} style={{justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', flexWrap: 'wrap', width: Dimensions.get('screen').width - 65 }}>
                 {
                   item.map((ingredient: IngredientType, j: number) => {
-                    return <Ingredient key={j} ingredient={ingredient} />
+                    return (
+                      <Ingredient
+                        key={j}
+                        onSelect={selectIngredient}
+                        unSelect={unselectIngredient}
+                        ingredient={ingredient}
+                        selected={checkIfIngredientIsSelected(ingredient.id)}/>
+                    )
                   })
                 }
               </View>
             )}
-            keyExtractor={item => String(item.id)}
+            keyExtractor={item => String(Math.random())}
           />
         </View>
       </View>

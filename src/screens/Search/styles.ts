@@ -6,13 +6,13 @@ const styles = StyleSheet.create({
         width: '100%',
         height: '100%',
         backgroundColor: '#efefef',
-        position : 'relative'
+        position : 'relative',
+        paddingTop: 40
     },
 
     searchContainer: {
         paddingLeft: 22,
-        paddingRight: 22,
-        paddingTop : 15
+        paddingRight: 22
     }
 });
 

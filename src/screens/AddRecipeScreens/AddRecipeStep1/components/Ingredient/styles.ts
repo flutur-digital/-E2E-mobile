@@ -21,15 +21,7 @@ const styles = StyleSheet.create({
        color: '#555555',
        marginTop : 7
    },
-    isChecked : {
-        width: 24,
-        height: 24,
-        position : 'absolute',
-        top : 13,
-        right : 15,
-        zIndex : 20
-    },
-    notChecked : {
+  selectBtn : {
         width: 24,
         height: 24,
         position : 'absolute',
