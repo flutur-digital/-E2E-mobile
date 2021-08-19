@@ -22,10 +22,10 @@ const Recipe : React.FC<RecipeInfo> = ({id,title, image, time, likes}) => {
         Animated.sequence([
             Animated.spring(moveRecipe, {
                 toValue: 0,
-                velocity: 10,
-                delay : 300,
+                velocity: 11,
+                delay : 400,
                 tension : 5,
-                friction : 3,
+                friction : 4,
                 useNativeDriver: true,
                 isInteraction: false
 
