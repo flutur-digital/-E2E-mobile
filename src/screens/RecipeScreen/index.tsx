@@ -49,11 +49,15 @@ const RecipeScreen : React.FC = ({ route, navigation }) => {
     }
 
     const likeRecipe = () => {
-      likeRecipeById(id).then((res) => {
-        if(res.data){
-          isRecipeLiked();
-        }
-      })
+      if(isAuthenticated){
+        likeRecipeById(id).then((res) => {
+          if(res.data){
+            isRecipeLiked();
+          }
+        })
+      } else {
+        return navigation.navigate('Login');
+      }
     }
 
     return (
@@ -61,8 +65,8 @@ const RecipeScreen : React.FC = ({ route, navigation }) => {
             <ScrollView style={styles.container} contentContainerStyle={styles.scrollContainer}>
             <View style={[Layouts.spaceBetween, {paddingLeft: 8, paddingRight: 6, paddingTop : 15}]}>
                 <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={()=>navigation.goBack()}/>
-              {!isLiked && <PrimarySmallBtn onClick={() => likeRecipe()} icon={<HeartSvg width={23} height={19}/>} bgColor={'#ffffff'}/> }
-              {isLiked && <PrimarySmallBtn onClick={() => likeRecipe()} icon={<HeartFullSvg width={23} height={19}/>} bgColor={'#ffffff'}/> }
+              {isLiked && <PrimarySmallBtn onClick={() => likeRecipe()} icon={<HeartSvg width={23} height={19}/>} bgColor={'#ffffff'}/> }
+              {!isLiked && <PrimarySmallBtn onClick={() => likeRecipe()} icon={<HeartFullSvg width={23} height={19}/>} bgColor={'#ffffff'}/> }
             </View>
 
               {recipe && <RecipeDetails recipeDetails={recipe}/> }

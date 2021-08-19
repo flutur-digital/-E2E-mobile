@@ -22,21 +22,17 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
     );
 
     const checkIsFollowingUser = (userId: number) => {
-        if(!isAuthenticated){
-            return navigation.navigate('Login');
-        } else {
-            followUserById(userId).then((res) => {
+        if(isAuthenticated){
+            getUserIsFollowingUser(userId).then((res) => {
                 if(res.data){
-                   setIsFollowingRecipeUser(res.data.following);
+                    setIsFollowingRecipeUser(res.data.following);
                 }
             })
         }
     }
 
     const folowUser = (userId: number) => {
-        if(!isAuthenticated){
-            return navigation.navigate('Login');
-        } else {
+        if(isAuthenticated){
             followUserById(userId).then((res) => {
                 if(res.data){
                     checkIsFollowingUser(userId);
