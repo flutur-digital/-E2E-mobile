@@ -39,7 +39,7 @@ const IngredientItem : React.FC<Props> = ({ingredient, onSelect,unSelect, select
         <View style={styles.ingredientContainer}>
             <Animated.View style={[styles.ingredientInfo, {transform: [{translateX: moveIngredient}]}]}>
                 <View style={styles.ingredientImageBox}>
-                  <Image style={styles.ingredientImage} source={{ uri: 'https://easy2eat.co/storage/ingr/OeHz72IuvqX6CmqYTI8ECVK70PUZcIi711xawOL3.png' }}/>
+                  <Image style={styles.ingredientImage} source={{ uri: ingredient.image }}/>
                 </View>
                 <Text style={styles.ingredientName}>{ingredient.name}</Text>
             </Animated.View>

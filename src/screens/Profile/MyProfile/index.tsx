@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
-import {View, Dimensions, Text, Pressable, SafeAreaView, StyleSheet, ScrollView, Image} from "react-native";
-import {Typography, MainColor, SecondColor, Layouts} from '../../../theme';
+import React, { useEffect, useState } from "react";
+import {View, Text, Pressable, SafeAreaView, ScrollView, Image} from "react-native";
+import {SecondColor, Layouts} from '../../../theme';
 import styles from "./styles";
 import Recipe from "../../../components/Recipe";
 
 import SettingsSvg from '../../../assets/images/settings.svg';
 import { useSelector } from "react-redux";
+import {getUserProfileById} from "../../../services";
 
 
 const MyProfile : React.FC = () => {
@@ -17,7 +18,23 @@ const MyProfile : React.FC = () => {
       (state: any) => state.authReducer
     );
 
-    console.log(user)
+    const [userData, setUserData] = useState<any>(null);
+
+    const getUserData = (userId: number) => {
+        getUserProfileById(userId).then((res) => {
+            if(res.data) {
+                setUserData(res.data.data);
+            }
+        });
+    }
+
+    useEffect(() => {
+        if(isAuthenticated && user.id){
+            getUserData(user.id);
+        }
+    },[]);
+
+    console.log(userData);
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
@@ -35,22 +52,26 @@ const MyProfile : React.FC = () => {
                        source={{uri : 'https://lh3.googleusercontent.com/proxy/zjtYbjTqfTUOImpno68A6EISaOjkWXYRu4tthjB2ijfXgSLQJgGhCz11Kby67tufSbreX9596DWdRLVkybhb04kY'}}
                 />
                 <Text style={styles.userName}>{user.name}</Text>
-                <Text style={styles.userBio}>
-                    Hello, please enjoy my recipes
-                </Text>
-                <Recipe
-                    title={'Raviolli with ricotta in sauce'}
-                    image={'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}
-                    time={'15 min'}
-                    likes={250}
-                />
-                <Recipe
-                    title={'Eggs with roast beef & avocado'}
-                    image={'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}
-                    time={'25 min'}
-                    likes={143}
-                />
-
+                <Text style={styles.userBio}>Hello, please enjoy my recipes</Text>
+                {
+                    userData &&
+                      <>
+                          {
+                              userData.recipes.map((recipe: any, index: number) => {
+                                  return (
+                                    <Recipe
+                                      key={index}
+                                      id={recipe.id}
+                                      title={recipe.name}
+                                      image={recipe.image}
+                                      time={`${recipe.prepare_time} min`}
+                                      likes={recipe.likes}
+                                    />
+                                  )
+                              })
+                          }
+                      </>
+                }
 
             </ScrollView>
         </SafeAreaView>

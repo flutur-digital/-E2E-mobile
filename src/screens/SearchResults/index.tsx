@@ -13,6 +13,8 @@ const SearchResults : React.FC = ({ route, navigation }) => {
 
     const { searchResults } = route.params;
 
+    // console.log(searchResults)
+
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
             <View style={[Layouts.spaceBetween, {paddingTop : 15}]}>

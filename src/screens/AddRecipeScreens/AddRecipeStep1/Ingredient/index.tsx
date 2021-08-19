@@ -23,7 +23,6 @@ const Ingredient : React.FC<Props> = ({ingredient}) => {
 
     const isChecked = true;
     const navigation = useNavigation();
-    console.log(windowWidth);
 
     return (
         <View style={{ width: (windowWidth-68)/3, height:100, paddingTop : 13, position : 'relative', paddingBottom : 19 }}>
@@ -31,11 +30,11 @@ const Ingredient : React.FC<Props> = ({ingredient}) => {
                 <CheckSvg width={16} height={12}/>
             </Pressable>
             <Pressable style={styles.ingredientWrapper}>
-                <Image style={styles.ingredientImage} source={{ uri: 'https://easy2eat.co/storage/ingr/OeHz72IuvqX6CmqYTI8ECVK70PUZcIi711xawOL3.png' }}/>
+                <Image style={styles.ingredientImage} source={{ uri: ingredient.image}}/>
                 <Text style={styles.ingredientName}>{ingredient.name}</Text>
             </Pressable>
         </View>
     )
 };
 
-export default Ingredient;
+export default Ingredient

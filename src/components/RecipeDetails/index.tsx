@@ -1,32 +1,34 @@
 import { useNavigation } from '@react-navigation/native';
-import React from 'react';
+import React, { useEffect } from "react";
 import {View, Text, Pressable, Image} from 'react-native';
 import styles from './styles';
 import TimeSvg from './assets/images/time.svg';
 import HeartSvg from './assets/images/heart.svg';
 
-const RecipeDetails : React.FC = () => {
+interface Props{
+    recipeDetails: any
+}
+
+const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
 
     const navigation = useNavigation();
+
+    useEffect(() => {
+        // console.log(recipeDetails)
+    },[])
 
     return (
         <View style={styles.recipeBox}>
             <Image
                 style={styles.recipeImage}
-                source={{uri : 'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}}
+                source={{uri : recipeDetails.image}}
             />
             <View style={styles.recipeTitleWrapper}>
-                <Text style={styles.title}>
-                    Eggs with roast beef & avocado
-                </Text>
+                <Text style={styles.title}>{recipeDetails.name}</Text>
                 <View style={styles.timeBlock}>
-                    <Text style={styles.timeTxt}>
-                        Time to prepare
-                    </Text>
+                    <Text style={styles.timeTxt}>Time to prepare</Text>
                     <TimeSvg width={18} height={18} style={{marginLeft : 8, marginRight : 7}}/>
-                    <Text style={styles.timeTxt}>
-                        15 min
-                    </Text>
+                    <Text style={styles.timeTxt}>{recipeDetails.prepare_time} min</Text>
                 </View>
             </View>
             <View style={styles.recipeContentTxt}>
@@ -50,15 +52,8 @@ const RecipeDetails : React.FC = () => {
                     source={{uri : 'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}}
                 />
                 <View style={styles.userInfo}>
-                    <Text style={styles.role}>
-                        Butcher
-                    </Text>
-                    <Text style={styles.name}>
-                        George
-                    </Text>
-                    <Text style={styles.name}>
-                        Yashin
-                    </Text>
+                    <Text style={styles.role}>Butcher</Text>
+                    <Text style={styles.name}>{recipeDetails.user.name}</Text>
                     <View style={styles.followBlock}>
                         <Pressable style={styles.followBtn}>
                             <Image style={styles.userAvatar}
