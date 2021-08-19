@@ -81,7 +81,7 @@ const Login: React.FC = () => {
     <SafeAreaView style={styles.wrapper}>
 
       <View style={Layouts.spaceBetween}>
-        <PrimarySmallBtn icon={<ArrowLeft width={9} height={16} />} bgColor={MainColor} />
+        <PrimarySmallBtn onClick={() => navigation.goBack()} icon={<ArrowLeft width={9} height={16} />} bgColor={MainColor} />
       </View>
       <View style={styles.container}>
         <Text allowFontScaling={false} adjustsFontSizeToFit numberOfLines={2} style={Typography.title}>

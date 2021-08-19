@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     },
     followBtn : {
         paddingLeft : 7,
-        paddingTop : 9,
+        paddingTop : 7,
         paddingBottom : 7,
         paddingRight: 19,
         borderWidth: 1,
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
     },
     likesCount : {
         flexDirection : 'column',
+        alignItems: 'center',
         justifyContent : 'center'
     }
 });

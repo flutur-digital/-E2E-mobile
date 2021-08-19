@@ -11,9 +11,6 @@ interface PrimarySmallBtnProps {
 }
 
 const PrimarySmallBtn : React.FC<PrimarySmallBtnProps> = ({icon, bgColor,onClick}) => {
-
-    const navigation = useNavigation();
-
     return (
         <Pressable onPress={onClick} style={[styles.PrimarySmallBtn,{backgroundColor: bgColor}]}>
             {icon}

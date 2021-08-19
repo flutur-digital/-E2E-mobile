@@ -4,6 +4,7 @@ import {View, Text, Pressable, Image} from 'react-native';
 import styles from './styles';
 import TimeSvg from './assets/images/time.svg';
 import HeartSvg from './assets/images/heart.svg';
+import { useSelector } from "react-redux";
 
 interface Props{
     recipeDetails: any
@@ -13,9 +14,21 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
 
     const navigation = useNavigation();
 
+    const {isAuthenticated, user} = useSelector(
+      (state: any) => state.authReducer
+    );
+
     useEffect(() => {
-        // console.log(recipeDetails)
-    },[])
+        console.log(recipeDetails)
+    },[]);
+
+    const folowUser = (userId: number) => {
+        if(!isAuthenticated){
+            return navigation.navigate('Login');
+        } else {
+            console.log('flow');
+        }
+    }
 
     return (
         <View style={styles.recipeBox}>
@@ -31,33 +44,36 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
                     <Text style={styles.timeTxt}>{recipeDetails.prepare_time} min</Text>
                 </View>
             </View>
-            <View style={styles.recipeContentTxt}>
-                <View style={styles.stepBox}>
-                    <Text style={styles.step}>
-                        1
-                    </Text>
-                </View>
-                <Text style={styles.contentTxt}>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis ipsum suspendisse ultrices gravida. Risus commodo viverra maecenas accumsan lacus vel facilisis.
-                </Text>
+            {
+                recipeDetails?.description.map((item: any, index: number) => {
+                    return (
+                      <>
+                          <View key={index} style={styles.recipeContentTxt}>
+                              <View style={styles.stepBox}>
+                                  <Text style={styles.step}>{index+1}</Text>
+                              </View>
+                              <Text style={styles.contentTxt}>{item.text}</Text>
 
-            </View>
-            <Image
-                style={styles.recipeMedia}
-                source={{uri : 'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}}
-            />
+                          </View>
+                          {
+                            item.file && <Image style={styles.recipeMedia} source={{uri : item.file}} />
+                          }
+                      </>
+                    )
+                })
+            }
             <View style={styles.recipeFooter}>
                 <Image
                     style={styles.smallRecipeImage}
-                    source={{uri : 'https://i.pinimg.com/originals/83/c6/3a/83c63a5986cbd3b47638bd2bea8bfa02.jpg'}}
+                    source={{uri : recipeDetails.image}}
                 />
                 <View style={styles.userInfo}>
                     <Text style={styles.role}>Butcher</Text>
                     <Text style={styles.name}>{recipeDetails.user.name}</Text>
                     <View style={styles.followBlock}>
-                        <Pressable style={styles.followBtn}>
+                        <Pressable onPress={() => folowUser(recipeDetails.user.id)} style={styles.followBtn}>
                             <Image style={styles.userAvatar}
-                                   source={{uri : 'https://lh3.googleusercontent.com/proxy/zjtYbjTqfTUOImpno68A6EISaOjkWXYRu4tthjB2ijfXgSLQJgGhCz11Kby67tufSbreX9596DWdRLVkybhb04kY'}}
+                                   source={{uri : 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png'}}
                             />
                             <Text style={styles.followTxt}>
                                 Follow
@@ -65,9 +81,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
                         </Pressable>
                         <View style={styles.likesCount}>
                             <HeartSvg width={23} height={20} style={{marginBottom : 7}}/>
-                            <Text style={styles.followTxt}>
-                                324
-                            </Text>
+                            <Text style={styles.followTxt}>{recipeDetails.likes}</Text>
                         </View>
 
                     </View>

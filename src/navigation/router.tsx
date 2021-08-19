@@ -139,7 +139,7 @@ const AuthStack = () => {
 
 const Router = (state:StateProps) => {
 
-  console.log(state);
+  // console.log(state);
   return state.isAuthenticated ? <AuthStack/> : <Stack1/>
 }
 
