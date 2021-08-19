@@ -13,20 +13,17 @@ import { getAllIngredients } from "../../../services";
 import { IngredientType } from "../../../types";
 import Ingredient from "./components/Ingredient";
 
-import { ImageLibraryOptions, launchImageLibrary } from "react-native-image-picker";
+import * as ImagePicker from "react-native-image-picker";
 import { chunk } from "lodash";
 
 const imagePickerOptions = {
-      title: 'Select Image',
-      type: 'library',
-      options: {
-          maxHeight: 200,
-          maxWidth: 200,
-          selectionLimit: 0,
-          mediaType: 'photo',
-          includeBase64: false,
-      },
-}
+  title: "Select Image",
+  type: "photo",
+  base64: true,
+  allowsEditing: true,
+  aspect: [4, 3],
+  quality: 1
+};
 
 const AddRecipeStep1: React.FC = () => {
 
@@ -48,8 +45,8 @@ const AddRecipeStep1: React.FC = () => {
   };
 
   useEffect(() => {
-    setListIngredients(chunk(searchIngredients,6))
-  },[searchIngredients])
+    setListIngredients(chunk(searchIngredients, 6));
+  }, [searchIngredients]);
 
   // console.log(listIngredients)
 
@@ -67,36 +64,46 @@ const AddRecipeStep1: React.FC = () => {
 
   //daga for step1
   const [selectedIngredients, setSelectedIngredients] = useState<Array<number>>([]);
+  const [recipeImage, setRecipeImage] = useState<any>(null);
 
   const selectIngredient = (ingredientId: number) => {
     setSelectedIngredients(selectedIngredients.concat([ingredientId]));
-  }
+  };
 
   const unselectIngredient = (ingredientId: number) => {
-    setSelectedIngredients(selectedIngredients.filter((el) => { return el != ingredientId }));
-  }
+    setSelectedIngredients(selectedIngredients.filter((el) => {
+      return el != ingredientId;
+    }));
+  };
 
   const checkIfIngredientIsSelected = (ingredientId: number) => {
     return selectedIngredients.includes(ingredientId);
-  }
+  };
 
   const navigation = useNavigation();
 
-    const [response, setResponse] = React.useState<any>(null);
 
-    const onButtonPress = () => {
-        // @ts-ignore
-        launchImageLibrary(imagePickerOptions, (response) =>  {
-            console.log(response)
-        })
-    };
+  const onButtonPress = async () => {
+    // @ts-ignore
+    ImagePicker.launchImageLibrary(imagePickerOptions, (response) => {
+      if (response.didCancel) {
+        console.log("cancel");
+      } else if (response.errorCode) {
+        console.log("error");
+      } else if (response.assets) {
+        setRecipeImage(response.assets[0]);
+      }
+    });
+  };
+
 
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", flex: 1 }}>
       <View style={[Layouts.spaceBetween, { paddingLeft: 20, paddingRight: 20, paddingTop: 15 }]}>
-        <View style={{ width: 38.7, height: 38.7 }}/>
+        <View style={{ width: 38.7, height: 38.7 }} />
         <Text style={styles.title}>Please, share{"\n"} with us your{"\n"} best recipe 🤗</Text>
-        <PrimarySmallBtn onClick={() => navigation.navigate("AddRecipeStep2")} icon={<ArrowRight width={11} height={18} />} bgColor={MainColor} />
+        <PrimarySmallBtn onClick={() => navigation.navigate("AddRecipeStep2")}
+                         icon={<ArrowRight width={11} height={18} />} bgColor={MainColor} />
       </View>
       <Text style={styles.description}>Set name, import photo of your dish,{"\n"} and check ingredients</Text>
       <View style={styles.container}>
@@ -104,7 +111,8 @@ const AddRecipeStep1: React.FC = () => {
         <View style={styles.addRecipeBox}>
           <View style={styles.recipeFooter}>
             <Pressable style={styles.addRecipeImage} onPress={() => onButtonPress()}>
-              <Image style={{ marginLeft: 41 }} source={require("./assets/images/add.png")} />
+              {!recipeImage && <Image style={{ marginLeft: 41 }} source={require("./assets/images/add.png")} />}
+              {recipeImage && <Image style={{ marginLeft: 41 }} source={{ uri: recipeImage.uri }} />}
             </Pressable>
             <View style={styles.userInfo}>
               <TextInput
@@ -135,7 +143,13 @@ const AddRecipeStep1: React.FC = () => {
             data={listIngredients}
             horizontal={true}
             renderItem={({ item, index }) => (
-              <View key={index} style={{justifyContent: 'flex-start', alignItems: 'flex-start', flexDirection: 'row', flexWrap: 'wrap', width: Dimensions.get('screen').width - 65 }}>
+              <View key={index} style={{
+                justifyContent: "flex-start",
+                alignItems: "flex-start",
+                flexDirection: "row",
+                flexWrap: "wrap",
+                width: Dimensions.get("screen").width - 65
+              }}>
                 {
                   item.map((ingredient: IngredientType, j: number) => {
                     return (
@@ -144,8 +158,8 @@ const AddRecipeStep1: React.FC = () => {
                         onSelect={selectIngredient}
                         unSelect={unselectIngredient}
                         ingredient={ingredient}
-                        selected={checkIfIngredientIsSelected(ingredient.id)}/>
-                    )
+                        selected={checkIfIngredientIsSelected(ingredient.id)} />
+                    );
                   })
                 }
               </View>
