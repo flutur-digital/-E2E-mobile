@@ -135,9 +135,7 @@ const AddRecipeStep1: React.FC = () => {
             </View>
 
           </View>
-          <Text style={[styles.description, { marginBottom: 30 }]}>
-            Which ingredients did you use?
-          </Text>
+          <Text style={[styles.description, { marginBottom: 30 }]}>Which ingredients did you use?</Text>
           <SearchInput onSearch={ingredientSearch} />
           <FlatList
             data={listIngredients}
