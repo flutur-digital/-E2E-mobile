@@ -1,10 +1,11 @@
 import { useNavigation } from '@react-navigation/native';
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {View, Text, Pressable, Image} from 'react-native';
 import styles from './styles';
 import TimeSvg from './assets/images/time.svg';
 import HeartSvg from './assets/images/heart.svg';
 import { useSelector } from "react-redux";
+import {followUserById, getUserIsFollowingUser} from "../../services";
 
 interface Props{
     recipeDetails: any
@@ -14,21 +15,39 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
 
     const navigation = useNavigation();
 
+    const [isFollowingRecipeUser, setIsFollowingRecipeUser] = useState<boolean>(false);
+
     const {isAuthenticated, user} = useSelector(
       (state: any) => state.authReducer
     );
 
-    useEffect(() => {
-        console.log(recipeDetails)
-    },[]);
+    const checkIsFollowingUser = (userId: number) => {
+        if(!isAuthenticated){
+            return navigation.navigate('Login');
+        } else {
+            followUserById(userId).then((res) => {
+                if(res.data){
+                   setIsFollowingRecipeUser(res.data.following);
+                }
+            })
+        }
+    }
 
     const folowUser = (userId: number) => {
         if(!isAuthenticated){
             return navigation.navigate('Login');
         } else {
-            console.log('flow');
+            followUserById(userId).then((res) => {
+                if(res.data){
+                    checkIsFollowingUser(userId);
+                }
+            })
         }
-    }
+    };
+
+    useEffect(() => {
+        checkIsFollowingUser(recipeDetails.user.id);
+    },[])
 
     return (
         <View style={styles.recipeBox}>
@@ -70,21 +89,34 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
                 <View style={styles.userInfo}>
                     <Text style={styles.role}>Butcher</Text>
                     <Text style={styles.name}>{recipeDetails.user.name}</Text>
-                    <View style={styles.followBlock}>
-                        <Pressable onPress={() => folowUser(recipeDetails.user.id)} style={styles.followBtn}>
-                            <Image style={styles.userAvatar}
-                                   source={{uri : 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png'}}
-                            />
-                            <Text style={styles.followTxt}>
-                                Follow
-                            </Text>
-                        </Pressable>
-                        <View style={styles.likesCount}>
-                            <HeartSvg width={23} height={20} style={{marginBottom : 7}}/>
-                            <Text style={styles.followTxt}>{recipeDetails.likes}</Text>
+                    {!isAuthenticated &&
+                        <View style={styles.followBlock}>
+                            <Pressable onPress={() => navigation.navigate('Login')} style={styles.followBtn}>
+                                <Image style={styles.userAvatar}
+                                       source={{ uri: 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png' }}
+                                />
+                                <Text style={styles.followTxt}>Follow</Text>
+                            </Pressable>
+                            <View style={styles.likesCount}>
+                                <HeartSvg width={23} height={20} style={{ marginBottom: 7 }} />
+                                <Text style={styles.followTxt}>{recipeDetails.likes}</Text>
+                            </View>
                         </View>
-
-                    </View>
+                    }
+                    {isAuthenticated &&
+                        <View style={styles.followBlock}>
+                            <Pressable onPress={() => folowUser(recipeDetails.user.id)} style={isFollowingRecipeUser ? styles.followBtnActive : styles.followBtn}>
+                                <Image style={styles.userAvatar}
+                                       source={{ uri: 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png' }}
+                                />
+                                <Text style={isFollowingRecipeUser ? styles.followTxtActive : styles.followTxt}>{isFollowingRecipeUser ? 'Following' : 'Follow' }</Text>
+                            </Pressable>
+                            <View style={styles.likesCount}>
+                                <HeartSvg width={23} height={20} style={{ marginBottom: 7 }} />
+                                <Text style={styles.followTxt}>{recipeDetails.likes}</Text>
+                            </View>
+                        </View>
+                    }
                 </View>
             </View>
         </View>

@@ -159,6 +159,20 @@ const styles = StyleSheet.create({
         flexDirection : 'row',
         alignItems : 'center'
     },
+
+    followBtnActive : {
+        paddingLeft : 7,
+        paddingTop : 7,
+        paddingBottom : 7,
+        paddingRight: 19,
+        borderWidth: 1,
+        backgroundColor: '#ffca00',
+        borderColor: '#ffca00',
+        borderRadius : 25,
+        display : 'flex',
+        flexDirection : 'row',
+        alignItems : 'center'
+    },
     userAvatar : {
         width : 34,
         height : 34,
@@ -168,6 +182,14 @@ const styles = StyleSheet.create({
     followTxt : {
         fontFamily: 'Cera Pro Medium',
         fontSize: 14,
+        fontWeight: '500',
+        fontStyle: 'normal',
+    },
+
+    followTxtActive : {
+        fontFamily: 'Cera Pro Medium',
+        fontSize: 14,
+        color: '#fff',
         fontWeight: '500',
         fontStyle: 'normal',
     },
