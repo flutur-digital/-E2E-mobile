@@ -24,28 +24,18 @@ const styles = StyleSheet.create({
     isChecked : {
         width: 24,
         height: 24,
-        backgroundColor: '#00e96b',
-        borderRadius : 5,
         position : 'absolute',
         top : 13,
         right : 15,
-        zIndex : 20,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        zIndex : 20
     },
     notChecked : {
         width: 24,
         height: 24,
-        backgroundColor: '#00000020',
-        borderRadius : 5,
         position : 'absolute',
         top : 13,
         right : 15,
-        zIndex : 20,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center'
+        zIndex : 20
     }
 });
 

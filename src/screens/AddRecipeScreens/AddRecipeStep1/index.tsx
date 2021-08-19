@@ -11,7 +11,7 @@ import SearchInput from "../../../components/SearchInput";
 
 import { getAllIngredients } from "../../../services";
 import { IngredientType } from "../../../types";
-import Ingredient from "./Ingredient";
+import Ingredient from "./components/Ingredient";
 
 import { ImageLibraryOptions, launchImageLibrary } from "react-native-image-picker";
 import { chunk } from "lodash";
