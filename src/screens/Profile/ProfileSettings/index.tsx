@@ -1,22 +1,22 @@
 import { useNavigation } from '@react-navigation/native';
 import React, {useState} from 'react';
 import {View, Text, Pressable, SafeAreaView, Image, TextInput} from "react-native";
-import Video from "react-native-video";
 
-import ArrowRight from '../../../assets/images/arrow-right.svg';
-import FacebookIcon from '../../../assets/images/socialsicons/facebook.svg';
-import InstagramIcon from '../../../assets/images/socialsicons/instagram.svg';
-import TwitterIcon from '../../../assets/images/socialsicons/twitter.svg';
 import {Layouts, MainColor} from "../../../theme";
 import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
 import ArrowLeft from "../../../assets/images/arrow-left.svg";
 import CheckSvg from "../../../assets/images/check.svg";
 import styles from "./styles";
+import { useSelector } from "react-redux";
 
 const ProfileSettings : React.FC = () => {
 
     const [value, onChangeText] = useState('Dorin');
     const [bio, setBio] = useState('Hello, please enjoy my recipes');
+
+    const {isAuthenticated, user} = useSelector(
+      (state: any) => state.authReducer
+    );
 
     const navigation = useNavigation();
     return (

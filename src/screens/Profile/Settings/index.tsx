@@ -105,7 +105,7 @@ return (
                 <Text style={styles.logOutBtn}>Log Out</Text>
             </Pressable>
             <Pressable>
-                <Text style={styles.deleteBtn}> Delete account</Text>
+                <Text style={styles.deleteBtn}>Delete account</Text>
             </Pressable>
         </View>
 
