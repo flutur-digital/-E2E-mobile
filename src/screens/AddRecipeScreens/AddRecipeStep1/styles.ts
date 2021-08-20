@@ -63,8 +63,10 @@ const styles = StyleSheet.create({
         width : 139,
         height : 103,
         borderRadius : 25,
+        flexDirection: 'row',
         backgroundColor: '#ececec',
-        justifyContent : 'center'
+        justifyContent : 'center',
+        alignItems: 'center'
     },
     userInfo : {
         width : '100%',

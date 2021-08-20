@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
         shadowRadius: 7,
         elevation: 1,
         borderRadius: 7,
-        marginBottom: 68
+        marginBottom: 25
     },
 
     startBtnText: {
@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
     socialBtns: {
         alignItems: 'center',
         flexDirection: 'row',
-        marginBottom: 24
+        marginBottom: 15
     },
 
     copyText: {

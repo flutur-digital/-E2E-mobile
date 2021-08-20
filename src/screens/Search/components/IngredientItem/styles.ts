@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
 
     ingredientInfo: {
         flexDirection: 'row',
-        alignItems: 'center'
+        alignItems: 'center',
     },
 
     ingredientImageBox: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     ingredientImage: {
         width: '100%',
         height: '100%',
-        resizeMode: 'stretch',
+        resizeMode: 'contain',
     },
 
     ingredientName:{
