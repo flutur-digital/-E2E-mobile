@@ -13,7 +13,7 @@ const BottomNavigationTab : React.FC<Props> = ({focused, width, height, inactive
 
   if(!focused){
     return (
-      <View style={{ paddingTop: 13 }}>
+      <View>
         <Image
           style={{width: width, height: height, resizeMode: 'contain'}}
           source={inactiveIcon}
@@ -22,7 +22,7 @@ const BottomNavigationTab : React.FC<Props> = ({focused, width, height, inactive
     )
   } else {
     return (
-      <View style={{ paddingTop: 13 }}>
+      <View>
         <Image
           style={{width: width, height: height, resizeMode: 'contain'}}
           source={activeIcon}

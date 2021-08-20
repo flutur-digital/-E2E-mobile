@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, SafeAreaView, Pressable, Image } from "react-native";
+import { View, Text, SafeAreaView, Pressable, Image, Platform } from "react-native";
 import { useDispatch } from "react-redux";
 import { Layouts, Typography, MainColor } from "../../theme";
 import styles from "./styles";
@@ -89,10 +89,13 @@ const Login: React.FC = () => {
         </Text>
         {/*<Recipe title={'Eggs with roast beef & avocado'} image={'https://shorturl.at/kJOV9'} time={'15 min'} likes={10}/>*/}
         <Image source={require("./assets/images/logo.png")} style={styles.logoBox} />
-        <Pressable style={styles.iosBtn}>
-          <AppleSvg width={20} height={25} />
-          <Text style={styles.whiteBtnTitle}>Sign in with Apple</Text>
-        </Pressable>
+        
+        {Platform.OS === 'ios' && 
+          <Pressable style={styles.iosBtn}>
+            <AppleSvg width={20} height={25} />
+            <Text style={styles.whiteBtnTitle}>Sign in with Apple</Text>
+          </Pressable>
+        }
         <Pressable onPress={() => loginFacebook()} style={styles.facebookBtn}>
           <FacebookSvg width={13} height={25} />
           <Text style={styles.whiteBtnTitle}>Sign in with Facebook</Text>

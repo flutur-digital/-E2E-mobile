@@ -82,9 +82,8 @@ const BottomNavigationStack = () => {
         activeTintColor: '#ff0000',
         inactiveTintColor: '#4c4c4c',
         showLabel: false,
-        style:{
-          paddingLeft: 20,
-          paddingRight:20
+        style: {
+          height: 65
         }
       }}
     >
