@@ -62,8 +62,8 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
             {
                 recipeDetails?.description.map((item: any, index: number) => {
                     return (
-                      <>
-                          <View key={index} style={styles.recipeContentTxt}>
+                      <React.Fragment key={index}>
+                          <View style={styles.recipeContentTxt}>
                               <View style={styles.stepBox}>
                                   <Text style={styles.step}>{index+1}</Text>
                               </View>
@@ -73,7 +73,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails}) => {
                           {
                             item.file && <Image style={styles.recipeMedia} source={{uri : item.file}} />
                           }
-                      </>
+                      </React.Fragment>
                     )
                 })
             }

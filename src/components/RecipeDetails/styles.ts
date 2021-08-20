@@ -7,6 +7,7 @@ const styles = StyleSheet.create({
         flexDirection : 'column',
         borderRadius : 15,
         marginTop : 20,
+        marginBottom: 35,
         backgroundColor : '#fff'
     },
     recipeImage : {

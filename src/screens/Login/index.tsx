@@ -31,7 +31,7 @@ const Login: React.FC = () => {
             userLogin(data.accessToken.toString(), "facebook").then((res) => {
               if (res && res.data && res.data.token && res.data.user) {
                 dispatch(setAuthSuccess({ token: res.data.token, user: res.data.user }));
-                return navigation.navigate('Stack3', { screen: 'MyProfile' });
+                // return navigation.goBack();
               }
             });
           }
@@ -54,12 +54,11 @@ const Login: React.FC = () => {
       await GoogleSignin.signIn();
       const response = await GoogleSignin.getTokens();
       //@ts-ignore
-      console.log(response)
       if (response) {
         userLogin(response.accessToken, "google").then((res) => {
           if (res && res.data && res.data.token && res.data.user) {
             dispatch(setAuthSuccess({ token: res.data.token, user: res.data.user }));
-            return navigation.navigate('Stack3', { screen: 'MyProfile' });
+            return navigation.goBack();
           }
         });
       }
@@ -92,28 +91,20 @@ const Login: React.FC = () => {
         <Image source={require("./assets/images/logo.png")} style={styles.logoBox} />
         <Pressable style={styles.iosBtn}>
           <AppleSvg width={20} height={25} />
-          <Text style={styles.whiteBtnTitle}>
-            Sign in with Apple
-          </Text>
+          <Text style={styles.whiteBtnTitle}>Sign in with Apple</Text>
         </Pressable>
         <Pressable onPress={() => loginFacebook()} style={styles.facebookBtn}>
           <FacebookSvg width={13} height={25} />
-          <Text style={styles.whiteBtnTitle}>
-            Sign in with Facebook
-          </Text>
+          <Text style={styles.whiteBtnTitle}>Sign in with Facebook</Text>
         </Pressable>
         <Pressable onPress={() => loginGoogle()} style={styles.googleBtn}>
           <GoogleSvg width={26} height={26} />
-          <Text style={styles.blackBtnTitle}>
-            Sign in with Google
-          </Text>
+          <Text style={styles.blackBtnTitle}>Sign in with Google</Text>
         </Pressable>
 
       </View>
       <View style={styles.legalBox}>
-        <Text style={styles.copyTxt}>
-          Easy2Eat Mobile App © 2021 All rights reserved
-        </Text>
+        <Text style={styles.copyTxt}>Easy2Eat Mobile App © 2021 All rights reserved</Text>
       </View>
 
     </SafeAreaView>
