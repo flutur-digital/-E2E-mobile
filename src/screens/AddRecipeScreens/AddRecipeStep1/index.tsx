@@ -14,20 +14,11 @@ import { IngredientType } from "../../../types";
 import Ingredient from "./components/Ingredient";
 
 import * as ImagePicker from "react-native-image-picker";
+import {imagePickerOptions} from "../../../config";
 import { chunk } from "lodash";
 import {checkIfInputIsEmpty} from "../../../util/util";
 import {setRecipeStep1, setCurrentStep} from "../../../store/modules/addRecipe.reducer";
 import { useDispatch, useSelector } from "react-redux";
-
-const imagePickerOptions = {
-  title: "Select Image",
-  type: "photo",
-  selectionLimit: 1,
-  includeBase64: false,
-  allowsEditing: true,
-  aspect: [4, 3],
-  quality: 1
-};
 
 const AddRecipeStep1: React.FC = () => {
 
@@ -45,13 +36,13 @@ const AddRecipeStep1: React.FC = () => {
   const [listIngredients, setListIngredients] = useState<any>([]);
 
   const checkAddRecipeStep = () => {
-    if(currentStep){
-      if(currentStep === 2){
-        return navigation.navigate("AddRecipeStep2");
-      } else if(currentStep === 3){
-        return navigation.navigate("AddRecipePreview");
-      }
-    }
+    // if(currentStep){
+    //   if(currentStep === 2){
+    //     return navigation.navigate("AddRecipeStep2");
+    //   } else if(currentStep === 3){
+    //     return navigation.navigate("AddRecipePreview");
+    //   }
+    // }
   }
 
   const getIngredients = () => {
@@ -123,7 +114,7 @@ const AddRecipeStep1: React.FC = () => {
       } else if (response.errorCode) {
         console.log("error");
       } else if (response.assets) {
-        console.log(response)
+        // console.log(response)
         setRecipeImage(response.assets[0]);
         // console.log('______________________________________________________________________________________________________________________________')
         // console.log(`data:image/png;base64,${recipeImage.base64}`)
@@ -138,7 +129,6 @@ const AddRecipeStep1: React.FC = () => {
       setRecipeImageError(checkIfInputIsEmpty(recipeImage))
       setPreparationTimeError(checkIfInputIsEmpty(preparationTime));
     } else {
-      // navigation.navigate("AddRecipeStep2")
       const stepData = {
         title,
         selectedIngredients,
@@ -146,7 +136,8 @@ const AddRecipeStep1: React.FC = () => {
         preparationTime
       };
 
-      dispatch(setRecipeStep1({step1: stepData}));
+
+      dispatch(setRecipeStep1({step1: JSON.stringify(stepData)}));
       dispatch(setCurrentStep({step: 2}));
       return navigation.navigate("AddRecipeStep2");
     }
