@@ -23,16 +23,23 @@ const AddRecipePreview : React.FC = () => {
     // console.log(step2);
 
     const initializeRecipePreview = (dataStep1: any,dataStep2: any) => {
-        // console.log(dataStep1.recipeImage.uri)
+        const descriptionArray : Array<any> = [];
+        dataStep2.steps.map((item: any) => {
+            descriptionArray.push({
+                text: item.description
+            })
+        });
         const previewData = {
             prepare_time: dataStep1.preparationTime,
             name: dataStep1.title,
             image: dataStep1.recipeImage.uri,
-            description: []
+            description: descriptionArray
         };
 
         setRecipeDetailsPreview(previewData);
     }
+
+    console.log(recipeDetailsPreview)
 
     useEffect(() => {
         // Return the function to unsubscribe from the event so it gets removed on unmount
