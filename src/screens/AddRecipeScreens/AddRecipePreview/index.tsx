@@ -21,8 +21,6 @@ const AddRecipePreview : React.FC = () => {
     const [recipeDetailsPreview, setRecipeDetailsPreview] = useState<any>(null);
 
     const initializeRecipePreview = (dataStep1: any,dataStep2: any) => {
-
-        console.log(dataStep1.selectedIngredients)
         const descriptionArray : Array<any> = [];
         dataStep2.steps.map((item: any) => {
             descriptionArray.push({
@@ -42,10 +40,7 @@ const AddRecipePreview : React.FC = () => {
         setRecipeDetailsPreview(previewData);
     }
 
-    // console.log(recipeDetailsPreview)
-
     useEffect(() => {
-        // Return the function to unsubscribe from the event so it gets removed on unmount
         return navigation.addListener('focus', () => {
             if(step1 && step2){
                 initializeRecipePreview(JSON.parse(step1),JSON.parse(step2));
@@ -68,17 +63,17 @@ const AddRecipePreview : React.FC = () => {
         userSaveRecipe(formData).then((res) => {
             console.log(res.data);
             if(res.data && res.data.id){
-                saveRecipeSteps(res.data.id, recipeDetailsPreview.description)
+                saveRecipeSteps(res.data, recipeDetailsPreview.description)
             }
         })
 
     }
 
-    const saveRecipeSteps = (recipeId: number, steps: Array<any>) => {
+    const saveRecipeSteps = (recipe: any, steps: Array<any>) => {
         // console.log(steps);
         steps.map((step: any, index: number) => {
             const formData = new FormData();
-            formData.append('recipe', recipeId);
+            formData.append('recipe', recipe.id);
             formData.append('step', index);
             formData.append('text', step.text);
             if(step.file) {
@@ -91,7 +86,9 @@ const AddRecipePreview : React.FC = () => {
             userSaveRecipeStep(formData).then((res) => {
                 console.log(res.data);
             })
-        })
+        });
+
+        return navigation.navigate('AddRecipeSuccess', {recipe: recipe});
     }
 
     return (
