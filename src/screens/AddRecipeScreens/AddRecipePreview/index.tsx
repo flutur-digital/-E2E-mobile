@@ -7,7 +7,8 @@ import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
 import ArrowLeft from "../../../assets/images/arrow-left.svg";
 import CheckSvg from '../../../assets/images/check.svg';
 import { useSelector } from "react-redux";
-import {userSaveRecipe} from "../../../services";
+import {userSaveRecipe, userSaveRecipeStep} from "../../../services";
+import RecipeDetails from "../../../components/RecipeDetails";
 
 const AddRecipePreview : React.FC = () => {
 
@@ -26,7 +27,8 @@ const AddRecipePreview : React.FC = () => {
         dataStep2.steps.map((item: any) => {
             descriptionArray.push({
                 text: item.description,
-                file: item?.file?.uri
+                file: item?.file,
+                fileUri: item?.file?.uri
             })
         });
         const previewData = {
@@ -52,24 +54,44 @@ const AddRecipePreview : React.FC = () => {
     },[navigation]);
 
     const saveRecipe = () => {
-        console.log(recipeDetailsPreview.ingredients)
 
         const formData = new FormData();
         formData.append('name', recipeDetailsPreview.name);
-        formData.append('preparation_time', Number(recipeDetailsPreview.prepare_time));
+        formData.append('preparation_time', recipeDetailsPreview.prepare_time);
         formData.append('image', {
             name: recipeDetailsPreview.imagefile.fileName,
             type: recipeDetailsPreview.imagefile.type,
             uri: Platform.OS === "android" ? recipeDetailsPreview.imagefile.uri : recipeDetailsPreview.imagefile.uri.replace("file://", "")
         });
         formData.append('ingredients', JSON.stringify(recipeDetailsPreview.ingredients));
-        // formData.append('steps', recipeDetailsPreview.name);
 
-        console.log(formData)
         userSaveRecipe(formData).then((res) => {
-            console.log(res);
+            console.log(res.data);
+            if(res.data && res.data.id){
+                saveRecipeSteps(res.data.id, recipeDetailsPreview.description)
+            }
         })
 
+    }
+
+    const saveRecipeSteps = (recipeId: number, steps: Array<any>) => {
+        // console.log(steps);
+        steps.map((step: any, index: number) => {
+            const formData = new FormData();
+            formData.append('recipe', recipeId);
+            formData.append('step', index);
+            formData.append('text', step.text);
+            if(step.file) {
+                formData.append('file', {
+                    name: step.file.fileName,
+                    type: step.file.type,
+                    uri: Platform.OS === "android" ? step.file.uri : step.file.uri.replace("file://", "")
+                });
+            }
+            userSaveRecipeStep(formData).then((res) => {
+                console.log(res.data);
+            })
+        })
     }
 
     return (
@@ -79,9 +101,9 @@ const AddRecipePreview : React.FC = () => {
                     <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={()=>navigation.goBack()}/>
                     <PrimarySmallBtn onClick={()=> saveRecipe()} icon={<CheckSvg width={20} height={14}/>} bgColor={'#00e96b'}/>
                 </View>
-                {/*{*/}
-                {/*    recipeDetailsPreview && <RecipeDetails recipeDetails={recipeDetailsPreview} isRecipePreview={true}/>*/}
-                {/*}*/}
+                {
+                    recipeDetailsPreview && <RecipeDetails recipeDetails={recipeDetailsPreview} isRecipePreview={true}/>
+                }
             </ScrollView>
 
         </SafeAreaView>

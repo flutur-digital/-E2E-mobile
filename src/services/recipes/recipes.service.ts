@@ -37,3 +37,17 @@ export const userSaveRecipe = async (formdata : any) => {
     return e;
   })
 }
+
+export const userSaveRecipeStep = async (formdata : any) => {
+  const authheaders = axiosAuthHeader();
+  return axios.post(`/add-recipe/step`,formdata,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      ...authheaders.headers
+    }
+  }).then(res => {
+    return res;
+  }).catch(e =>{
+    return e;
+  })
+}

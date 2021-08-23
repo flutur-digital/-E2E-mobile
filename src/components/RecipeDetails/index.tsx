@@ -80,12 +80,12 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
 
                           </View>
                           {
-                              (item.file && isFileImage(item.file)) && <Image style={styles.recipeMedia} source={{uri : item.file}} />
+                              (item.fileUri && isFileImage(item.fileUri)) && <Image style={styles.recipeMedia} source={{uri : item.fileUri}} />
                           }
-                          {(item.file && !isFileImage(item.file)) &&
+                          {(item.fileUri && !isFileImage(item.fileUri)) &&
                               <View style={{ width: '100%', height: 200 }}>
                                   <Video
-                                    source={{ uri: item.file }}
+                                    source={{ uri: item.fileUri }}
                                     controls={true}
                                     paused={true}
                                     style={{width: '100%', height: 200}}
