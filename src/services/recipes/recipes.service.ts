@@ -1,4 +1,5 @@
 import axios from "axios";
+import {axiosAuthHeader} from "../../config/axiosConfig";
 
 export const searchRecipes = async (ingredients: Array<number>) => {
   return axios.post(`/search`,{
@@ -20,4 +21,19 @@ export const getRecipeById = async (id: number) => {
     .catch(e =>{
       return e;
     })
+}
+
+
+export const userSaveRecipe = async (formdata : any) => {
+  const authheaders = axiosAuthHeader();
+  return axios.post(`/add-recipe`,formdata,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      ...authheaders.headers
+    }
+  }).then(res => {
+    return res;
+  }).catch(e =>{
+    return e;
+  })
 }

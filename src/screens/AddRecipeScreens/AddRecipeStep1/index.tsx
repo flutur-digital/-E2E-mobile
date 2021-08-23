@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, Image, TextInput, FlatList, Dimensions } from "react-native";
+import { View, Alert, Text, Pressable, SafeAreaView, Image, TextInput, FlatList, Dimensions } from "react-native";
 import { Layouts, MainColor } from "../../../theme";
 import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
 import ArrowDown from "./assets/images/arrow-down.svg";
@@ -136,12 +136,22 @@ const AddRecipeStep1: React.FC = () => {
         preparationTime
       };
 
-
       dispatch(setRecipeStep1({step1: JSON.stringify(stepData)}));
       dispatch(setCurrentStep({step: 2}));
       return navigation.navigate("AddRecipeStep2");
     }
   }
+
+  useEffect(() => {
+    let error_fileds = [];
+    if(titleError) error_fileds.push('title');
+    if(selectedIngredientsError) error_fileds.push('title');
+    if(recipeImageError) error_fileds.push('image');
+    if(preparationTimeError) error_fileds.push('preparation time');
+    if(error_fileds.length > 0){
+      Alert.alert(`The ${error_fileds.join(',')} fields are not complete`);
+    }
+  },[titleError,selectedIngredientsError,recipeImageError,preparationTimeError])
 
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", flex: 1 }}>

@@ -16,8 +16,8 @@ import Video from "react-native-video";
 interface StepType{
     id: number;
     description?: string;
-    image?: any;
-    video?: any;
+    file?: any;
+    fileType?: string;
 }
 
 const AddRecipeStep2 : React.FC = () => {
@@ -87,7 +87,8 @@ const AddRecipeStep2 : React.FC = () => {
             } else if (response.errorCode) {
                 console.log("error");
             } else if (response.assets) {
-                localArray[stepIndex].image = response.assets[0];
+                localArray[stepIndex].file = response.assets[0];
+                localArray[stepIndex].fileType = 'image';
                 setSteps(localArray);
             }
         });
@@ -104,7 +105,8 @@ const AddRecipeStep2 : React.FC = () => {
             } else if (response.errorCode) {
                 console.log("error");
             } else if (response.assets) {
-                localArray[stepIndex].video = response.assets[0];
+                localArray[stepIndex].file = response.assets[0];
+                localArray[stepIndex].fileType = 'video';
                 setSteps(localArray);
             }
         });
@@ -147,20 +149,21 @@ const AddRecipeStep2 : React.FC = () => {
                                     style={[styles.contentTxt]}
                                   />
                               </View>
-                              {step.image &&
+                              {(step.file && step.fileType == 'image') &&
                                   <View style={{ width: '100%', height: 200, marginBottom: 15 }}>
                                       <Image style={{ width: '100%', height: 200, resizeMode: 'stretch' }}
-                                             source={{ uri: step.image.uri }} />
+                                             source={{ uri: step.file.uri }} />
                                   </View>
                               }
-                              {step.video &&
+                              {(step.file && step.fileType == 'video') &&
                                   <View style={{ width: '100%', height: 200 }}>
                                       <Video
-                                        source={{ uri: step.video.uri }}
+                                        source={{ uri: step.file.uri }}
                                         controls={true}
                                         style={{width: '100%', height: 200}}
                                         muted={false}
                                         repeat={false}
+                                        paused={true}
                                         resizeMode={"cover"}
                                         rate={1.0}
 
@@ -169,8 +172,8 @@ const AddRecipeStep2 : React.FC = () => {
                               }
                               <View style={styles.recipeAddButtons}>
                                   <Pressable onPress={() => addNewStep()}><Image style={{width : 73, height : 35}} source={require('./assets/images/add-step-img.png')}/></Pressable>
-                                  <Pressable onPress={() => updateStepImage(step.id)}><Image style={{width : 58, height : 37}} source={require('./assets/images/add-image.png')}/></Pressable>
-                                  <Pressable onPress={() => updateStepVideo(step.id)}><Image style={{width : 63, height : 36}} source={require('./assets/images/add-vidoe.png')}/></Pressable>
+                                  <Pressable onPress={() => !step.file ? updateStepImage(step.id) : null}><Image style={{width : 58, height : 37}} source={require('./assets/images/add-image.png')}/></Pressable>
+                                  <Pressable onPress={() => !step.file ? updateStepVideo(step.id) : null}><Image style={{width : 63, height : 36}} source={require('./assets/images/add-vidoe.png')}/></Pressable>
                               </View>
                           </View>
                         )

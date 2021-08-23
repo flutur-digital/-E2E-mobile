@@ -6,6 +6,7 @@ import TimeSvg from './assets/images/time.svg';
 import HeartSvg from './assets/images/heart.svg';
 import { useSelector } from "react-redux";
 import {followUserById, getUserIsFollowingUser} from "../../services";
+import Video from "react-native-video";
 
 interface Props{
     recipeDetails: any,
@@ -14,7 +15,10 @@ interface Props{
 
 const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false}) => {
 
-    console.log(recipeDetails);
+    const isFileImage = (file: string) => {
+        let reg = /(.*?)\.(jpg|bmp|jpeg|png)$/;
+        return file.match(reg);
+    }
 
     const navigation = useNavigation();
 
@@ -76,7 +80,22 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
 
                           </View>
                           {
-                            item.file && <Image style={styles.recipeMedia} source={{uri : item.file}} />
+                              (item.file && isFileImage(item.file)) && <Image style={styles.recipeMedia} source={{uri : item.file}} />
+                          }
+                          {(item.file && !isFileImage(item.file)) &&
+                              <View style={{ width: '100%', height: 200 }}>
+                                  <Video
+                                    source={{ uri: item.file }}
+                                    controls={true}
+                                    paused={true}
+                                    style={{width: '100%', height: 200}}
+                                    muted={false}
+                                    repeat={false}
+                                    resizeMode={"cover"}
+                                    rate={1.0}
+
+                                  />
+                              </View>
                           }
                       </React.Fragment>
                     )

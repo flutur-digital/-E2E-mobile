@@ -8,6 +8,7 @@ import AppleSvg from "./assets/images/apple.svg";
 import FacebookSvg from "./assets/images/facebook.svg";
 import GoogleSvg from "./assets/images/google.svg";
 import PrimarySmallBtn from "../../components/PrimarySmallBtn";
+import { appleAuth } from '@invertase/react-native-apple-authentication';
 import { LoginManager, AccessToken } from "react-native-fbsdk-next";
 import { GoogleSignin, statusCodes } from "@react-native-google-signin/google-signin";
 
@@ -20,6 +21,25 @@ const Login: React.FC = () => {
 
   const dispatch = useDispatch();
   const navigation = useNavigation();
+
+  const loginApple = async () =>  {
+    // performs login request
+    const appleAuthRequestResponse = await appleAuth.performRequest({
+      requestedOperation: appleAuth.Operation.LOGIN,
+      requestedScopes: [appleAuth.Scope.EMAIL, appleAuth.Scope.FULL_NAME],
+    });
+
+    console.log(appleAuthRequestResponse);
+
+    // // get current authentication state for user
+    // // /!\ This method must be tested on a real device. On the iOS simulator it always throws an error.
+    // const credentialState = await appleAuth.getCredentialStateForUser(appleAuthRequestResponse.user);
+    //
+    // // use credentialState response to ensure the user is authenticated
+    // if (credentialState === appleAuth.State.AUTHORIZED) {
+    //   // user is authenticated
+    // }
+  }
 
   const loginFacebook = () => {
     LoginManager.logInWithPermissions(["public_profile", "email"]).then((result) => {
@@ -89,9 +109,9 @@ const Login: React.FC = () => {
         </Text>
         {/*<Recipe title={'Eggs with roast beef & avocado'} image={'https://shorturl.at/kJOV9'} time={'15 min'} likes={10}/>*/}
         <Image source={require("./assets/images/logo.png")} style={styles.logoBox} />
-        
-        {Platform.OS === 'ios' && 
-          <Pressable style={styles.iosBtn}>
+
+        {Platform.OS === 'ios' &&
+          <Pressable onPress={() => loginApple()} style={styles.iosBtn}>
             <AppleSvg width={20} height={25} />
             <Text style={styles.whiteBtnTitle}>Sign in with Apple</Text>
           </Pressable>
