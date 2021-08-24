@@ -23,7 +23,6 @@ const MyProfile : React.FC = () => {
       (state: any) => state.authReducer
     );
 
-    const [loading, setLoading] = useState<boolean>(false);
     const [userData, setUserData] = useState<any>(null);
 
     const getUserData = (userId: number) => {
@@ -53,13 +52,11 @@ const MyProfile : React.FC = () => {
     }
 
     const editRecipe = (recipeId: number) => {
-
+      return navigation.navigate('Stack2',{screen: 'EditRecipeStep1',params: {recipeId: recipeId}});
     }
 
     const deleteRecipe = (recipeId: number) => {
-      setLoading(true);
       userDeleteRecipe(recipeId).then((res) => {
-        setLoading(false);
         if(res.data && res.data.status){
           if(isAuthenticated && user.id){
             getUserData(user.id);
@@ -136,7 +133,6 @@ const MyProfile : React.FC = () => {
                     }
 
             </View>
-            <LoaderOverlay loading={loading}/>
         </SafeAreaView>
     )
 };

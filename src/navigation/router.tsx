@@ -19,6 +19,9 @@ import AddRecipeStep2 from "../screens/AddRecipeScreens/AddRecipeStep2";
 import AddRecipePreview from "../screens/AddRecipeScreens/AddRecipePreview";
 import AddRecipeSuccess from "../screens/AddRecipeScreens/AddRecipeSuccess";
 
+//edit recipe screens
+import EditRecipeStep1 from "../screens/EditRecipeScreens/EditRecipeStep1";
+
 //user profile screens
 import MyProfile from "../screens/Profile/MyProfile";
 import ProfileSettings from "../screens/Profile/ProfileSettings";
@@ -55,6 +58,8 @@ const Stack2 = () => {
       <Stack.Screen name="AddRecipeStep2" component={AddRecipeStep2} />
       <Stack.Screen name="AddRecipePreview" component={AddRecipePreview} />
       <Stack.Screen name="AddRecipeSuccess" component={AddRecipeSuccess} />
+
+      <Stack.Screen name="EditRecipeStep1" component={EditRecipeStep1} />
     </Stack.Navigator>
   )
 }
