@@ -51,3 +51,11 @@ export const userSaveRecipeStep = async (formdata : any) => {
     return e;
   })
 }
+
+export const userDeleteRecipe = async (recipeId : number) => {
+  return axios.post(`/recipe/${recipeId}/delete`, { },axiosAuthHeader()).then(res => {
+    return res;
+  }).catch(e =>{
+    return e;
+  })
+}

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, ScrollView, Image, FlatList } from "react-native";
+import { View, Text, Pressable, SafeAreaView, ScrollView, Image, FlatList, Alert } from "react-native";
 import { SwipeListView } from 'react-native-swipe-list-view';
 import {SecondColor, Layouts} from '../../../theme';
 import styles from "./styles";
@@ -11,6 +11,8 @@ import SettingsSvg from '../../../assets/images/settings.svg';
 import { useSelector } from "react-redux";
 import {getUserProfileById} from "../../../services";
 import { isFileImage } from "../../../util/util";
+import {userDeleteRecipe} from "../../../services";
+import LoaderOverlay from "../../../components/LoaderOverlay";
 
 
 const MyProfile : React.FC = () => {
@@ -21,6 +23,7 @@ const MyProfile : React.FC = () => {
       (state: any) => state.authReducer
     );
 
+    const [loading, setLoading] = useState<boolean>(false);
     const [userData, setUserData] = useState<any>(null);
 
     const getUserData = (userId: number) => {
@@ -47,6 +50,43 @@ const MyProfile : React.FC = () => {
               <Text style={styles.userBio}>{user.bio ?? ''}</Text>
           </View>
         )
+    }
+
+    const editRecipe = (recipeId: number) => {
+
+    }
+
+    const deleteRecipe = (recipeId: number) => {
+      setLoading(true);
+      userDeleteRecipe(recipeId).then((res) => {
+        setLoading(false);
+        if(res.data && res.data.status){
+          if(isAuthenticated && user.id){
+            getUserData(user.id);
+          }
+        }
+      })
+    }
+
+    const confirmDeleteRecipe = (recipeId: number, recipeName: string) => {
+      Alert.alert(
+        "Are your sure?",
+        `Are you sure you want to delete the recipe ${recipeName}`,
+        [
+          {
+            text: "Yes",
+            onPress: () => deleteRecipe(recipeId),
+          },
+          {
+            text: "No",
+          },
+        ]
+      );
+    }
+
+    const [selectedRowKey, setSelectedRowKey] = useState<number>(0);
+    const swipeGestureEndedFunction = (keyId: string) => {
+      setSelectedRowKey(Number(keyId));
     }
 
     return (
@@ -77,7 +117,13 @@ const MyProfile : React.FC = () => {
                               likes={data.item.likes}
                             />
                           )}
-                          renderHiddenItem={ (data, rowMap) => (<RecipeDeleteHiddenRow/>)}
+                          keyExtractor={(rowData: any) => {
+                            return rowData.id;
+                          }}
+                          swipeGestureBegan={swipeGestureEndedFunction}
+                          renderHiddenItem={ (data: any, rowMap) =>
+                            (<RecipeDeleteHiddenRow selectedKeyId={selectedRowKey} keyId={data.item.id} onEdit={() => editRecipe(data.item.id)} onDelete={() => confirmDeleteRecipe(data.item.id, data.item.name)}/>)
+                          }
                           leftOpenValue={0}
                           rightOpenValue={-90}
                         />
@@ -89,8 +135,8 @@ const MyProfile : React.FC = () => {
                             </View>
                     }
 
-
             </View>
+            <LoaderOverlay loading={loading}/>
         </SafeAreaView>
     )
 };
