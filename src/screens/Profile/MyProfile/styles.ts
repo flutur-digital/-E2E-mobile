@@ -3,17 +3,22 @@ import {MainColor} from "../../../theme";
 
 const styles = StyleSheet.create({
     container : {
+        width: '100%',
+        flex: 1
+    },
+
+    listContainer: {
+        paddingLeft : 14,
+        paddingRight : 15,
+    },
+
+    headerViewContent: {
         display : 'flex',
         flexDirection : 'column',
         width: '100%',
-        paddingLeft : 14,
-        paddingRight : 15,
-        position : 'relative'
+        alignItems: 'center'
     },
-    scrollContainer : {
-        justifyContent : 'center',
-        alignItems : 'center',
-    },
+
     settingsBtn : {
         width: 39,
         height : 39,

@@ -1,18 +1,16 @@
 import { StyleSheet } from "react-native";
-import {MainColor} from "../../theme";
 
 const styles = StyleSheet.create({
     container : {
         display : 'flex',
         flexDirection : 'column',
         width: '100%',
-        paddingLeft : 14,
-        paddingRight : 15,
-        position : 'relative'
+        flex: 1
     },
-    scrollContainer : {
-        justifyContent : 'center',
-        alignItems : 'center',
+    listContainer: {
+        width: '100%',
+        paddingLeft : 14,
+        paddingRight : 15
     }
 
 });

@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, ScrollView, Image, ListRenderItem } from "react-native";
+import { View, Text, Pressable, SafeAreaView, ScrollView, Image, FlatList } from "react-native";
 import { SwipeListView } from 'react-native-swipe-list-view';
 import {SecondColor, Layouts} from '../../../theme';
 import styles from "./styles";
@@ -39,23 +39,31 @@ const MyProfile : React.FC = () => {
         });
     },[navigation]);
 
+    const listHeaderView = () => {
+        return (
+          <View style={styles.headerViewContent}>
+              <Image style={styles.userAvatar}  source={(user.avatar && isFileImage(user.avatar)) ? {uri: user.avatar} : require('../../../assets/images/noavatar.png')} />
+              <Text style={styles.userName}>{user.name}</Text>
+              <Text style={styles.userBio}>{user.bio ?? ''}</Text>
+          </View>
+        )
+    }
+
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
-            <View style={[Layouts.spaceBetween, {paddingTop : 15}]}>
+            <View style={[Layouts.spaceBetween, {paddingTop : 15, paddingBottom: 5}]}>
                 <View style={{width: 38.7, height: 38.7,}}/>
                 <Pressable style={styles.settingsBtn} onPress={()=>navigation.navigate('Settings')}>
                     <SettingsSvg width={22} height={22}/>
                 </Pressable>
 
             </View>
-            <ScrollView style={styles.container} contentContainerStyle={styles.scrollContainer}>
-                <Image style={styles.userAvatar}  source={(user.avatar && isFileImage(user.avatar)) ? {uri: user.avatar} : require('../../../assets/images/noavatar.png')} />
-                <Text style={styles.userName}>{user.name}</Text>
-                <Text style={styles.userBio}>{user.bio ?? ''}</Text>
-                <View style={{ width: '100%' }}>
+            <View style={styles.container}>
                 {
                     userData && userData.recipes.length > 0 &&
                         <SwipeListView
+                          style={styles.listContainer}
+                          ListHeaderComponent={listHeaderView()}
                           swipeRowStyle={{width: '100%' }}
                           closeOnScroll={true}
                           data={userData?.recipes}
@@ -80,9 +88,9 @@ const MyProfile : React.FC = () => {
                                 <Text style={styles.userName}>You don't have any recipes yet</Text>
                             </View>
                     }
-                </View>
 
-            </ScrollView>
+
+            </View>
         </SafeAreaView>
     )
 };
