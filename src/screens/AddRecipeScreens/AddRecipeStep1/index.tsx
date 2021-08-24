@@ -38,7 +38,6 @@ const AddRecipeStep1: React.FC = () => {
   const [listIngredients, setListIngredients] = useState<any>([]);
 
   const checkAddRecipeStep = () => {
-    console.log("current step " + currentStep);
     if(currentStep){
       if(currentStep === 2){
         return navigation.navigate("AddRecipeStep2");
@@ -47,8 +46,6 @@ const AddRecipeStep1: React.FC = () => {
       }
     }
   }
-
-
 
   useEffect(() => {
     checkAddRecipeStep();

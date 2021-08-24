@@ -51,7 +51,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
     },[])
 
     return (
-        <View style={styles.recipeBox}>
+        <View style={[styles.recipeBox, isRecipePreview ? { paddingBottom: 20 } : null]}>
             <Image
                 style={styles.recipeImage}
                 source={{uri : recipeDetails.image}}

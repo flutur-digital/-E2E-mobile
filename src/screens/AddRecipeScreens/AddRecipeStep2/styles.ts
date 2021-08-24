@@ -22,20 +22,15 @@ const styles = StyleSheet.create({
         marginBottom : 14
     },
     container : {
-        display : 'flex',
         width : '100%',
-        // height : '100%',
-        // flex : 1,
-        justifyContent : 'center',
+        flex : 1,
         alignItems : 'center',
-        flexDirection : 'column',
-        paddingLeft : 14,
-        paddingRight : 15
+        flexDirection : 'column'
     },
     addRecipeBox : {
-        width: '100%',
-        flex : 1,
-        height : '100%',
+        // width: '100%',
+        // flex : 1,
+        // height : 200,
         flexDirection : 'column',
         justifyContent : 'space-between',
         paddingTop : 20,

@@ -1,15 +1,15 @@
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import {View, SafeAreaView, ScrollView, Platform} from "react-native";
-import {Layouts, MainColor, SecondColor} from "../../../theme";
+import { Platform, SafeAreaView, ScrollView, View } from "react-native";
+import { Layouts, MainColor, SecondColor } from "../../../theme";
 import styles from "../../RecipeScreen/styles";
 import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
 import ArrowLeft from "../../../assets/images/arrow-left.svg";
-import CheckSvg from '../../../assets/images/check.svg';
+import CheckSvg from "../../../assets/images/check.svg";
 import { useDispatch, useSelector } from "react-redux";
-import {userSaveRecipe, userSaveRecipeStep} from "../../../services";
+import { userSaveRecipe, userSaveRecipeStep } from "../../../services";
 import RecipeDetails from "../../../components/RecipeDetails";
-import { setCurrentStep } from "../../../store/modules/addRecipe.reducer";
+import { resetAddRecipeState, setCurrentStep } from "../../../store/modules/addRecipe.reducer";
 
 const AddRecipePreview : React.FC = () => {
 
@@ -55,6 +55,25 @@ const AddRecipePreview : React.FC = () => {
         });
     },[navigation]);
 
+    const saveRecipeSteps = async (recipe: any, steps: Array<any>) => {
+        return await Promise.all(steps.map(async (step: any, index: number): Promise<number> => {
+            const formData = new FormData();
+            formData.append('recipe', recipe.id);
+            formData.append('step', index);
+            formData.append('text', step.text);
+            if (step.file) {
+                formData.append('file', {
+                    name: step.file.fileName,
+                    type: step.file.type,
+                    uri: Platform.OS === "android" ? step.file.uri : step.file.uri.replace("file://", "")
+                });
+            }
+            return userSaveRecipeStep(formData).then((res) => {
+                return index + 1;
+            });
+        }));
+    }
+
     const saveRecipe = () => {
 
         const formData = new FormData();
@@ -68,34 +87,15 @@ const AddRecipePreview : React.FC = () => {
         formData.append('ingredients', JSON.stringify(recipeDetailsPreview.ingredients));
 
         userSaveRecipe(formData).then((res) => {
-            console.log(res.data);
             if(res.data && res.data.id){
-                saveRecipeSteps(res.data, recipeDetailsPreview.description)
+                saveRecipeSteps(res.data, recipeDetailsPreview.description).then((result) => {
+                    if(result){
+                        return navigation.navigate('AddRecipeSuccess', {recipe: res.data});
+                    }
+                })
             }
         })
 
-    }
-
-    const saveRecipeSteps = (recipe: any, steps: Array<any>) => {
-        // console.log(steps);
-        steps.map((step: any, index: number) => {
-            const formData = new FormData();
-            formData.append('recipe', recipe.id);
-            formData.append('step', index);
-            formData.append('text', step.text);
-            if(step.file) {
-                formData.append('file', {
-                    name: step.file.fileName,
-                    type: step.file.type,
-                    uri: Platform.OS === "android" ? step.file.uri : step.file.uri.replace("file://", "")
-                });
-            }
-            userSaveRecipeStep(formData).then((res) => {
-                console.log(res.data);
-            })
-        });
-
-        return navigation.navigate('AddRecipeSuccess', {recipe: recipe});
     }
 
     return (
