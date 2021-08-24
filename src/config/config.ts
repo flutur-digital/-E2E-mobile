@@ -6,6 +6,8 @@ export const config = {
 export const imagePickerOptions = {
   mediaType: "photo",
   selectionLimit: 1,
+  maxWidth: 512,
+  maxHeight: 512,
   includeBase64: false,
   allowsEditing: true,
   aspect: [4, 3],

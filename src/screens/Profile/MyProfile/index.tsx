@@ -10,6 +10,7 @@ import RecipeDeleteHiddenRow from "../../../components/RecipeDeteleHiddenRow";
 import SettingsSvg from '../../../assets/images/settings.svg';
 import { useSelector } from "react-redux";
 import {getUserProfileById} from "../../../services";
+import { isFileImage } from "../../../util/util";
 
 
 const MyProfile : React.FC = () => {
@@ -31,37 +32,32 @@ const MyProfile : React.FC = () => {
     }
 
     useEffect(() => {
-        if(isAuthenticated && user.id){
-            getUserData(user.id);
-        }
-    },[]);
-
-    const loging = (data:any) => {
-        console.log(data);
-    }
+        return navigation.addListener('focus', () => {
+            if(isAuthenticated && user.id){
+                getUserData(user.id);
+            }
+        });
+    },[navigation]);
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
             <View style={[Layouts.spaceBetween, {paddingTop : 15}]}>
-                <View style={{width: 38.7, height: 38.7,}}>
-
-                </View>
+                <View style={{width: 38.7, height: 38.7,}}/>
                 <Pressable style={styles.settingsBtn} onPress={()=>navigation.navigate('Settings')}>
                     <SettingsSvg width={22} height={22}/>
                 </Pressable>
 
             </View>
             <ScrollView style={styles.container} contentContainerStyle={styles.scrollContainer}>
-                <Image style={styles.userAvatar}
-                       source={{uri : 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png'}}
-                />
+                <Image style={styles.userAvatar}  source={(user.avatar && isFileImage(user.avatar)) ? {uri: user.avatar} : require('../../../assets/images/noavatar.png')} />
                 <Text style={styles.userName}>{user.name}</Text>
-                <Text style={styles.userBio}>Hello, please enjoy my recipes</Text>
+                <Text style={styles.userBio}>{user.bio ?? ''}</Text>
                 <View style={{ width: '100%' }}>
                 {
-                    userData &&
+                    userData && userData.recipes.length > 0 &&
                         <SwipeListView
                           swipeRowStyle={{width: '100%' }}
+                          closeOnScroll={true}
                           data={userData?.recipes}
                           renderItem={ (data: any, rowMap) => (
                             <Recipe
@@ -77,8 +73,13 @@ const MyProfile : React.FC = () => {
                           leftOpenValue={0}
                           rightOpenValue={-90}
                         />
-
                 }
+                    {
+                        userData && userData.recipes.length == 0 &&
+                            <View style={{ paddingTop: 50 }}>
+                                <Text style={styles.userName}>You don't have any recipes yet</Text>
+                            </View>
+                    }
                 </View>
 
             </ScrollView>

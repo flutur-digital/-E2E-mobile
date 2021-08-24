@@ -34,8 +34,9 @@ const styles = StyleSheet.create({
         borderRadius : 12
     },
     userAvatar : {
-        width : 94,
-        height : 94,
+        width : 108,
+        height : 108,
+        resizeMode: "cover",
         borderRadius: 99
     },
     userName: {

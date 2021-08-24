@@ -19,6 +19,7 @@ import { chunk } from "lodash";
 import {checkIfInputIsEmpty} from "../../../util/util";
 import {setRecipeStep1, setCurrentStep} from "../../../store/modules/addRecipe.reducer";
 import { useDispatch, useSelector } from "react-redux";
+import LoaderOverlay from "../../../components/LoaderOverlay";
 
 const AddRecipeStep1: React.FC = () => {
 
@@ -31,19 +32,27 @@ const AddRecipeStep1: React.FC = () => {
 
   const [focused, setFocus] = useState("#cacaca");
 
+  const [loading, setLoading] = useState<boolean>(false);
   const [ingredients, setIngredients] = useState<Array<IngredientType>>([]);
   const [searchIngredients, setSearchIngredients] = useState<Array<IngredientType>>([]);
   const [listIngredients, setListIngredients] = useState<any>([]);
 
   const checkAddRecipeStep = () => {
-    // if(currentStep){
-    //   if(currentStep === 2){
-    //     return navigation.navigate("AddRecipeStep2");
-    //   } else if(currentStep === 3){
-    //     return navigation.navigate("AddRecipePreview");
-    //   }
-    // }
+    console.log("current step " + currentStep);
+    if(currentStep){
+      if(currentStep === 2){
+        return navigation.navigate("AddRecipeStep2");
+      } else if(currentStep === 3){
+        return navigation.navigate("AddRecipePreview");
+      }
+    }
   }
+
+
+
+  useEffect(() => {
+    checkAddRecipeStep();
+  },[currentStep])
 
   const getIngredients = () => {
     getAllIngredients().then((res) => {
@@ -58,19 +67,11 @@ const AddRecipeStep1: React.FC = () => {
     setListIngredients(chunk(searchIngredients, 6));
   }, [searchIngredients]);
 
-  // console.log(listIngredients)
-
   useEffect(() => {
-    // Return the function to unsubscribe from the event so it gets removed on unmount
     return navigation.addListener('focus', () => {
-      checkAddRecipeStep();
       getIngredients();
     });
   },[navigation]);
-
-  // useEffect(() => {
-  //
-  // }, []);
 
   const ingredientSearch = (searchedValue: string) => {
     const formattedQuery = searchedValue.toLowerCase();
@@ -114,20 +115,19 @@ const AddRecipeStep1: React.FC = () => {
       } else if (response.errorCode) {
         console.log("error");
       } else if (response.assets) {
-        // console.log(response)
         setRecipeImage(response.assets[0]);
-        // console.log('______________________________________________________________________________________________________________________________')
-        // console.log(`data:image/png;base64,${recipeImage.base64}`)
       }
     });
   };
 
   const nextStep = () => {
+    setLoading(true);
     if(checkIfInputIsEmpty(title) || checkIfInputIsEmpty(selectedIngredients) || checkIfInputIsEmpty(recipeImage) || checkIfInputIsEmpty(preparationTime)){
       setTitleError(checkIfInputIsEmpty(title))
       setSelectedIngredientsError(checkIfInputIsEmpty(selectedIngredients))
       setRecipeImageError(checkIfInputIsEmpty(recipeImage))
       setPreparationTimeError(checkIfInputIsEmpty(preparationTime));
+      setLoading(false);
     } else {
       const stepData = {
         title,
@@ -138,6 +138,7 @@ const AddRecipeStep1: React.FC = () => {
 
       dispatch(setRecipeStep1({step1: JSON.stringify(stepData)}));
       dispatch(setCurrentStep({step: 2}));
+      setLoading(false);
       return navigation.navigate("AddRecipeStep2");
     }
   }
@@ -182,7 +183,7 @@ const AddRecipeStep1: React.FC = () => {
               <View style={styles.timeBlock}>
                 <View style={styles.preparationTime}>
                   <ClockSvg width={18} height={18} />
-                  <TextInput value={preparationTime} onChangeText={(text) => setPreparationTime(text)} style={{ marginLeft: 6 }} placeholder={"0 min"} />
+                  <TextInput value={preparationTime} keyboardType = 'numeric' onChangeText={(text) => setPreparationTime(text)} style={{ marginLeft: 6 }} placeholder={"0 min"} />
                 </View>
               </View>
             </View>
@@ -219,7 +220,7 @@ const AddRecipeStep1: React.FC = () => {
           />
         </View>
       </View>
-
+      <LoaderOverlay loading={loading}/>
     </SafeAreaView>
   );
 };

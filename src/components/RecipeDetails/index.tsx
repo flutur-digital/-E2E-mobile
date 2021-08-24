@@ -6,6 +6,7 @@ import TimeSvg from './assets/images/time.svg';
 import HeartSvg from './assets/images/heart.svg';
 import { useSelector } from "react-redux";
 import {followUserById, getUserIsFollowingUser} from "../../services";
+import {isFileImage} from "../../util/util";
 import Video from "react-native-video";
 
 interface Props{
@@ -14,11 +15,6 @@ interface Props{
 }
 
 const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false}) => {
-
-    const isFileImage = (file: string) => {
-        let reg = /(.*?)\.(jpg|bmp|jpeg|png)$/;
-        return file.match(reg);
-    }
 
     const navigation = useNavigation();
 

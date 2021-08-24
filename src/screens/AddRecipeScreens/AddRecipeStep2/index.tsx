@@ -29,15 +29,22 @@ const AddRecipeStep2 : React.FC = () => {
       (state: any) => state.addRecipeReducer
     );
 
+    const goPrevStep = () => {
+        dispatch(setCurrentStep({step: 1}));
+    }
     const checkAddRecipeStep = () => {
         if(currentStep){
             if(currentStep === 1){
                 return navigation.navigate("AddRecipeStep1");
-            } else if(currentStep === 2){
-                return navigation.navigate("AddRecipeStep2");
+            } else if(currentStep === 3){
+                return navigation.navigate("AddRecipePreview");
             }
         }
     }
+
+    useEffect(() => {
+        checkAddRecipeStep();
+    },[currentStep])
 
     const [steps, setSteps] = useState<Array<StepType>>([]);
 
@@ -56,7 +63,7 @@ const AddRecipeStep2 : React.FC = () => {
     useEffect(() => {
         // Return the function to unsubscribe from the event so it gets removed on unmount
         return navigation.addListener('focus', () => {
-            checkAddRecipeStep();
+
         });
     },[navigation]);
 
@@ -126,7 +133,7 @@ const AddRecipeStep2 : React.FC = () => {
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',flex : 1 }}>
             <View style={[Layouts.spaceBetween, {paddingLeft: 20, paddingRight: 20,paddingTop : 15}]}>
-                <PrimarySmallBtn onClick={()=>navigation.goBack()} icon={<ArrowLeft width={11} height={18}/>} bgColor={'#fff'}/>
+                <PrimarySmallBtn onClick={() => goPrevStep()} icon={<ArrowLeft width={11} height={18}/>} bgColor={'#fff'}/>
                 <Text style={styles.title}>Please, write{'\n'} or upload video{'\n'} recipe 🥬</Text>
                 <PrimarySmallBtn onClick={()=> nextStep()} icon={<ArrowRight width={11} height={18}/>} bgColor={MainColor}/>
             </View>

@@ -50,3 +50,17 @@ export const getUserIsFollowingUser = async (userId: number) => {
       return e;
     })
 }
+
+export const updateUserProfile = async (formdata : any) => {
+  const authheaders = axiosAuthHeader();
+  return axios.post(`/save-settings`,formdata,{
+    headers: {
+      'Content-Type': 'multipart/form-data',
+      ...authheaders.headers
+    }
+  }).then(res => {
+    return res;
+  }).catch(e =>{
+    return e;
+  })
+}

@@ -6,17 +6,24 @@ import styles from "../../RecipeScreen/styles";
 import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
 import ArrowLeft from "../../../assets/images/arrow-left.svg";
 import CheckSvg from '../../../assets/images/check.svg';
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {userSaveRecipe, userSaveRecipeStep} from "../../../services";
 import RecipeDetails from "../../../components/RecipeDetails";
+import { setCurrentStep } from "../../../store/modules/addRecipe.reducer";
 
 const AddRecipePreview : React.FC = () => {
 
     const navigation = useNavigation();
+    const dispatch = useDispatch();
 
     const {currentStep, step1, step2} = useSelector(
       (state: any) => state.addRecipeReducer
     );
+
+    const goPrevStep = () => {
+        dispatch(setCurrentStep({step: 2}));
+        return navigation.goBack()
+    }
 
     const [recipeDetailsPreview, setRecipeDetailsPreview] = useState<any>(null);
 
@@ -95,7 +102,7 @@ const AddRecipePreview : React.FC = () => {
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
             <ScrollView style={styles.container} contentContainerStyle={styles.scrollContainer}>
                 <View style={[Layouts.spaceBetween, {paddingLeft: 8, paddingRight: 6, paddingTop : 15}]}>
-                    <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={()=>navigation.goBack()}/>
+                    <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={() => goPrevStep()}/>
                     <PrimarySmallBtn onClick={()=> saveRecipe()} icon={<CheckSvg width={20} height={14}/>} bgColor={'#00e96b'}/>
                 </View>
                 {

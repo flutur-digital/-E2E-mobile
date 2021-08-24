@@ -84,6 +84,7 @@ const BottomNavigationStack = () => {
         showLabel: false,
         style: {
           alignItems: 'center',
+          paddingTop: 20,
           height: 78
         }
       }}
