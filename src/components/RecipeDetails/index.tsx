@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from "react";
-import {View, Text, Pressable, Image} from 'react-native';
+import {View, Text, Pressable} from 'react-native';
+import FastImage from "react-native-fast-image";
 import styles from './styles';
 import TimeSvg from './assets/images/time.svg';
 import HeartSvg from './assets/images/heart.svg';
@@ -20,7 +21,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
 
     const [isFollowingRecipeUser, setIsFollowingRecipeUser] = useState<boolean>(false);
 
-    const {isAuthenticated, user} = useSelector(
+    const {isAuthenticated} = useSelector(
       (state: any) => state.authReducer
     );
 
@@ -52,7 +53,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
 
     return (
         <View style={[styles.recipeBox, isRecipePreview ? { paddingBottom: 20 } : null]}>
-            <Image
+            <FastImage
                 style={styles.recipeImage}
                 source={{uri : recipeDetails.image}}
             />
@@ -76,7 +77,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
 
                           </View>
                           {
-                              (item.fileUri && isFileImage(item.fileUri)) && <Image style={styles.recipeMedia} source={{uri : item.fileUri}} />
+                              (item.fileUri && isFileImage(item.fileUri)) && <FastImage style={styles.recipeMedia} resizeMode={FastImage.resizeMode.contain} source={{uri : item.fileUri}} />
                           }
                           {(item.fileUri && !isFileImage(item.fileUri)) &&
                               <View style={{ width: '100%', height: 200 }}>
@@ -100,7 +101,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
             {
                 !isRecipePreview &&
                     <View style={styles.recipeFooter}>
-                        <Image
+                        <FastImage
                           style={styles.smallRecipeImage}
                           source={{uri : recipeDetails.image}}
                         />
@@ -110,7 +111,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
                             {!isAuthenticated &&
                                 <View style={styles.followBlock}>
                                     <Pressable onPress={() => navigation.navigate('Login')} style={styles.followBtn}>
-                                        <Image style={styles.userAvatar}
+                                        <FastImage style={styles.userAvatar}
                                                source={{ uri: 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png' }}
                                         />
                                         <Text style={styles.followTxt}>Follow</Text>
@@ -124,7 +125,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
                             {isAuthenticated &&
                                 <View style={styles.followBlock}>
                                     <Pressable onPress={() => folowUser(recipeDetails.user.id)} style={isFollowingRecipeUser ? styles.followBtnActive : styles.followBtn}>
-                                        <Image style={styles.userAvatar}
+                                        <FastImage style={styles.userAvatar}
                                                source={{ uri: 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png' }}
                                         />
                                         <Text style={isFollowingRecipeUser ? styles.followTxtActive : styles.followTxt}>{isFollowingRecipeUser ? 'Following' : 'Follow' }</Text>

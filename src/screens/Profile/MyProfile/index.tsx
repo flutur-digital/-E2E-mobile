@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, ScrollView, Image, FlatList, Alert } from "react-native";
+import { View, Text, Pressable, SafeAreaView, Alert } from "react-native";
+import FastImage from "react-native-fast-image";
 import { SwipeListView } from 'react-native-swipe-list-view';
 import {SecondColor, Layouts} from '../../../theme';
 import styles from "./styles";
@@ -12,8 +13,6 @@ import { useSelector } from "react-redux";
 import {getUserProfileById} from "../../../services";
 import { isFileImage } from "../../../util/util";
 import {userDeleteRecipe} from "../../../services";
-import LoaderOverlay from "../../../components/LoaderOverlay";
-
 
 const MyProfile : React.FC = () => {
 
@@ -44,7 +43,7 @@ const MyProfile : React.FC = () => {
     const listHeaderView = () => {
         return (
           <View style={styles.headerViewContent}>
-              <Image style={styles.userAvatar}  source={(user.avatar && isFileImage(user.avatar)) ? {uri: user.avatar} : require('../../../assets/images/noavatar.png')} />
+              <FastImage style={styles.userAvatar}  source={(user.avatar && isFileImage(user.avatar)) ? {uri: user.avatar} : require('../../../assets/images/noavatar.png')} />
               <Text style={styles.userName}>{user.name}</Text>
               <Text style={styles.userBio}>{user.bio ?? ''}</Text>
           </View>

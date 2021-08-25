@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     },
     recipeMedia : {
         width : '100%',
-        resizeMode : 'contain',
+        // resizeMode : 'contain',
         height : 250
     },
     recipeFooter : {

@@ -1,10 +1,8 @@
-import { useNavigation } from '@react-navigation/native';
-import React, { useState, useEffect, useRef } from 'react';
-import {View, Text, Pressable, Image, Animated} from 'react-native';
+import React, { useEffect, useRef } from 'react';
+import {View, Text, Pressable, Animated} from 'react-native';
+import FastImage from 'react-native-fast-image';
 import styles from './styles';
 import {IngredientType} from "../../../../types";
-import PrimarySmallBtn from "../../../../components/PrimarySmallBtn";
-import AddIcon from './assets/addicon.svg';
 import SelectedIngredientIcon from './assets/selectedIngredientIcon.svg';
 import UnselectedIngredientIcon from './assets/unselectedIngredientIcon.svg';
 
@@ -18,7 +16,6 @@ interface Props {
 const IngredientItem : React.FC<Props> = ({ingredient, onSelect,unSelect, selected}) => {
 
     const moveIngredient = useRef(new Animated.Value(-200)).current;
-
 
     useEffect(() => {
         Animated.sequence([
@@ -39,7 +36,7 @@ const IngredientItem : React.FC<Props> = ({ingredient, onSelect,unSelect, select
         <View style={styles.ingredientContainer}>
             <Animated.View style={[styles.ingredientInfo, {transform: [{translateX: moveIngredient}]}]}>
                 <View style={styles.ingredientImageBox}>
-                  <Image style={styles.ingredientImage} source={{ uri: ingredient.image }}/>
+                  <FastImage style={styles.ingredientImage} resizeMode={FastImage.resizeMode.contain} source={{ uri: ingredient.image }}/>
                 </View>
                 <Text style={styles.ingredientName}>{ingredient.name}</Text>
             </Animated.View>

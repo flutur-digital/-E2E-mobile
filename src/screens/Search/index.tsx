@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, FlatList } from "react-native";
+import { View, Text, SafeAreaView, FlatList } from "react-native";
 import SearchInput from "../../components/SearchInput";
 import IngredientItem from "./components/IngredientItem";
 import {Typography} from "../../theme";
