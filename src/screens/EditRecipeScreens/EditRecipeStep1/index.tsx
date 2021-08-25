@@ -17,7 +17,7 @@ import * as ImagePicker from "react-native-image-picker";
 import {imagePickerOptions} from "../../../config";
 import { chunk } from "lodash";
 import {checkIfInputIsEmpty} from "../../../util/util";
-import {setRecipeStep1, setCurrentStep} from "../../../store/modules/addRecipe.reducer";
+import {setRecipeStep1, setCurrentStep} from "../../../store/modules/editRecipe.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import {getRecipeById} from "../../../services";
 import LoaderOverlay from "../../../components/LoaderOverlay";
@@ -26,11 +26,10 @@ import LoaderOverlay from "../../../components/LoaderOverlay";
 const EditRecipeStep1: React.FC = ({ route, navigation }) => {
 
   const { recipeId } = route.params;
-  const [recipeData, setRecipeData] = useState<any>(null);
   const dispatch = useDispatch();
 
   const {currentStep} = useSelector(
-    (state: any) => state.addRecipeReducer
+    (state: any) => state.editRecipeReducer
   )
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -144,10 +143,9 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
 
   const nextStep = () => {
     setLoading(true);
-    if(checkIfInputIsEmpty(title) || checkIfInputIsEmpty(selectedIngredients) || checkIfInputIsEmpty(recipeImage) || checkIfInputIsEmpty(preparationTime)){
+    if(checkIfInputIsEmpty(title) || checkIfInputIsEmpty(selectedIngredients) || checkIfInputIsEmpty(preparationTime)){
       setTitleError(checkIfInputIsEmpty(title))
       setSelectedIngredientsError(checkIfInputIsEmpty(selectedIngredients))
-      setRecipeImageError(checkIfInputIsEmpty(recipeImage))
       setPreparationTimeError(checkIfInputIsEmpty(preparationTime));
       setLoading(false);
     } else {
@@ -169,7 +167,6 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
     let error_fileds = [];
     if(titleError) error_fileds.push('title');
     if(selectedIngredientsError) error_fileds.push('title');
-    if(recipeImageError) error_fileds.push('image');
     if(preparationTimeError) error_fileds.push('preparation time');
     if(error_fileds.length > 0){
       Alert.alert(`The ${error_fileds.join(',')} fields are not complete`);
@@ -180,7 +177,7 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
     <SafeAreaView style={{ width: "100%", height: "100%", flex: 1 }}>
       <View style={[Layouts.spaceBetween, { paddingLeft: 20, paddingRight: 20, paddingTop: 15 }]}>
         <View style={{ width: 38.7, height: 38.7 }} />
-        <Text style={styles.title}>Please, share{"\n"} with us your{"\n"} best recipe 🤗</Text>
+        <Text style={styles.title}>Edit your{"\n"} recipe very{"\n"} quickly 🤗</Text>
         <PrimarySmallBtn onClick={() => nextStep()} icon={<ArrowRight width={11} height={18} />} bgColor={MainColor} />
       </View>
       <Text style={styles.description}>Set name, import photo of your dish,{"\n"} and check ingredients</Text>
@@ -209,7 +206,6 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
                 </View>
               </View>
             </View>
-
           </View>
           <Text style={[styles.description, { marginBottom: 30 }]}>Which ingredients did you use?</Text>
           <SearchInput onSearch={ingredientSearch} />
