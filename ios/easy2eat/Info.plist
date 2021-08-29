@@ -45,6 +45,8 @@
 	<string>8a5ed38fa2cd6d62a79b915aaf640a5e</string>
 	<key>FacebookDisplayName</key>
 	<string>Easy2eat</string>
+	<key>LSApplicationCategoryType</key>
+	<string></string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>fbapi</string>
@@ -78,6 +80,8 @@
 	</dict>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>App needs photo library Access for upload videos and images to recipe details</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>App uses photos for upload videos and images to recipe details</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Light.ttf</string>
