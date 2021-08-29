@@ -13,7 +13,7 @@ import { useDispatch } from "react-redux";
 import { resetAddRecipeState } from "../../../store/modules/addRecipe.reducer";
 
 //@ts-ignore
-const AddRecipeSuccess : React.FC = ({ route, navigation }) => {
+const EditRecipeSuccess : React.FC = ({ route, navigation }) => {
 
     const { recipe } = route.params;
     const dispatch = useDispatch();
@@ -55,4 +55,4 @@ const AddRecipeSuccess : React.FC = ({ route, navigation }) => {
     )
 }
 
-export default AddRecipeSuccess;
+export default EditRecipeSuccess;

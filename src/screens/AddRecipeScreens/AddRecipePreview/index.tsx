@@ -1,6 +1,6 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { Platform, SafeAreaView, ScrollView, View } from "react-native";
+import { Alert, Platform, SafeAreaView, ScrollView, View } from "react-native";
 import { Layouts, MainColor, SecondColor } from "../../../theme";
 import styles from "../../RecipeScreen/styles";
 import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
@@ -10,6 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { userSaveRecipe, userSaveRecipeStep } from "../../../services";
 import RecipeDetails from "../../../components/RecipeDetails";
 import { resetAddRecipeState, setCurrentStep } from "../../../store/modules/addRecipe.reducer";
+import LoaderOverlay from "../../../components/LoaderOverlay";
 
 const AddRecipePreview : React.FC = () => {
 
@@ -25,6 +26,7 @@ const AddRecipePreview : React.FC = () => {
         return navigation.goBack()
     }
 
+    const [loading, setLoading] = useState<boolean>(false);
     const [recipeDetailsPreview, setRecipeDetailsPreview] = useState<any>(null);
 
     const initializeRecipePreview = (dataStep1: any,dataStep2: any) => {
@@ -75,7 +77,7 @@ const AddRecipePreview : React.FC = () => {
     }
 
     const saveRecipe = () => {
-
+        setLoading(true);
         const formData = new FormData();
         formData.append('name', recipeDetailsPreview.name);
         formData.append('preparation_time', recipeDetailsPreview.prepare_time);
@@ -89,10 +91,16 @@ const AddRecipePreview : React.FC = () => {
         userSaveRecipe(formData).then((res) => {
             if(res.data && res.data.id){
                 saveRecipeSteps(res.data, recipeDetailsPreview.description).then((result) => {
+                    setLoading(false);
                     if(result){
                         return navigation.navigate('AddRecipeSuccess', {recipe: res.data});
+                    } else {
+                        Alert.alert(`Please check all steps if they are completed!`);
                     }
                 })
+            } else {
+                setLoading(false);
+                Alert.alert(`Whoops, looks like something went wrong!`);
             }
         })
 
@@ -109,7 +117,7 @@ const AddRecipePreview : React.FC = () => {
                     recipeDetailsPreview && <RecipeDetails recipeDetails={recipeDetailsPreview} isRecipePreview={true}/>
                 }
             </ScrollView>
-
+            <LoaderOverlay loading={loading}/>
         </SafeAreaView>
     )
 }

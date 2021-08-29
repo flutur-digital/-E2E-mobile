@@ -1,30 +1,27 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { Platform, SafeAreaView, ScrollView, View } from "react-native";
+import { Alert, Platform, SafeAreaView, ScrollView, View } from "react-native";
 import { Layouts, MainColor, SecondColor } from "../../../theme";
 import styles from "../../RecipeScreen/styles";
 import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
 import ArrowLeft from "../../../assets/images/arrow-left.svg";
 import CheckSvg from "../../../assets/images/check.svg";
 import { useDispatch, useSelector } from "react-redux";
-import { userSaveRecipe, userSaveRecipeStep } from "../../../services";
+import { userEditRecipe, userSaveRecipeStep } from "../../../services";
 import RecipeDetails from "../../../components/RecipeDetails";
-import { resetAddRecipeState, setCurrentStep } from "../../../store/modules/addRecipe.reducer";
+import LoaderOverlay from "../../../components/LoaderOverlay";
 
-const AddRecipePreview : React.FC = () => {
+const EditRecipePreview : React.FC = () => {
 
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
     const {currentStep, step1, step2} = useSelector(
-      (state: any) => state.addRecipeReducer
+      (state: any) => state.editRecipeReducer
     );
 
-    const goPrevStep = () => {
-        dispatch(setCurrentStep({step: 2}));
-        return navigation.goBack()
-    }
 
+    const [loading, setLoading] = useState<boolean>(false);
     const [recipeDetailsPreview, setRecipeDetailsPreview] = useState<any>(null);
 
     const initializeRecipePreview = (dataStep1: any,dataStep2: any) => {
@@ -33,13 +30,14 @@ const AddRecipePreview : React.FC = () => {
             descriptionArray.push({
                 text: item.description,
                 file: item?.file,
-                fileUri: item?.file?.uri
+                fileUri: item?.fileUri
             })
         });
         const previewData = {
+            recipeId: dataStep1.recipeId,
             prepare_time: dataStep1.preparationTime,
             name: dataStep1.title,
-            image: dataStep1.recipeImage.uri,
+            image: dataStep1.recipeImage ? dataStep1.recipeImage.uri : dataStep1.recipeImagePreview,
             imagefile: dataStep1.recipeImage,
             ingredients: dataStep1.selectedIngredients,
             description: descriptionArray
@@ -75,24 +73,33 @@ const AddRecipePreview : React.FC = () => {
     }
 
     const saveRecipe = () => {
-
         const formData = new FormData();
+        setLoading(true);
         formData.append('name', recipeDetailsPreview.name);
         formData.append('preparation_time', recipeDetailsPreview.prepare_time);
-        formData.append('image', {
-            name: recipeDetailsPreview.imagefile.fileName,
-            type: recipeDetailsPreview.imagefile.type,
-            uri: Platform.OS === "android" ? recipeDetailsPreview.imagefile.uri : recipeDetailsPreview.imagefile.uri.replace("file://", "")
-        });
+        if(recipeDetailsPreview.imagefile) {
+            formData.append('image', {
+                name: recipeDetailsPreview.imagefile.fileName,
+                type: recipeDetailsPreview.imagefile.type,
+                uri: Platform.OS === "android" ? recipeDetailsPreview.imagefile.uri : recipeDetailsPreview.imagefile.uri.replace("file://", "")
+            });
+        }
         formData.append('ingredients', JSON.stringify(recipeDetailsPreview.ingredients));
 
-        userSaveRecipe(formData).then((res) => {
-            if(res.data && res.data.id){
-                saveRecipeSteps(res.data, recipeDetailsPreview.description).then((result) => {
+        userEditRecipe(formData, recipeDetailsPreview.recipeId).then((res) => {
+            console.log(res.data.data.id);
+            if(res.data && res.data.data.id){
+                saveRecipeSteps(res.data.data, recipeDetailsPreview.description).then((result) => {
+                    setLoading(false);
                     if(result){
-                        return navigation.navigate('AddRecipeSuccess', {recipe: res.data});
+                        return navigation.navigate('EditRecipeSuccess', {recipe: res.data.data});
+                    } else {
+                        Alert.alert(`Whoops, looks like something went wrong!`);
                     }
                 })
+            } else {
+                setLoading(false);
+                Alert.alert(`Whoops, looks like something went wrong!`);
             }
         })
 
@@ -102,16 +109,16 @@ const AddRecipePreview : React.FC = () => {
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : SecondColor }}>
             <ScrollView style={styles.container} contentContainerStyle={styles.scrollContainer}>
                 <View style={[Layouts.spaceBetween, {paddingLeft: 8, paddingRight: 6, paddingTop : 15}]}>
-                    <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={() => goPrevStep()}/>
+                    <PrimarySmallBtn icon={<ArrowLeft width={9} height={16}/>} bgColor={MainColor} onClick={() => navigation.goBack()}/>
                     <PrimarySmallBtn onClick={()=> saveRecipe()} icon={<CheckSvg width={20} height={14}/>} bgColor={'#00e96b'}/>
                 </View>
                 {
                     recipeDetailsPreview && <RecipeDetails recipeDetails={recipeDetailsPreview} isRecipePreview={true}/>
                 }
             </ScrollView>
-
+            <LoaderOverlay loading={loading}/>
         </SafeAreaView>
     )
 }
 
-export default AddRecipePreview;
+export default EditRecipePreview;

@@ -21,6 +21,7 @@ import {setRecipeStep1, setCurrentStep} from "../../../store/modules/editRecipe.
 import { useDispatch, useSelector } from "react-redux";
 import {getRecipeById} from "../../../services";
 import LoaderOverlay from "../../../components/LoaderOverlay";
+import ArrowLeft from "../../../assets/images/arrow-left-gray.svg";
 
 //@ts-ignore
 const EditRecipeStep1: React.FC = ({ route, navigation }) => {
@@ -28,9 +29,9 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
   const { recipeId } = route.params;
   const dispatch = useDispatch();
 
-  const {currentStep} = useSelector(
-    (state: any) => state.editRecipeReducer
-  )
+  // console.log(recipeId)
+
+  const [recipeForEdit, setRecipeForEdit] = useState<any>(null);
 
   const [loading, setLoading] = useState<boolean>(false);
   const [ingredients, setIngredients] = useState<Array<IngredientType>>([]);
@@ -47,8 +48,10 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
   const getRecipeData = (recipeId: number) => {
     setLoading(true);
     getRecipeById(recipeId).then((res) => {
+      // console.log(res)
       setLoading(false);
       if(res.data && res.data.data){
+        setRecipeForEdit(res.data.data);
         initializeData(res.data.data);
       }
     })
@@ -59,20 +62,6 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
       getRecipeData(recipeId);
     }
   },[recipeId])
-
-  const checkAddRecipeStep = () => {
-    if(currentStep){
-      if(currentStep === 2){
-        return navigation.navigate("AddRecipeStep2");
-      } else if(currentStep === 3){
-        return navigation.navigate("AddRecipePreview");
-      }
-    }
-  }
-
-  useEffect(() => {
-    checkAddRecipeStep();
-  },[currentStep])
 
   const getIngredients = () => {
     getAllIngredients().then((res) => {
@@ -150,6 +139,8 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
       setLoading(false);
     } else {
       const stepData = {
+        recipeId,
+        recipeImagePreview,
         title,
         selectedIngredients,
         recipeImage,
@@ -157,9 +148,8 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
       };
 
       dispatch(setRecipeStep1({step1: JSON.stringify(stepData)}));
-      dispatch(setCurrentStep({step: 2}));
       setLoading(false);
-      return navigation.navigate("AddRecipeStep2");
+      return navigation.navigate("EditRecipeStep2",{recipeForEdit: recipeForEdit});
     }
   }
 
@@ -176,11 +166,11 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
   return (
     <SafeAreaView style={{ width: "100%", height: "100%", flex: 1 }}>
       <View style={[Layouts.spaceBetween, { paddingLeft: 20, paddingRight: 20, paddingTop: 15 }]}>
-        <View style={{ width: 38.7, height: 38.7 }} />
+        <PrimarySmallBtn onClick={() => navigation.goBack()} icon={<ArrowLeft width={11} height={18}/>} bgColor={'#fff'}/>
         <Text style={styles.title}>Edit your{"\n"} recipe very{"\n"} quickly 🤗</Text>
         <PrimarySmallBtn onClick={() => nextStep()} icon={<ArrowRight width={11} height={18} />} bgColor={MainColor} />
       </View>
-      <Text style={styles.description}>Set name, import photo of your dish,{"\n"} and check ingredients</Text>
+      <Text style={styles.description}>Edit name, import photo of your dish,{"\n"} and check ingredients</Text>
       <View style={styles.container}>
         <ArrowDown width={25} height={25} />
         <View style={styles.addRecipeBox}>
@@ -194,6 +184,7 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
               <TextInput
                 placeholder={"Your dish name"}
                 multiline
+                autoCorrect={false}
                 maxLength={40}
                 onChangeText={text => setTitle(text)}
                 value={title}
@@ -202,7 +193,7 @@ const EditRecipeStep1: React.FC = ({ route, navigation }) => {
               <View style={styles.timeBlock}>
                 <View style={styles.preparationTime}>
                   <ClockSvg width={18} height={18} />
-                  <TextInput value={preparationTime} keyboardType = 'numeric' onChangeText={(text) => setPreparationTime(text)} style={{ marginLeft: 6 }} placeholder={"0 min"} />
+                  <TextInput value={preparationTime} autoCorrect={false} keyboardType = 'numeric' onChangeText={(text) => setPreparationTime(text)} style={{ marginLeft: 6 }} placeholder={"0 min"} />
                 </View>
               </View>
             </View>

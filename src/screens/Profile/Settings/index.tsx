@@ -20,9 +20,6 @@ const Settings: React.FC = () => {
     const dispatch = useDispatch();
     const navigation = useNavigation();
 
-    const [value, onChangeText] = useState('Dorin');
-    const [bio, setBio] = useState('Hello, please enjoy my recipes');
-
     const logoutNow = () => {
         dispatch(logout())
     }

@@ -38,7 +38,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>FacebookAppID</key>
 	<string>508616260228902</string>
 	<key>FacebookClientToken</key>
@@ -76,14 +76,8 @@
 			</dict>
 		</dict>
 	</dict>
-	<key>NSCameraUsageDescription</key>
-	<string>App needs Camera Access Permission for testing</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>App needs Microphone Access Permission for testing</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
-	<string>App needs photo library Access</string>
+	<string>App needs photo library Access for upload videos and images to recipe details</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Roboto-Light.ttf</string>

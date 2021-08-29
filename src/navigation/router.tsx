@@ -21,6 +21,9 @@ import AddRecipeSuccess from "../screens/AddRecipeScreens/AddRecipeSuccess";
 
 //edit recipe screens
 import EditRecipeStep1 from "../screens/EditRecipeScreens/EditRecipeStep1";
+import EditRecipeStep2 from "../screens/EditRecipeScreens/EditRecipeStep2";
+import EditRecipePreview from "../screens/EditRecipeScreens/EditRecipePreview";
+import EditRecipeSuccess from "../screens/EditRecipeScreens/EditRecipeSuccess";
 
 //user profile screens
 import MyProfile from "../screens/Profile/MyProfile";
@@ -58,8 +61,6 @@ const Stack2 = () => {
       <Stack.Screen name="AddRecipeStep2" component={AddRecipeStep2} />
       <Stack.Screen name="AddRecipePreview" component={AddRecipePreview} />
       <Stack.Screen name="AddRecipeSuccess" component={AddRecipeSuccess} />
-
-      <Stack.Screen name="EditRecipeStep1" component={EditRecipeStep1} />
     </Stack.Navigator>
   )
 }
@@ -72,8 +73,14 @@ const Stack3 = () => {
       }}
     >
       <Stack.Screen name="MyProfile" component={MyProfile} />
-        <Stack.Screen name="Settings" component={Settings} />
-        <Stack.Screen name="ProfileSettings" component={ProfileSettings} />
+      <Stack.Screen name="Settings" component={Settings} />
+      <Stack.Screen name="ProfileSettings" component={ProfileSettings} />
+
+      {/* edit screens */}
+      <Stack.Screen name="EditRecipeStep1" component={EditRecipeStep1} />
+      <Stack.Screen name="EditRecipeStep2" component={EditRecipeStep2} />
+      <Stack.Screen name="EditRecipeSuccess" component={EditRecipeSuccess} />
+      <Stack.Screen name="EditRecipePreview" component={EditRecipePreview} />
     </Stack.Navigator>
   )
 }

@@ -45,11 +45,17 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
         }
     };
 
+    console.log(recipeDetails)
+
     useEffect(() => {
         if(!isRecipePreview) {
             checkIsFollowingUser(recipeDetails.user.id);
         }
-    },[])
+    },[]);
+
+    const getStepFile = (item: any) => {
+        return isRecipePreview ? item.fileUri : item.file;
+    }
 
     return (
         <View style={[styles.recipeBox, isRecipePreview ? { paddingBottom: 20 } : null]}>
@@ -77,9 +83,9 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
 
                           </View>
                           {
-                              (item.fileUri && isFileImage(item.fileUri)) && <FastImage style={styles.recipeMedia} resizeMode={FastImage.resizeMode.contain} source={{uri : item.fileUri}} />
+                              (getStepFile(item) && isFileImage(getStepFile(item))) && <FastImage style={styles.recipeMedia} resizeMode={FastImage.resizeMode.contain} source={{uri : getStepFile(item)}} />
                           }
-                          {(item.fileUri && !isFileImage(item.fileUri)) &&
+                          {(getStepFile(item) && !isFileImage(getStepFile(item))) &&
                               <View style={{ width: '100%', height: 200 }}>
                                   <Video
                                     source={{ uri: item.fileUri }}

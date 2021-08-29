@@ -38,7 +38,7 @@ const AddRecipeStep2 : React.FC = () => {
     const dispatch = useDispatch();
     const scrollViewRef = useRef<any>();
 
-    const {currentStep} = useSelector(
+    const {currentStep, step2} = useSelector(
       (state: any) => state.addRecipeReducer
     );
 
@@ -70,7 +70,9 @@ const AddRecipeStep2 : React.FC = () => {
     }
 
     useEffect(() => {
-        initializeSteps();
+        if(!step2) {
+            initializeSteps();
+        }
     },[])
 
     useEffect(() => {
@@ -126,6 +128,7 @@ const AddRecipeStep2 : React.FC = () => {
             } else if (response.errorCode) {
                 console.log("error");
             } else if (response.assets) {
+                console.log(response.assets)
                 localArray[stepIndex].file = response.assets[0];
                 localArray[stepIndex].fileType = 'video';
                 setSteps(localArray);

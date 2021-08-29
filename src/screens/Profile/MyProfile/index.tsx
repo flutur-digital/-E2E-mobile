@@ -51,7 +51,7 @@ const MyProfile : React.FC = () => {
     }
 
     const editRecipe = (recipeId: number) => {
-      return navigation.navigate('Stack2',{screen: 'EditRecipeStep1',params: {recipeId: recipeId}});
+      return navigation.navigate('EditRecipeStep1',{recipeId: recipeId});
     }
 
     const deleteRecipe = (recipeId: number) => {
@@ -126,9 +126,12 @@ const MyProfile : React.FC = () => {
                 }
                     {
                         userData && userData.recipes.length == 0 &&
+                          <>
+                            {listHeaderView()}
                             <View style={{ paddingTop: 50 }}>
                                 <Text style={styles.userName}>You don't have any recipes yet</Text>
                             </View>
+                          </>
                     }
 
             </View>
