@@ -41,7 +41,6 @@ const MyProfile : React.FC = () => {
     },[navigation]);
 
     const listHeaderView = () => {
-      console.log(user)
         return (
           <View style={styles.headerViewContent}>
               {(user.avatar && isFileImage(user.avatar)) && <FastImage style={styles.userAvatar} source={{uri: "https://easy2eat.co/storage/"+user.avatar}}/> }
