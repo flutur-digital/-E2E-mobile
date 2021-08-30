@@ -1,5 +1,5 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-  package="com.easy2eat">
+  package="app.easy2eat.co">
 
     <uses-permission android:name="android.permission.INTERNET" />
 

@@ -48,10 +48,10 @@ const styles = StyleSheet.create({
         fontWeight: "500",
         fontStyle: "normal",
         letterSpacing: -0.95,
-        color: "#000000",
+        color: 'black',
         textAlign : 'center',
         marginTop : 4,
-        lineHeight: 0,
+        // lineHeight: 0,
     },
     userBio : {
         fontFamily: 'Cera Pro Medium',
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
         fontWeight: '500',
         fontStyle: 'normal',
         color: '#8b8b8b',
-        lineHeight: 0,
         marginBottom : 38,
         marginTop: 12
     },

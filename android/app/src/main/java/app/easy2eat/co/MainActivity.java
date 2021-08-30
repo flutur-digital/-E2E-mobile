@@ -1,4 +1,4 @@
-package com.easy2eat;
+package app.easy2eat.co;
 
 import com.facebook.react.ReactActivity;
 

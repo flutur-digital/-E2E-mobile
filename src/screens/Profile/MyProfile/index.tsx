@@ -1,6 +1,6 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from "react";
-import { View, Text, Pressable, SafeAreaView, Alert } from "react-native";
+import { View, Text, Pressable, SafeAreaView, Alert,Image } from "react-native";
 import FastImage from "react-native-fast-image";
 import { SwipeListView } from 'react-native-swipe-list-view';
 import {SecondColor, Layouts} from '../../../theme';
@@ -41,9 +41,11 @@ const MyProfile : React.FC = () => {
     },[navigation]);
 
     const listHeaderView = () => {
+      console.log(user)
         return (
           <View style={styles.headerViewContent}>
-              <FastImage style={styles.userAvatar}  source={(user.avatar && isFileImage(user.avatar)) ? {uri: user.avatar} : require('../../../assets/images/noavatar.png')} />
+              {(user.avatar && isFileImage(user.avatar)) && <FastImage style={styles.userAvatar} source={{uri: "https://easy2eat.co/storage/"+user.avatar}}/> }
+              {(!user.avatar || !isFileImage(user.avatar)) && <Image style={styles.userAvatar} source={require('../../../assets/images/noavatar.png')}/> }
               <Text style={styles.userName}>{user.name}</Text>
               <Text style={styles.userBio}>{user.bio ?? ''}</Text>
           </View>

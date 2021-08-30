@@ -78,7 +78,7 @@ const Login: React.FC = () => {
         userLogin(response.accessToken, "google").then((res) => {
           if (res && res.data && res.data.token && res.data.user) {
             dispatch(setAuthSuccess({ token: res.data.token, user: res.data.user }));
-            return navigation.goBack();
+            // return navigation.goBack();
           }
         });
       }

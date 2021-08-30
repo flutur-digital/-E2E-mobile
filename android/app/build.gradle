@@ -131,7 +131,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.easy2eat"
+        applicationId "app.easy2eat.co"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
