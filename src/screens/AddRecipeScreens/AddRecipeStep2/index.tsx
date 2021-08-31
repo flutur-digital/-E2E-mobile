@@ -72,16 +72,18 @@ const AddRecipeStep2 : React.FC = () => {
         }
     }
 
-    // useEffect(() => {
-    //     if(!step2) {
-    //         initializeSteps();
-    //     }
-    // },[])
+    useEffect(() => {
+        if(!step2) {
+            initializeSteps();
+        } else {
+            //TODO COMPLETE STEPS AFTER GOBACK
+        }
+    },[step2])
 
     useEffect(() => {
         // Return the function to unsubscribe from the event so it gets removed on unmount
         return navigation.addListener('focus', () => {
-            initializeSteps();
+
         });
     },[navigation]);
 
@@ -187,7 +189,7 @@ const AddRecipeStep2 : React.FC = () => {
                                     <Text style={styles.step}>{item.id}</Text>
                                 </View>
                                 <TextInput
-                                  placeholder={"Your dish name"}
+                                  placeholder={"Your step description"}
                                   multiline
                                   onChangeText={text => updateStepDescription(item.id,text)}
                                   value={item.description}
@@ -225,52 +227,6 @@ const AddRecipeStep2 : React.FC = () => {
                   }}
                   keyExtractor={item => String(item.id)}
                 />
-                {/*{*/}
-                {/*    steps.map((step: StepType, index: number) => {*/}
-                {/*        return (*/}
-                {/*          <View key={index} style={styles.addRecipeBox}>*/}
-                {/*              <View style={styles.stepAlign}>*/}
-                {/*                  <View style={styles.stepBox}>*/}
-                {/*                      <Text style={styles.step}>{step.id}</Text>*/}
-                {/*                  </View>*/}
-                {/*                  <TextInput*/}
-                {/*                    placeholder={"Your dish name"}*/}
-                {/*                    multiline*/}
-                {/*                    onChangeText={text => updateStepDescription(step.id,text)}*/}
-                {/*                    value={step.description}*/}
-                {/*                    style={[styles.contentTxt]}*/}
-                {/*                  />*/}
-                {/*              </View>*/}
-                {/*              {(step.file && step.fileType == 'image') &&*/}
-                {/*                  <View style={{ width: '100%', height: 200, marginBottom: 15 }}>*/}
-                {/*                      <Image style={{ width: '100%', height: 200, resizeMode: 'cover' }}*/}
-                {/*                             source={{ uri: step.file.uri }} />*/}
-                {/*                  </View>*/}
-                {/*              }*/}
-                {/*              {(step.file && step.fileType == 'video') &&*/}
-                {/*                  <View style={{ width: '100%', height: 200 }}>*/}
-                {/*                      <Video*/}
-                {/*                        source={{ uri: step.file.uri }}*/}
-                {/*                        controls={true}*/}
-                {/*                        style={{width: '100%', height: 200}}*/}
-                {/*                        muted={false}*/}
-                {/*                        repeat={false}*/}
-                {/*                        paused={true}*/}
-                {/*                        resizeMode={"cover"}*/}
-                {/*                        rate={1.0}*/}
-
-                {/*                      />*/}
-                {/*                  </View>*/}
-                {/*              }*/}
-                {/*              <View style={styles.recipeAddButtons}>*/}
-                {/*                  <Pressable onPress={() => addNewStep()}><Image style={{width : 73, height : 35}} source={require('./assets/images/add-step-img.png')}/></Pressable>*/}
-                {/*                  <Pressable onPress={() => !step.file ? updateStepImage(step.id) : null}><Image style={{width : 58, height : 37}} source={require('./assets/images/add-image.png')}/></Pressable>*/}
-                {/*                  <Pressable onPress={() => !step.file ? updateStepVideo(step.id) : null}><Image style={{width : 63, height : 36}} source={require('./assets/images/add-vidoe.png')}/></Pressable>*/}
-                {/*              </View>*/}
-                {/*          </View>*/}
-                {/*        )*/}
-                {/*    })*/}
-                {/*}*/}
             </View>
 
         </SafeAreaView>

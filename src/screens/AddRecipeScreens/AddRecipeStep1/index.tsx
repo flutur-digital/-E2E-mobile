@@ -79,9 +79,7 @@ const AddRecipeStep1: React.FC = () => {
   };
 
   const resetState = () => {
-    // console.log(step1)
     if(!step1){
-      console.log("reset")
       setTitle('');
       setSelectedIngredients([]);
       setRecipeImage(null);
