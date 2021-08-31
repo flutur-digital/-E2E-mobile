@@ -27,7 +27,7 @@ const MyProfile : React.FC = () => {
     const getUserData = (userId: number) => {
         getUserProfileById(userId).then((res) => {
             if(res.data) {
-                setUserData(res.data.data);
+              setUserData(res.data.data);
             }
         });
     }
@@ -43,7 +43,7 @@ const MyProfile : React.FC = () => {
     const listHeaderView = () => {
         return (
           <View style={styles.headerViewContent}>
-              {(user.avatar && isFileImage(user.avatar)) && <FastImage style={styles.userAvatar} source={{uri: "https://easy2eat.co/storage/"+user.avatar}}/> }
+              {(user.avatar && isFileImage(user.avatar)) && <FastImage style={styles.userAvatar} source={{uri: user.avatar}}/> }
               {(!user.avatar || !isFileImage(user.avatar)) && <Image style={styles.userAvatar} source={require('../../../assets/images/noavatar.png')}/> }
               <Text style={styles.userName}>{user.name}</Text>
               <Text style={styles.userBio}>{user.bio ?? ''}</Text>

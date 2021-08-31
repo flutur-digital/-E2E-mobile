@@ -67,7 +67,7 @@ const Search : React.FC = () => {
         <SafeAreaView>
           <View style={styles.mainContainer}>
             <View style={styles.searchContainer}>
-                  <Text style={Typography.title}>Please choose ingredients you have</Text>
+                  <Text style={Typography.title}>Please choose{"\n"} ingredients you have</Text>
                   <SearchInput onSearch={ingredientSearch}/>
             </View>
             <FlatList

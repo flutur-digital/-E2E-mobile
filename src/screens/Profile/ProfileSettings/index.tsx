@@ -24,6 +24,8 @@ const ProfileSettings : React.FC = () => {
       (state: any) => state.authReducer
     );
 
+    console.log(user.avatar);
+
     const [loading, setLoading] = useState<boolean>(false);
     const [userName,setUserName] = useState<string>(user?.name ?? '');
     const [userBio, setUserBio] = useState<string>(user?.bio ?? '');
