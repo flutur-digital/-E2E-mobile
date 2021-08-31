@@ -42,7 +42,7 @@ const AddRecipeStep1: React.FC = () => {
   const isFocused = useIsFocused();
   const dispatch = useDispatch();
 
-  const { currentStep } = useSelector(
+  const { currentStep, step1 } = useSelector(
     (state: any) => state.addRecipeReducer
   )
 
@@ -77,6 +77,21 @@ const AddRecipeStep1: React.FC = () => {
       }
     });
   };
+
+  const resetState = () => {
+    // console.log(step1)
+    if(!step1){
+      console.log("reset")
+      setTitle('');
+      setSelectedIngredients([]);
+      setRecipeImage(null);
+      setPreparationTime('');
+    }
+  }
+
+  useEffect(() => {
+    resetState();
+  },[step1])
 
   useEffect(() => {
     setListIngredients(chunk(searchIngredients, 6));

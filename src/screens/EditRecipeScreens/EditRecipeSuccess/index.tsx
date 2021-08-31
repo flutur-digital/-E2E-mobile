@@ -10,7 +10,7 @@ import FacebookSvg from '../../../assets/images/socialsicons/facebook-white.svg'
 import TwitterSvg from '../../../assets/images/socialsicons/twitter-white.svg';
 import InstagramSvg from '../../../assets/images/socialsicons/instagram-white.svg';
 import { useDispatch } from "react-redux";
-import { resetAddRecipeState } from "../../../store/modules/addRecipe.reducer";
+import { resetAddRecipeState } from "../../../store/modules/editRecipe.reducer";
 
 //@ts-ignore
 const EditRecipeSuccess : React.FC = ({ route, navigation }) => {
@@ -24,10 +24,10 @@ const EditRecipeSuccess : React.FC = ({ route, navigation }) => {
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : MainColor, position : 'relative', alignItems : 'center', justifyContent : 'center' }}>
-            <Text style={styles.title}>Congratulations,  you've added{"\n"}  your recipe!</Text>
-            <View style={styles.successIcon}>
+            <Text style={styles.title}>Congratulations,{"\n"} you've edited{"\n"}  your recipe!</Text>
+            <Pressable onPress={() => navigation.navigate('MyProfile')} style={styles.successIcon}>
               <LottieView source={require('./assets/successanimation.json')} autoPlay/>
-            </View>
+            </Pressable>
             <View style={{width : '100%', paddingLeft : 15, paddingRight : 13, marginTop : 55, zIndex : 20}}>
                 <Recipe
                   id={2}

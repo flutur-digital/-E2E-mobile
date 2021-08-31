@@ -5,6 +5,8 @@ import {MainColor} from "../../../theme";
 import BackSvg from '../../../assets/images/back.svg';
 import Recipe from "../../../components/Recipe";
 
+import { StackActions } from '@react-navigation/native';
+
 import styles from "./styles";
 import FacebookSvg from '../../../assets/images/socialsicons/facebook-white.svg';
 import TwitterSvg from '../../../assets/images/socialsicons/twitter-white.svg';
@@ -18,14 +20,21 @@ const AddRecipeSuccess : React.FC = ({ route, navigation }) => {
     const { recipe } = route.params;
     const dispatch = useDispatch();
 
+    // useEffect(() => {
+    //   dispatch(resetAddRecipeState());
+    // },[]);
+
     useEffect(() => {
-      dispatch(resetAddRecipeState());
-    },[]);
+      return navigation.addListener('blur', () => {
+        dispatch(resetAddRecipeState());
+        navigation.dispatch(StackActions.popToTop());
+      });
+    },[navigation])
 
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : MainColor, position : 'relative', alignItems : 'center', justifyContent : 'center' }}>
             <Text style={styles.title}>Congratulations,  you've added{"\n"}  your recipe!</Text>
-            <Pressable onPress={() => navigation.navigate('AddRecipeStep1')} style={styles.successIcon}>
+            <Pressable onPress={() => navigation.navigate('Stack3', {screen: 'MyProfile'})} style={styles.successIcon}>
               <LottieView source={require('./assets/successanimation.json')} autoPlay/>
             </Pressable>
             <View style={{width : '100%', paddingLeft : 15, paddingRight : 13, marginTop : 55, zIndex : 20}}>

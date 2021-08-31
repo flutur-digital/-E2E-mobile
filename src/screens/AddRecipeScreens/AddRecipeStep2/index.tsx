@@ -1,5 +1,5 @@
 import { useIsFocused, useNavigation } from "@react-navigation/native";
-import React, { useEffect, createRef, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
     View,
     Text,
@@ -7,9 +7,7 @@ import {
     SafeAreaView,
     TextInput,
     Image,
-    ScrollView,
     FlatList,
-    Platform,
     Alert
 } from "react-native";
 import {Layouts, MainColor} from "../../../theme";
@@ -65,23 +63,25 @@ const AddRecipeStep2 : React.FC = () => {
     const [steps, setSteps] = useState<Array<StepType>>([]);
 
     const initializeSteps = () => {
-        let step : StepType = {
-            id: 1,
-            description: ''
-        };
-        setSteps([step]);
+        if(!step2) {
+            let step: StepType = {
+                id: 1,
+                description: ''
+            };
+            setSteps([step]);
+        }
     }
 
-    useEffect(() => {
-        if(!step2) {
-            initializeSteps();
-        }
-    },[])
+    // useEffect(() => {
+    //     if(!step2) {
+    //         initializeSteps();
+    //     }
+    // },[])
 
     useEffect(() => {
         // Return the function to unsubscribe from the event so it gets removed on unmount
         return navigation.addListener('focus', () => {
-
+            initializeSteps();
         });
     },[navigation]);
 
