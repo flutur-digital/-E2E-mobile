@@ -43,10 +43,10 @@ const MyProfile : React.FC = () => {
     const listHeaderView = () => {
         return (
           <View style={styles.headerViewContent}>
-              {(user.avatar && isFileImage(user.avatar)) && <FastImage style={styles.userAvatar} source={{uri: user.avatar}}/> }
-              {(!user.avatar || !isFileImage(user.avatar)) && <Image style={styles.userAvatar} source={require('../../../assets/images/noavatar.png')}/> }
-              <Text style={styles.userName}>{user.name}</Text>
-              <Text style={styles.userBio}>{user.bio ?? ''}</Text>
+              {(userData.avatar && isFileImage(userData.avatar)) && <FastImage style={styles.userAvatar} source={{uri: userData.avatar}}/> }
+              {(!userData.avatar || !isFileImage(userData.avatar)) && <Image style={styles.userAvatar} source={require('../../../assets/images/noavatar.png')}/> }
+              <Text style={styles.userName}>{userData.name}</Text>
+              <Text style={styles.userBio}>{userData.bio ?? ''}</Text>
           </View>
         )
     }
