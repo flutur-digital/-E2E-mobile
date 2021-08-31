@@ -21,7 +21,7 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
 
     const [isFollowingRecipeUser, setIsFollowingRecipeUser] = useState<boolean>(false);
 
-    const {isAuthenticated} = useSelector(
+    const {isAuthenticated, user} = useSelector(
       (state: any) => state.authReducer
     );
 
@@ -130,12 +130,14 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
                             }
                             {isAuthenticated &&
                                 <View style={styles.followBlock}>
-                                    <Pressable onPress={() => folowUser(recipeDetails.user.id)} style={isFollowingRecipeUser ? styles.followBtnActive : styles.followBtn}>
-                                        <FastImage style={styles.userAvatar}
-                                               source={{ uri: 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png' }}
-                                        />
-                                        <Text style={isFollowingRecipeUser ? styles.followTxtActive : styles.followTxt}>{isFollowingRecipeUser ? 'Following' : 'Follow' }</Text>
-                                    </Pressable>
+                                    {recipeDetails.user.id !== user.id &&
+                                        <Pressable onPress={() => folowUser(recipeDetails.user.id)} style={isFollowingRecipeUser ? styles.followBtnActive : styles.followBtn}>
+                                            <FastImage style={styles.userAvatar}
+                                                source={{ uri: 'https://vyshnevyi-partners.com/wp-content/uploads/2016/12/no-avatar.png' }}
+                                            />
+                                            <Text style={isFollowingRecipeUser ? styles.followTxtActive : styles.followTxt}>{isFollowingRecipeUser ? 'Following' : 'Follow' }</Text>
+                                        </Pressable>
+                                    }
                                     <View style={styles.likesCount}>
                                         <HeartSvg width={23} height={20} style={{ marginBottom: 7 }} />
                                         <Text style={styles.followTxt}>{recipeDetails.likes}</Text>
