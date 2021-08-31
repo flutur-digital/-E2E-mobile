@@ -25,9 +25,9 @@ const AddRecipeSuccess : React.FC = ({ route, navigation }) => {
     return (
         <SafeAreaView style={{ width: '100%', height:'100%',backgroundColor : MainColor, position : 'relative', alignItems : 'center', justifyContent : 'center' }}>
             <Text style={styles.title}>Congratulations,  you've added{"\n"}  your recipe!</Text>
-            <View style={styles.successIcon}>
+            <Pressable onPress={() => navigation.navigate('AddRecipeStep1')} style={styles.successIcon}>
               <LottieView source={require('./assets/successanimation.json')} autoPlay/>
-            </View>
+            </Pressable>
             <View style={{width : '100%', paddingLeft : 15, paddingRight : 13, marginTop : 55, zIndex : 20}}>
                 <Recipe
                   id={2}

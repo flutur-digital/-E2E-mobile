@@ -9,7 +9,7 @@ import CheckSvg from "../../../assets/images/check.svg";
 import { useDispatch, useSelector } from "react-redux";
 import { userSaveRecipe, userSaveRecipeStep } from "../../../services";
 import RecipeDetails from "../../../components/RecipeDetails";
-import { resetAddRecipeState, setCurrentStep } from "../../../store/modules/addRecipe.reducer";
+import { setCurrentStep } from "../../../store/modules/addRecipe.reducer";
 import LoaderOverlay from "../../../components/LoaderOverlay";
 
 const AddRecipePreview : React.FC = () => {

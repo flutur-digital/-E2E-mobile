@@ -1,4 +1,4 @@
-import { useNavigation } from '@react-navigation/native';
+import { useIsFocused, useNavigation } from "@react-navigation/native";
 import React, { useEffect, createRef, useState, useRef } from "react";
 import {
     View,
@@ -35,6 +35,7 @@ interface StepType{
 const AddRecipeStep2 : React.FC = () => {
 
     const navigation = useNavigation();
+    const isFocused = useIsFocused();
     const dispatch = useDispatch();
     const scrollViewRef = useRef<any>();
 
@@ -56,7 +57,9 @@ const AddRecipeStep2 : React.FC = () => {
     }
 
     useEffect(() => {
-        checkAddRecipeStep();
+        if(isFocused) {
+            checkAddRecipeStep();
+        }
     },[currentStep])
 
     const [steps, setSteps] = useState<Array<StepType>>([]);

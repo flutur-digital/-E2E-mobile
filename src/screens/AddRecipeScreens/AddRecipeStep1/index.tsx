@@ -1,6 +1,21 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useState } from "react";
-import { View, Alert, Text, KeyboardAvoidingView, Platform, TouchableWithoutFeedback, Keyboard, Pressable, SafeAreaView, Image, TextInput, FlatList, Dimensions } from "react-native";
+import {
+  Alert,
+  Dimensions,
+  FlatList,
+  Image,
+  Keyboard,
+  KeyboardAvoidingView,
+  Platform,
+  Pressable,
+  SafeAreaView,
+  Text,
+  TextInput,
+  TouchableWithoutFeedback,
+  View
+} from "react-native";
+import { useIsFocused } from '@react-navigation/native';
 import { Layouts, MainColor } from "../../../theme";
 import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
 import ArrowDown from "./assets/images/arrow-down.svg";
@@ -17,13 +32,14 @@ import * as ImagePicker from "react-native-image-picker";
 import { imagePickerOptions } from "../../../config";
 import { chunk } from "lodash";
 import { checkIfInputIsEmpty } from "../../../util/util";
-import { setRecipeStep1, setCurrentStep } from "../../../store/modules/addRecipe.reducer";
+import { setCurrentStep, setRecipeStep1 } from "../../../store/modules/addRecipe.reducer";
 import { useDispatch, useSelector } from "react-redux";
 import LoaderOverlay from "../../../components/LoaderOverlay";
 
 const AddRecipeStep1: React.FC = () => {
 
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
   const dispatch = useDispatch();
 
   const { currentStep } = useSelector(
@@ -48,7 +64,9 @@ const AddRecipeStep1: React.FC = () => {
   }
 
   useEffect(() => {
-    checkAddRecipeStep();
+    if(isFocused) {
+      checkAddRecipeStep();
+    }
   }, [currentStep])
 
   const getIngredients = () => {
