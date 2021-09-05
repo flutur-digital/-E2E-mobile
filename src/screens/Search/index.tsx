@@ -64,14 +64,14 @@ const Search : React.FC = () => {
     },[selectedIngredients]);
 
     return (
-        <SafeAreaView>
+
           <View style={styles.mainContainer}>
             <View style={styles.searchContainer}>
                   <Text style={Typography.title}>Please choose{"\n"} ingredients you have</Text>
                   <SearchInput onSearch={ingredientSearch}/>
             </View>
             <FlatList
-                style={{ marginTop: 27, paddingLeft: 22, paddingRight: 22 }}
+                style={{ paddingTop: 27, paddingLeft: 22, paddingRight: 22 }}
                 data={searchIngredients}
                 renderItem={({ item, index }) => (
                     <IngredientItem
@@ -86,7 +86,7 @@ const Search : React.FC = () => {
 
             {searchResults && searchResults.length > 0 && <RecipeResultsCounter onClick={()=> navigation.navigate('SearchResults', {searchResults: searchResults})} recipesFound={searchResults.length}/> }
           </View>
-        </SafeAreaView>
+
     )
 }
 

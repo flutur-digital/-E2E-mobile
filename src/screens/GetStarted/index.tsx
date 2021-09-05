@@ -1,12 +1,13 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef } from 'react';
-import { View, Text, Pressable, Animated } from "react-native";
+import { View, Text, Pressable, ImageBackground, Animated, Image } from "react-native";
 import Video from "react-native-video";
 import styles from "./styles";
 
 import { getUserProfileById } from "../../services";
 import { updateUserData } from '../../store/modules/auth.reducer';
 
+import StartIcon from './assets/startbtnicon.svg';
 import ArrowRight from '../../assets/images/arrow-right.svg';
 import FacebookIcon from '../../assets/images/socialsicons/facebook.svg';
 import InstagramIcon from '../../assets/images/socialsicons/instagram.svg';
@@ -116,10 +117,18 @@ const GetStarted: React.FC = () => {
       />
       <View style={styles.contentWrapper}>
         <Animated.View style={{ transform: [{ translateY: moveButton }] }}>
-          <Pressable style={styles.startBtn} onPress={() => isAuthenticated ? navigation.navigate('BottomNavigation', { screen: 'Stack1', params: { screen: 'Search' } }) : navigation.navigate('Search')}>
-            <Text style={styles.startBtnText}>Start</Text>
-            <ArrowRight />
-          </Pressable>
+          {/*<StartIcon/>*/}
+          {/*<Image source={require('./assets/startbtn.png')}/>*/}
+          <ImageBackground style={{ width: 190, height: 80, marginBottom: 25 }} source={require('./assets/startbtn.png')}>
+            <Pressable style={{ height: '100%', paddingBottom: 9, width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }} onPress={() => isAuthenticated ? navigation.navigate('BottomNavigation', { screen: 'Stack1', params: { screen: 'Search' } }) : navigation.navigate('Search')}>
+              <Text style={styles.startBtnText}>Start</Text>
+              <ArrowRight/>
+            </Pressable>
+          </ImageBackground>
+          {/*<Pressable style={styles.startBtn} onPress={() => isAuthenticated ? navigation.navigate('BottomNavigation', { screen: 'Stack1', params: { screen: 'Search' } }) : navigation.navigate('Search')}>*/}
+          {/*  <Text style={styles.startBtnText}>Start</Text>*/}
+          {/*  <ArrowRight />*/}
+          {/*</Pressable>*/}
         </Animated.View>
         <View style={styles.socialBtns}>
           <Animated.View style={{ transform: [{ translateY: moveFB }] }}>

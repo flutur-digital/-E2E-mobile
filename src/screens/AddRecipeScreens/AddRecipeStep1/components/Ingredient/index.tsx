@@ -18,7 +18,7 @@ interface Props {
 const Ingredient : React.FC<Props> = ({ingredient, onSelect,unSelect, selected}) => {
 
     return (
-        <Pressable onPress={() => selected ? unSelect(ingredient.id) : onSelect(ingredient.id)} style={{ width: (windowWidth-68)/3, height:100, paddingTop : 13, position : 'relative', paddingBottom : 19 }}>
+        <Pressable onPress={() => selected ? unSelect(ingredient.id) : onSelect(ingredient.id)} style={{ width: (windowWidth-68)/3, height:100, paddingTop : 13, position : 'relative', paddingBottom : 19, borderRightWidth: 1, borderBottomWidth: 1, borderStyle: 'solid', borderRightColor: '#e8e8e8',  borderBottomColor: '#e8e8e8' }}>
           {
             selected ? <View style={styles.selectBtn}><Image style={{ width: 24, height: 24,}} source={require('./assets/images/selectedIcon.png')}/></View>
             : <View style={styles.selectBtn}><Image style={{ width: 24, height: 24,}} source={require('./assets/images/unselectedIcon.png')}/></View>

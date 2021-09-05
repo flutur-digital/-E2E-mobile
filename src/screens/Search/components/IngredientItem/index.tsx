@@ -22,7 +22,7 @@ const IngredientItem : React.FC<Props> = ({ingredient, onSelect,unSelect, select
             Animated.spring(moveIngredient, {
                 toValue: 0,
                 velocity: 2,
-                delay : ingredient.id*100,
+                delay : 100,
                 bounciness : 12,
                 useNativeDriver: true,
                 isInteraction: false
@@ -42,8 +42,8 @@ const IngredientItem : React.FC<Props> = ({ingredient, onSelect,unSelect, select
             </Animated.View>
             <View style={styles.ingredientActions}>
               {
-                selected ? <Pressable onPress={() => unSelect(ingredient.id)}><SelectedIngredientIcon width={60} height={60}/></Pressable> :
-                  <Pressable onPress={() => onSelect(ingredient.id)}><UnselectedIngredientIcon width={60} height={60}/></Pressable>
+                selected ? <Pressable onPress={() => unSelect(ingredient.id)}><SelectedIngredientIcon width={44} height={44}/></Pressable> :
+                  <Pressable onPress={() => onSelect(ingredient.id)}><UnselectedIngredientIcon width={44} height={44}/></Pressable>
               }
             </View>
         </View>
