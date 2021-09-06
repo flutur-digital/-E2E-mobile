@@ -99,7 +99,7 @@ const Login: React.FC = () => {
   return (
     <SafeAreaView style={styles.wrapper}>
 
-      <View style={Layouts.spaceBetween}>
+      <View style={[Layouts.spaceBetween, {paddingTop : 15}]}>
         <PrimarySmallBtn onClick={() => navigation.goBack()} icon={<ArrowLeft width={9} height={16} />} bgColor={MainColor} />
       </View>
       <View style={styles.container}>
