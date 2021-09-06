@@ -20,3 +20,8 @@ export const videoPickerOptions = {
   includeBase64: false,
   videoQuality: "high"
 };
+
+export const hapticOptions = {
+  enableVibrateFallback: true,
+  ignoreAndroidSystemSettings: false
+};

@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useState } from "react";
-import { View, Text, SafeAreaView, FlatList } from "react-native";
+import { View, Text, FlatList } from "react-native";
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 import SearchInput from "../../components/SearchInput";
 import IngredientItem from "./components/IngredientItem";
 import {Typography} from "../../theme";
@@ -8,6 +9,8 @@ import styles from "./styles";
 import {IngredientType} from "../../types";
 import RecipeResultsCounter from "./components/RecipeResultsCounter";
 import {getAllIngredients, searchRecipes} from "../../services";
+
+import { hapticOptions } from "../../config";
 
 const Search : React.FC = () => {
 
@@ -38,13 +41,14 @@ const Search : React.FC = () => {
       setSearchIngredients(data);
     }
 
-
     const selectIngredient = (ingredientId: number) => {
       setSelectedIngredients(selectedIngredients.concat([ingredientId]));
+      ReactNativeHapticFeedback.trigger("impactLight", hapticOptions);
     }
 
     const unselectIngredient = (ingredientId: number) => {
       setSelectedIngredients(selectedIngredients.filter((el) => { return el != ingredientId }));
+      ReactNativeHapticFeedback.trigger("impactLight", hapticOptions);
     }
 
     const checkIfIngredientIsSelected = (ingredientId: number) => {
@@ -62,6 +66,12 @@ const Search : React.FC = () => {
         setSearchResults(null);
       }
     },[selectedIngredients]);
+
+    useEffect(() => {
+      if(searchResults && searchResults.length > 0) {
+        ReactNativeHapticFeedback.trigger("impactLight", hapticOptions);
+      }
+    },[searchResults])
 
     return (
 
