@@ -225,19 +225,23 @@ const AddRecipeStep1: React.FC = () => {
               <FlatList
                 data={listIngredients}
                 horizontal={true}
+                style={{ marginTop: 15 }}
                 renderItem={({ item, index }) => (
                   <View key={index} style={{
                     justifyContent: "flex-start",
                     alignItems: "flex-start",
                     flexDirection: "row",
                     flexWrap: "wrap",
-                    width: Dimensions.get("screen").width - 65
+                    width: Dimensions.get("screen").width - 65,
+                    // backgroundColor: 'red'
+                    height: 200
                   }}>
                     {
                       item.map((ingredient: IngredientType, j: number) => {
                         return (
                           <Ingredient
                             key={j}
+                            index={j}
                             onSelect={selectIngredient}
                             unSelect={unselectIngredient}
                             ingredient={ingredient}

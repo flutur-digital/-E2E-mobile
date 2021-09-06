@@ -38,7 +38,7 @@ const IngredientItem : React.FC<Props> = ({ingredient, onSelect,unSelect, select
                 <View style={styles.ingredientImageBox}>
                   <FastImage style={styles.ingredientImage} resizeMode={FastImage.resizeMode.contain} source={{ uri: ingredient.image }}/>
                 </View>
-                <Text style={styles.ingredientName}>{ingredient.name}</Text>
+                <Text numberOfLines={1} style={styles.ingredientName}>{ingredient.name}</Text>
             </Animated.View>
             <View style={styles.ingredientActions}>
               {

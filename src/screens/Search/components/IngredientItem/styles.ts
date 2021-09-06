@@ -33,6 +33,8 @@ const styles = StyleSheet.create({
         fontStyle: 'normal',
         textAlign: 'left',
         fontFamily: 'Cera Pro Medium',
+        width: '60%'
+
     },
 
     ingredientActions: {

@@ -18,8 +18,7 @@ const styles = StyleSheet.create({
        fontFamily: 'Cera Pro Medium',
        fontSize: 16,
        fontWeight: '500',
-       color: '#555555',
-       marginTop : 7
+       color: '#555555'
    },
   selectBtn : {
         width: 24,
