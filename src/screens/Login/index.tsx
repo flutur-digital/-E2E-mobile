@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, SafeAreaView, Pressable, Image, Platform } from "react-native";
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 import { useDispatch } from "react-redux";
 import { Layouts, Typography, MainColor } from "../../theme";
 import styles from "./styles";
@@ -16,6 +17,7 @@ import { userLogin } from "../../services";
 
 import { setAuthSuccess } from "../../store/modules/auth.reducer";
 import { useNavigation } from "@react-navigation/native";
+import { hapticOptions } from "../../config";
 
 const Login: React.FC = () => {
 
@@ -23,6 +25,7 @@ const Login: React.FC = () => {
   const navigation = useNavigation();
 
   const loginApple = async () =>  {
+    ReactNativeHapticFeedback.trigger("impactLight", hapticOptions);
     // performs login request
     const appleAuthRequestResponse = await appleAuth.performRequest({
       requestedOperation: appleAuth.Operation.LOGIN,
@@ -42,6 +45,7 @@ const Login: React.FC = () => {
   }
 
   const loginFacebook = () => {
+    ReactNativeHapticFeedback.trigger("impactLight", hapticOptions);
     LoginManager.logInWithPermissions(["public_profile", "email"]).then((result) => {
       if (result.isCancelled) {
         console.log("Login cancelled");
@@ -65,6 +69,7 @@ const Login: React.FC = () => {
   };
 
   const loginGoogle = async () => {
+    ReactNativeHapticFeedback.trigger("impactLight", hapticOptions);
     GoogleSignin.configure({
       iosClientId: "750241320668-r1ihbh0rlp39ca2ib04a6kjvbgp653rg.apps.googleusercontent.com",
       webClientId: "750241320668-43pnr3ragddtr5kial45jlfgku7b94s6.apps.googleusercontent.com"
@@ -107,9 +112,7 @@ const Login: React.FC = () => {
           Welcome to{"\n"}
           e<Text style={{ color: MainColor }}>2</Text>e community!
         </Text>
-        {/*<Recipe title={'Eggs with roast beef & avocado'} image={'https://shorturl.at/kJOV9'} time={'15 min'} likes={10}/>*/}
         <Image source={require("./assets/images/logo.png")} style={styles.logoBox} />
-
         {Platform.OS === 'ios' &&
           <Pressable onPress={() => loginApple()} style={styles.iosBtn}>
             <AppleSvg width={20} height={25} />

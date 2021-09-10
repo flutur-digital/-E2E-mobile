@@ -45,8 +45,6 @@ const RecipeDetails : React.FC<Props> = ({recipeDetails, isRecipePreview = false
         }
     };
 
-    console.log(recipeDetails)
-
     useEffect(() => {
         if(!isRecipePreview) {
             checkIsFollowingUser(recipeDetails.user.id);

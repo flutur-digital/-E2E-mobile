@@ -1,10 +1,12 @@
 import { useNavigation } from "@react-navigation/native";
 import React, { useEffect, useRef } from "react";
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
 import { View, Text, Pressable, Animated } from "react-native";
 import FastImage from "react-native-fast-image";
 import styles from "./styles";
 import DurationSvg from "./assets/images/time.svg";
 import HeartSvg from "./assets/images/heart3.svg";
+import { hapticOptions } from "../../config";
 
 interface RecipeInfo {
   id: number,
@@ -38,7 +40,7 @@ const Recipe: React.FC<RecipeInfo> = ({ id, title, image, time, likes }) => {
 
   return (
     <Animated.View style={{ transform: [{ translateX: moveRecipe }] }}>
-      <Pressable style={styles.recipeBox} onPress={() => navigation.navigate("RecipeScreen", { id: id })}>
+      <Pressable style={styles.recipeBox} onPress={() => {ReactNativeHapticFeedback.trigger("impactLight", hapticOptions); navigation.navigate("RecipeScreen", { id: id })}}>
         <FastImage style={styles.recipeImage} resizeMode={FastImage.resizeMode.cover} source={{ uri: image }} />
         <View style={styles.wrapper}>
           <Text numberOfLines={3} style={styles.recipeTitle}>{title}</Text>

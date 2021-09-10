@@ -1,6 +1,7 @@
 import { useNavigation } from '@react-navigation/native';
 import React, { useEffect, useRef } from 'react';
-import { View, Text, Pressable, ImageBackground, Animated, Image } from "react-native";
+import ReactNativeHapticFeedback from "react-native-haptic-feedback";
+import { View, Text, Pressable, ImageBackground, Animated} from "react-native";
 import Video from "react-native-video";
 import styles from "./styles";
 
@@ -13,6 +14,7 @@ import FacebookIcon from '../../assets/images/socialsicons/facebook.svg';
 import InstagramIcon from '../../assets/images/socialsicons/instagram.svg';
 import TwitterIcon from '../../assets/images/socialsicons/twitter.svg';
 import { useDispatch, useSelector } from "react-redux";
+import { hapticOptions } from "../../config";
 
 const GetStarted: React.FC = () => {
 
@@ -120,7 +122,7 @@ const GetStarted: React.FC = () => {
           {/*<StartIcon/>*/}
           {/*<Image source={require('./assets/startbtn.png')}/>*/}
           <ImageBackground style={{ width: 190, height: 80, marginBottom: 25 }} source={require('./assets/startbtn.png')}>
-            <Pressable style={{ height: '100%', paddingBottom: 9, width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }} onPress={() => isAuthenticated ? navigation.navigate('BottomNavigation', { screen: 'Stack1', params: { screen: 'Search' } }) : navigation.navigate('Search')}>
+            <Pressable style={{ height: '100%', paddingBottom: 9, width: '100%', flexDirection: 'row', alignItems: 'center', justifyContent: 'center' }} onPress={() => {ReactNativeHapticFeedback.trigger("impactLight", hapticOptions); isAuthenticated ? navigation.navigate('BottomNavigation', { screen: 'Stack1', params: { screen: 'Search' } }) : navigation.navigate('Search')}}>
               <Text style={styles.startBtnText}>Start</Text>
               <ArrowRight/>
             </Pressable>
