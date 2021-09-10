@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     inputBox: {
         width: '100%',
         paddingBottom: 14,
+        paddingLeft: 35,
         color: '#c4c4c4',
         fontSize: 20,
         fontWeight: '500',
@@ -20,6 +21,11 @@ const styles = StyleSheet.create({
     },
 
     searchIcon: {
+        position: 'absolute',
+        left: 5
+    },
+
+    deleteIcon: {
         position: 'absolute',
         right: 5
     }
