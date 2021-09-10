@@ -16,6 +16,7 @@ import {
   View
 } from "react-native";
 import { useIsFocused } from '@react-navigation/native';
+import SegmentedPicker from 'react-native-segmented-picker';
 import { Layouts, MainColor } from "../../../theme";
 import PrimarySmallBtn from "../../../components/PrimarySmallBtn";
 import ArrowDown from "./assets/images/arrow-down.svg";
@@ -121,6 +122,14 @@ const AddRecipeStep1: React.FC = () => {
   const [recipeImageError, setRecipeImageError] = useState<boolean>(false);
   const [preparationTimeError, setPreparationTimeError] = useState<boolean>(false);
 
+  const [preparationTimeSelect, setPreparationTimeSelect] = useState<boolean>(false);
+
+  const confirmPreparationTime = (selections: any) => {
+    setPreparationTimeError(false);
+    setPreparationTime(selections["col_1"])
+    setPreparationTimeSelect(false);
+  }
+
   const selectIngredient = (ingredientId: number) => {
     setSelectedIngredients(selectedIngredients.concat([ingredientId]));
   };
@@ -212,10 +221,45 @@ const AddRecipeStep1: React.FC = () => {
                     onFocus={() => setFocus("#000000")}
                   />
                   <View style={styles.timeBlock}>
-                    <View style={styles.preparationTime}>
+                    <Pressable onPress={() => setPreparationTimeSelect(true)} style={styles.preparationTime}>
                       <ClockSvg width={18} height={18} />
-                      <TextInput value={preparationTime} keyboardType='numeric' onChangeText={(text) => setPreparationTime(text)} style={{ marginLeft: 6 }} placeholder={"0 min"} />
-                    </View>
+                      <Text style={{ marginLeft: 6 }}>{preparationTime} min</Text>
+                    </Pressable>
+                    <SegmentedPicker
+                      visible={preparationTimeSelect}
+                      onConfirm={confirmPreparationTime}
+                      options={[
+                        {
+                          key: 'col_1',
+                          items: [
+                            { label: '1 min', value: '1' },
+                            { label: '2 min', value: '2' },
+                            { label: '3 min', value: '3' },
+                            { label: '4 min', value: '4' },
+                            { label: '5 min', value: '5' },
+                            { label: '10 min', value: '10' },
+                            { label: '15 min', value: '15' },
+                            { label: '20 min', value: '20' },
+                            { label: '25 min', value: '25' },
+                            { label: '30 min', value: '30' },
+                            { label: '35 min', value: '35' },
+                            { label: '40 min', value: '40' },
+                            { label: '45 min', value: '45' },
+                            { label: '50 min', value: '50' },
+                            { label: '55 min', value: '55' },
+                            { label: '60 min', value: '60' },
+                            { label: '65 min', value: '65' },
+                            { label: '70 min', value: '70' },
+                            { label: '75 min', value: '75' },
+                            { label: '80 min', value: '80' },
+                            { label: '85 min', value: '85' },
+                            { label: '90 min', value: '90' },
+                            { label: '95 min', value: '95' },
+                            { label: '100 min', value: '100' },
+                          ],
+                        },
+                      ]}
+                    />
                   </View>
                 </View>
 

@@ -169,7 +169,7 @@ const EditRecipeStep2 : React.FC = ({ route, navigation }) => {
                                     <Text style={styles.step}>{item.id}</Text>
                                 </View>
                                 <TextInput
-                                  placeholder={"Your dish name"}
+                                  placeholder={"Your step description"}
                                   multiline
                                   autoCorrect={false}
                                   onChangeText={text => updateStepDescription(item.id,text)}

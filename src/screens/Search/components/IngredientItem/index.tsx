@@ -30,7 +30,7 @@ const IngredientItem : React.FC<Props> = ({ingredient, onSelect,unSelect, select
             }),
         ]).start();
 
-    },[moveIngredient]);
+    },[]);
 
     return (
         <View style={styles.ingredientContainer}>

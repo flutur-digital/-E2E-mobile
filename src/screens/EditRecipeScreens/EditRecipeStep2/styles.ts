@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
         display : 'flex',
         width : '100%',
         flexDirection : 'row',
+        alignItems: 'center'
     },
     stepBox : {
 
@@ -99,7 +100,8 @@ const styles = StyleSheet.create({
         display : 'flex',
         alignItems : 'center',
         justifyContent : 'center',
-        marginRight : 5
+        marginRight : 5,
+        marginTop: 5,
     },
     step : {
         fontFamily: 'Cera Pro Medium',

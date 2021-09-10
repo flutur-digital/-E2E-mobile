@@ -33,4 +33,4 @@ const Ingredient : React.FC<Props> = ({ingredient,index, onSelect,unSelect, sele
     )
 };
 
-export default Ingredient
+export default React.memo(Ingredient);
