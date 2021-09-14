@@ -89,7 +89,7 @@ const styles = StyleSheet.create({
         display : 'flex',
         width : '100%',
         flexDirection : 'row',
-        alignItems: 'center'
+        alignItems: 'flex-start',
     },
     stepBox : {
 

@@ -16,6 +16,7 @@ const styles = StyleSheet.create({
         borderRadius : 20,
         marginBottom : 10,
         height : 150,
+        position : 'relative'
 
     },
 
@@ -76,6 +77,16 @@ const styles = StyleSheet.create({
         textAlign: "left",
         color: "#000000",
         marginLeft : 5.7
+    },
+    newTxt : {
+        fontFamily: 'Cera Pro Medium',
+        fontSize : 14,
+        fontWeight: "500",
+        color : '#fff',
+        position: 'absolute',
+        right : 15,
+        bottom : 17,
+        textTransform : 'uppercase'
     }
 });
 

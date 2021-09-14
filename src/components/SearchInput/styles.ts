@@ -13,7 +13,7 @@ const styles = StyleSheet.create({
         width: '100%',
         paddingBottom: 14,
         paddingLeft: 35,
-        color: '#c4c4c4',
+        color: '#b7b7b7',
         fontSize: 20,
         fontWeight: '500',
         fontStyle: 'normal',
